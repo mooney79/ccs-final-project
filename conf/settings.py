@@ -27,7 +27,7 @@ SECRET_KEY = os.environ['SECRET_KEY']
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1:3000', 'localhost:3000', '127.0.0.1:8000', '127.0.0.1']
+ALLOWED_HOSTS = ['127.0.0.1:3000', 'localhost:3000', '127.0.0.1:8000', '127.0.0.1', 'ccs-final-project-mooney79.herokuapp.com']
 
 
 # Application definition
