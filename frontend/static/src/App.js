@@ -6,6 +6,7 @@ import LoginForm from './components/LoginForm';
 import RegistrationForm from './components/RegistrationForm';
 import './App.css';
 import WelcomePage from './components/WelcomePage';
+import WellView from './components/WellView';
 // import Underlay from './components/Underlay';
 
 function App() {
@@ -48,8 +49,11 @@ function App() {
         <Route path='/login'>
             <LoginForm  isAuth={isAuth} setIsAuth={setIsAuth}/>
         </Route>       
+        <Route path='/wellinfo'>
+            <WellView />
+        </Route>       
         <Route path=''>
-          <WelcomePage isAuth={isAuth} userID={userID}/>
+          <WelcomePage isAuth={isAuth} setIsAuth={setIsAuth} userID={userID} history={history}/>
         </Route>        
       </Switch>
     </div>
