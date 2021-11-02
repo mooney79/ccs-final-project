@@ -8,6 +8,7 @@ Django AllAuth
 Frontend: 
 React
 React Router 5.3.0
+React FontAwesome 5.15.4
 
 GUnicorn Ubuntu 20.04
 WhiteNoise 5.3.0

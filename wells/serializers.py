@@ -6,18 +6,10 @@ class WellSerializer(serializers.ModelSerializer):
         model = Well
         fields = '__all__'
 
-
-    
-
-
 class PlugSerializer(serializers.ModelSerializer):
     class Meta:
         model = Plug
         fields = '__all__'
-
-        # def get_queryset(self):
-        #     well = self.kwargs['well']
-        #     return Plug.objects.filter(well=pk)
 
 class HoleSerializer(serializers.ModelSerializer):
     class Meta:

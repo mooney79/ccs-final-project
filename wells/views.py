@@ -8,21 +8,23 @@ from .serializers import WellSerializer, PlugSerializer, PerforationSerializer, 
 class WellFeaturesDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Well.objects.all()
     serializer_class = WellFeaturesSerializer
-    lookup_field = 'pk'
 
-    # def get_queryset(self):
-    #     pk = self.kwargs['pk']
-    #     return Well.objects.filter(id=pk)
-    # permission_classes = [IsOwnerOrReadOnly]
+class WellListAPIView(generics.ListCreateAPIView):
+    queryset = Well.objects.all()
+    serializer_class = WellSerializer
 
-# class PostListAPIView(generics.ListCreateAPIView):
-#     queryset = Post.objects.order_by('-created_at')
-#     serializer_class = PostSerializer
-#     permission_classes = (IsAuthenticatedOrReadOnly,)
+class WellDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Well.objects.all()
+    serializer_class = WellSerializer
 
-# class PostDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
-#     queryset = Post.objects.all()
-#     serializer_class = PostSerializer
-#     permission_classes = (IsOwnerOrReadOnly,)
-
+    def get_queryset(self):
+        pk = self.kwargs['pk']
+        return Well.objects.filter(pk=pk)
     
+class PersonalWellsListAPIView(generics.ListCreateAPIView):
+    serializer_class = WellSerializer
+
+    def get_queryset(self):
+        # queryset = Well.objects.all()
+        queryset = Well.objects.filter(user=self.request.user)
+        return queryset

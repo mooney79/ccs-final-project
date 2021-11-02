@@ -2,35 +2,35 @@ from django.db import models
 from accounts.models import User
 
 # Figure out what can be null/blank
-# queryset=Well.objects.all(), 
+
 class Well(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     API_number = models.CharField(max_length=100)
-    company = models.CharField(max_length=100)
+    company = models.CharField(max_length=100, blank=True, null=True)
     updated_at = models.DateTimeField(auto_now=True) 
     lease = models.CharField(max_length=100)
     well_number = models.CharField(max_length=100)
-    field = models.CharField(max_length=100)
-    location = models.CharField(max_length=100)
-    section = models.CharField(max_length=100)
+    field = models.CharField(max_length=100, blank=True, null=True)
+    location = models.CharField(max_length=100, blank=True, null=True)
+    section = models.CharField(max_length=100, blank=True, null=True)
     spud_date = models.CharField(max_length=100, blank=True, null=True)
     # spud_date = models.DateField(blank=True, null=True)
-    survey = models.CharField(max_length=100)
+    survey = models.CharField(max_length=100, blank=True, null=True)
     total_depth = models.IntegerField()
-    permit_number = models.CharField(max_length=100)
+    permit_number = models.CharField(max_length=100, blank=True, null=True)
     completion_date = models.CharField(max_length=100, blank=True, null=True)
     # completion_date = models.DateField(blank=True, null=True)
-    county = models.CharField(max_length=100)
-    state = models.CharField(max_length=100)
-    kelley_bushing = models.CharField(max_length=100)
+    county = models.CharField(max_length=100, blank=True, null=True)
+    state = models.CharField(max_length=100, blank=True, null=True)
+    kelley_bushing = models.CharField(max_length=100, blank=True, null=True)
     derrick_floor = models.CharField(max_length=100, blank=True)
-    initial_formation = models.CharField(max_length=100)
-    current_status = models.CharField(max_length=100)
-    ground_level = models.IntegerField()
+    initial_formation = models.CharField(max_length=100, blank=True, null=True)
+    current_status = models.CharField(max_length=100, blank=True, null=True)
+    ground_level = models.IntegerField(blank=True, null=True)
     plat_image = models.ImageField(upload_to="media/", null=True, default=None, blank=True)
 
     def __str__(self):
-        return self.API_number
+        return f"{self.lease} {self.well_number}"
 
 
 class Cement(models.Model):

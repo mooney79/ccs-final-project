@@ -7,9 +7,11 @@ import RegistrationForm from './components/RegistrationForm';
 import './App.css';
 import WelcomePage from './components/WelcomePage';
 import WellView from './components/WellView';
-// import Underlay from './components/Underlay';
+import WellList from './components/WellList';
+
 
 function App() {
+  const [userName, setUserName] = useState('');
   const [isAuth, setIsAuth] = useState(null);
   const [userID, setUserID] = useState(null);
   const history = useHistory();
@@ -24,13 +26,15 @@ function App() {
       });
       if (!response.ok) {
         setIsAuth(false);
-        // history.push('/login'); // THIS LINE IS PUSHING FROM REGISTRATION BACK TO LOGIN.  DISABLE?
+        history.push('/login'); // THIS LINE IS PUSHING FROM REGISTRATION BACK TO LOGIN.  DISABLE?
       } else {
         const data = await response.json();
         const ID=data.pk;
+        const username=data.username;
         setIsAuth(true);
         setUserID(ID);
-        history.push('');
+        setUserName(username);
+        // history.push('');
       }
     }
     checkAuth();
@@ -52,8 +56,11 @@ function App() {
         <Route path='/wellinfo'>
             <WellView />
         </Route>       
+        <Route path='/wellslist'>
+            <WellList isAuth={isAuth} history={history}/>
+        </Route>       
         <Route path=''>
-          <WelcomePage isAuth={isAuth} setIsAuth={setIsAuth} userID={userID} history={history}/>
+          <WelcomePage isAuth={isAuth} setIsAuth={setIsAuth} userID={userID} history={history} userName={userName}/>
         </Route>        
       </Switch>
     </div>

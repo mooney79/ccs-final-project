@@ -1,7 +1,7 @@
 body{
   background-image: url("./StaticImages/background.jpg");
   background-size: fit;
-  background-position-y: 30%;
+  background-position-y: 45%;
   background-repeat: no-repeat;
   font-family: 'Oxygen', sans-serif; 
   background-color: rgb(184, 156, 45);
@@ -45,7 +45,8 @@ body{
 .fp-h1 {
   font-family: 'Oswald', sans-serif;
   font-weight: 700;
-  font-size: 60px;
+  font-size: 48px;
+  margin-bottom: 16px;
 }
 
 .fp-p {
@@ -102,6 +103,55 @@ body{
   z-index: 99;
   border: 15px green solid;
 }
+
+.well-list-container{
+  width: 100%;
+  border: thin solid black;
+  padding: 16px;
+  border-radius: 16px;
+}
+
+.well-ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.ListItem{
+  background-color: rgba(184, 156, 45, 0.4);
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-left: 8px;
+  padding-bottom: 0px;
+  justify-content: space-between;
+}
+
+li:nth-child(even){
+  background-color: rgba(184, 156, 45, 0.2);
+}
+
+.li-button{
+  display: inline;
+  border-radius: 8px;
+  background-color: rgba(241, 241, 241, 1.0);
+  transform: scale(0.9); 
+}
+
+.li-button:hover{
+  background-color: rgba(255, 255, 255, 1.0);
+  transform: scale(1.0); 
+}
+
+.bold-span{
+  font-weight: bold;
+}
+
+
+
+
+
 
 
 
