@@ -37,7 +37,7 @@ function WelcomePage(props){
     return (
         <div className="welcome-container">
             <h1 className="fp-h1 text-center"> Welcome back, {props.userName}! </h1>
-            <WellList /> 
+            <WellList setWell={props.setWell} well={props.well}/> 
             {logHTML}            
         </div>
     )

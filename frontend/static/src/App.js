@@ -15,6 +15,7 @@ function App() {
   const [isAuth, setIsAuth] = useState(null);
   const [userID, setUserID] = useState(null);
   const history = useHistory();
+  const [well, setWell] = useState(null);
 
   useEffect(()=> {
     const checkAuth = async () => {
@@ -54,13 +55,13 @@ function App() {
             <LoginForm  isAuth={isAuth} setIsAuth={setIsAuth}/>
         </Route>       
         <Route path='/wellinfo'>
-            <WellView />
+            <WellView well={well} setWell={setWell}/>
         </Route>       
-        <Route path='/wellslist'>
-            <WellList isAuth={isAuth} history={history}/>
-        </Route>       
+        {/* <Route path='/wellslist'>
+            <WellList isAuth={isAuth} history={history} well={well} setWell={setWell}/>
+        </Route>        */}
         <Route path=''>
-          <WelcomePage isAuth={isAuth} setIsAuth={setIsAuth} userID={userID} history={history} userName={userName}/>
+          <WelcomePage isAuth={isAuth} setIsAuth={setIsAuth} userID={userID} history={history} userName={userName} well={well} setWell={setWell}/>
         </Route>        
       </Switch>
     </div>

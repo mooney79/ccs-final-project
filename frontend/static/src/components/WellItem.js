@@ -1,18 +1,31 @@
 import { useHistory } from "react-router-dom";
+import Cookies from "js-cookie";
 
 function WellItem(props) {
     const id = props.id;
     const idString = `${id}`;
     const history = useHistory();
 
+    const fetchWell = async () => {
+      const response = await fetch(`/api/wells/${id}/`, 
+      {headers: {
+              'Content-Type': 'application/json',
+              'X-CSRFToken': Cookies.get('csrftoken'),
+              }
+      });
+      if (!response.ok) {
+          console.log('Error fetching well');
+      } else {
+          const data = await response.json();
+          props.setWell(data);
+          history.push('/wellinfo');
+      }
+    }
+
     function handleClick(event){
-        const wellID = event.target.parentElement.id;
-        history.push('/wellinfo');
-        /*
-            use Router to push the wellID to the wellinfo page?
-            <NavLink to='/wellinfo'> Well Info Preview</NavLink> ?
-        */
-        }
+      const wellID = event.target.parentElement.id;
+      fetchWell();
+    }
 
   return(
     <li className="ListItem" id={idString}>

@@ -25,14 +25,9 @@ function WellList(props){
         fetchWells();
     }, []);
 
-    // if (wellList.length === 0) {
-    //     return <div>Loading...</div>
-    // } else {
-    //     return <p>{wellList[0].API_number}</p>
-
     let list;
     if (wellList !== []){
-        list = wellList.map(well => <WellItem key={well.id+9000} {...well} wellList={wellList} setWellList={setWellList} />)
+        list = wellList.map(well => <WellItem key={well.id+9000} {...well} wellList={wellList} setWellList={setWellList} setWell={props.setWell} />)
     } else {
         list = <> <Spinner animation="grow" variant='primary' /><p>Loading...</p></>
     }
@@ -44,20 +39,7 @@ function WellList(props){
                 {list}
             </ul>
         </div>
-    )
-    
+    )    
 }
 
 export default WellList
-
-
-/* Ok, so I need to fetch the user in App.js.  
-Then use that to fetch associated wells to populate this component.
-When this well is clicked on, I need to pass the well ID to the WellView component.
-
-
-    
-
-
-
-*/
