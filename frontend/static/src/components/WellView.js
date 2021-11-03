@@ -174,31 +174,41 @@ function WellView(props) {
                         <div className="showme">
                             <p className="label1"> HOLE</p>
                         </div>
-                        {wellHolesHTML}
+                        <div className="scroll-area">
+                            {wellHolesHTML}
+                        </div>
                     </div>
                     <div className="casing-col col">
                         <div className="showme">
                             <p className="label2">CASING</p>
                         </div>
-                        {wellCasingsHTML}
+                        <div className="scroll-area">
+                            {wellCasingsHTML}
+                        </div>
                     </div>
                     <div className="cement-col col">
                         <div className="showme" >
                             <p className="label3">CEMENT</p>
                         </div>
-                        {wellCementsHTML}
+                        <div className="scroll-area">
+                            {wellCementsHTML}
+                        </div>
                     </div>
                     <div className="perf-col col">
                         <div className="showme">
                             <p className="label4">PERFORATIONS</p>
                         </div>
-                        {wellPerfsHTML}
+                        <div className="scroll-area">
+                            {wellPerfsHTML}
+                        </div>
                     </div>
                     <div className="plug-col col">
                         <div className="col showme">
                             <p className="label5">PLUGS</p>
                         </div>
-                        {wellPlugsHTML}
+                        <div className="scroll-area">
+                            {wellPlugsHTML}
+                        </div>
                     </div>
                 </div>
             </div>;

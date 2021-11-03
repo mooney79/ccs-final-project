@@ -106,13 +106,24 @@ h2{
 .perf-col, .casing-col, .cement-col, .hole-col, .plug-col{
   height: 70vh;
   max-height: 70vh;
-  overflow: hidden;
-  overflow-y: scroll;
+  
+  background-color: rgba(241, 241, 241, 1.0);
+  border-right: 1px black solid;
+}
+
+.plug-col{
+  border-right: none;
 }
 
 .well-hole, .well-casing, .well-cement, .well-plug, .well-perfs{
-  background-color: rgba(241, 241, 241, 0.6);
   padding: 16px;
+}
+
+.scroll-area{
+  overflow: hidden;
+  overflow-y: scroll;
+  height: 55vh;
+  max-height: 55vh;
 }
 
 
