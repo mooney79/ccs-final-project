@@ -175,7 +175,7 @@ SITE_ID = 1
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 REACT_APP_DIR = os.path.join(BASE_DIR, 'frontend/static')
-STATICFILES_DIRS = (os.path.join(BASE_DIR, 'frontend/static/build/static'),)
+STATICFILES_DIRS = (os.path.join(BASE_DIR, 'frontend/static/build/static'),) #os.path.join(BASE_DIR, 'frontend/static/build/')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' 

@@ -7,7 +7,7 @@ import RegistrationForm from './components/RegistrationForm';
 import './App.css';
 import WelcomePage from './components/WelcomePage';
 import WellView from './components/WellView';
-import WellList from './components/WellList';
+// import WellList from './components/WellList';
 
 
 function App() {
@@ -54,7 +54,7 @@ function App() {
         <Route path='/login'>
             <LoginForm  isAuth={isAuth} setIsAuth={setIsAuth}/>
         </Route>       
-        <Route path='/wellinfo'>
+        <Route path='/wellinfo/:id'>
             <WellView well={well} setWell={setWell}/>
         </Route>       
         {/* <Route path='/wellslist'>

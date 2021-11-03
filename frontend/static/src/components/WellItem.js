@@ -18,7 +18,7 @@ function WellItem(props) {
       } else {
           const data = await response.json();
           props.setWell(data);
-          history.push('/wellinfo');
+          history.push(`/wellinfo/${id}`);
       }
     }
 

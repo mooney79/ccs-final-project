@@ -37,6 +37,9 @@ function WellList(props){
             <p><span className="bold-span"> Your wells: </span></p>
             <ul className="well-ul">
                 {list}
+                <li className="ListItem" id="new-well">
+                    <button className="list-p li-button" onClick={() => {console.log('create a new Well!')}}> Add New Well</button>
+                </li>
             </ul>
         </div>
     )    
