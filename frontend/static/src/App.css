@@ -77,31 +77,66 @@ body{
 }
 
 .well-info{
-  height: 100vh;
+  max-height: 100vh;
   width: 75vw;
   border: 1px solid black;
   background-color: rgba(241, 241, 241, 0.2);
+  padding: 16px;
 }
 
-.well info button{
-  font-family: "font-awesome";
+
+.well-table-top{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: baseline;
 }
+
+.text-right{
+  text-align: right;
+}
+
+h2{
+  font-family: 'Oswald', sans-serif;
+  font-weight: 700;
+  font-size: 36px;
+  margin-bottom: 16px;
+}
+
+.perf-col, .casing-col, .cement-col, .hole-col, .plug-col{
+  height: 70vh;
+  max-height: 70vh;
+  overflow: hidden;
+  overflow-y: scroll;
+}
+
+.well-hole, .well-casing, .well-cement, .well-plug, .well-perfs{
+  background-color: rgba(241, 241, 241, 0.6);
+  padding: 16px;
+}
+
+
+
+
+
 .canvas-frame{
   width: 25vw;
   height: 100vh;
   border: 3px solid purple;
   background-color: rgba(241, 241, 241, 1.0);
+  z-index: 5;
 }
 
 .plat-pop-up{
   position: absolute;
   top: 5%;
   left: 32.5%;
-  width: 10vw;
-  height: 15vh;
+  width: 500px !important;
+  height: 500px;
   display: none;
   z-index: 99;
   border: 15px green solid;
+  background-color: rgba(241, 241, 241, 1.0);
 }
 
 .well-list-container{
@@ -115,6 +150,10 @@ body{
   list-style-type: none;
   margin: 0;
   padding: 0;
+}
+
+.icon{
+  cursor: pointer
 }
 
 .ListItem{
@@ -154,8 +193,6 @@ li:nth-child(even){
 
 
 
-
-
 @media screen and (max-width: 768px) {
   
   * {
@@ -187,4 +224,54 @@ li:nth-child(even){
     margin-left: auto;
     margin-right: auto;
   }
+}
+
+
+/* Experimental */
+.showme{
+  background-image: url("./StaticImages/chevron2.png");
+  height: 100px;
+  width: 100%;
+  background-size: contain;
+  background-repeat: no-repeat;
+  font-family: 'Oswald', sans-serif;
+  font-weight: 700;
+  font-size: 28px;
+  margin-left: 0;
+  margin-bottom: 16px;
+  color: rgba(241, 241, 241, 1.0);
+  text-align: center;
+  background-position: center top;
+  position: relative;
+  background-color: rgba(241, 241, 241, 0.6);
+}
+
+.label1{
+  position: absolute;
+  top: 5%;
+  left: 40%;
+}
+
+.label2{
+  position: absolute;
+  top: 5%;
+  left: 35%;
+}
+
+.label3{
+  position: absolute;
+  top: 5%;
+  left: 35%;
+}
+
+.label4{
+  position: absolute;
+  top: 5%;
+  left: 20%;
+}
+
+.label5{
+  position: absolute;
+  top: 5%;
+  left: 37.5%;
 }
