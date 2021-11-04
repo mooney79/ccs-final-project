@@ -332,7 +332,7 @@ function WellView(props) {
             well: props.match.params.id,
             starting_depth: 0,
             ending_depth: 0,
-            sacks_pumped: '',
+            sacks_pumped: 0,
             cement_type: '',
         }
         const options = {
@@ -382,7 +382,7 @@ function WellView(props) {
             well: props.match.params.id,
             starting_depth: 0,
             ending_depth: 0,
-            sacks_pumped: '',
+            sacks_pumped: 0,
             cement_type: '',
         }
         const options = {
