@@ -67,7 +67,7 @@ function RegistrationForm(props){
             </div>
             <div className="form-group text-left mb-3">
                 <label htmlFor='email'>Email address</label>
-                <input type="text" 
+                <input type="email" 
                     className="form-control"
                     id="email"
                     placeholder="Enter E-mail"

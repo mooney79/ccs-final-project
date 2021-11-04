@@ -1,7 +1,7 @@
 from django.db import models
 from accounts.models import User
 
-# Figure out what can be null/blank
+# Required fields -- API, Lease, well number, total depth
 
 class Well(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
@@ -37,15 +37,15 @@ class Cement(models.Model):
     well = models.ForeignKey(Well, on_delete=models.CASCADE, null=True, related_name="cements")
     starting_depth = models.IntegerField()
     ending_depth = models.IntegerField()
-    sacks_pumped = models.IntegerField()
-    cement_type = models.CharField(max_length=100)
+    sacks_pumped = models.IntegerField(blank=True, null=True)
+    cement_type = models.CharField(max_length=100, blank=True, null=True)
 
 class Casing(models.Model):
     well = models.ForeignKey(Well, on_delete=models.CASCADE, null=True, related_name="casings")
     starting_depth = models.IntegerField()
     ending_depth = models.IntegerField()
-    casing_weight = models.CharField(max_length=100)
-    casing_grading = models.CharField(max_length=100)
+    casing_weight = models.CharField(max_length=100, blank=True, null=True)
+    casing_grading = models.CharField(max_length=100, blank=True, null=True)
     LARGE = 'lrg'
     MEDIUM = 'med'
     SMALL = 'sml'
@@ -64,18 +64,18 @@ class Perforation(models.Model):
     well = models.ForeignKey(Well, on_delete=models.CASCADE, null=True, related_name="perforations")
     starting_depth = models.IntegerField()
     ending_depth = models.IntegerField()
-    perforation_interval = models.CharField(max_length=100)
-    perforation_total_holes = models.CharField(max_length=100)
+    perforation_interval = models.CharField(max_length=100, blank=True, null=True)
+    perforation_total_holes = models.CharField(max_length=100, blank=True, null=True)
     
 class Plug(models.Model):
     well = models.ForeignKey(Well, on_delete=models.CASCADE, null=True, related_name="plugs")
     starting_depth = models.IntegerField()
     ending_depth = models.IntegerField()
-    sacks_pumped = models.IntegerField()
-    cement_type = models.CharField(max_length=100)
+    sacks_pumped = models.IntegerField(blank=True, null=True)
+    cement_type = models.CharField(max_length=100, blank=True, null=True)
 
 class Hole(models.Model):
     well = models.ForeignKey(Well, on_delete=models.CASCADE, null=True, related_name="holes")
     starting_depth = models.IntegerField()
     ending_depth = models.IntegerField()
-    hole_size = models.CharField(max_length=100)
+    hole_size = models.CharField(max_length=100, blank=True, null=True)

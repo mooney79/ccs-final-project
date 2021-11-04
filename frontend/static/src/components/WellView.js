@@ -25,11 +25,11 @@ function WellView(props) {
     let wellCementsHTML;
     let wellPerfsHTML;
     let wellPlugsHTML;
-    let currentTarget;
-    let selected;
-    let $active;
-    let id;
-    let value;
+    // let currentTarget;
+    // let selected;
+    // let $active;
+    // let id;
+    // let value;
     
     function displayPopup() {
         const $popup = document.getElementById('popup');
@@ -277,6 +277,130 @@ function WellView(props) {
         wellPlugsHTML = <> <Spinner animation="grow" variant='primary' /><p>Loading...</p></>
     }
 
+    const createNewHole = async () => {
+        const newHole = {
+            well: props.match.params.id,
+            starting_depth: 0,
+            ending_depth: 0,
+            hole_size: ''
+        }
+        const options = {
+            method: 'POST',
+            headers:{
+                'Content-Type': 'application/json',
+                'X-CSRFToken': Cookies.get('csrftoken'),
+            },
+            body: JSON.stringify(newHole)
+        };
+        const response = await fetch('/api/wells/holes/', options);
+        if(!response){
+            console.log(response);
+        } else {
+            const data = await response.json();
+            setWellHoles([...wellHoles, newHole]);
+        }
+    };
+
+    const createNewCasing = async () => {
+        const newCasing = {
+            well: props.match.params.id,
+            starting_depth: 0,
+            ending_depth: 0,
+            casing_weight: '',
+            casing_grading: '',
+            gauge: 'sml',
+        }
+        const options = {
+            method: 'POST',
+            headers:{
+                'Content-Type': 'application/json',
+                'X-CSRFToken': Cookies.get('csrftoken'),
+            },
+            body: JSON.stringify(newCasing)
+        };
+        const response = await fetch('/api/wells/casings/', options);
+        if(!response){
+            console.log(response);
+        } else {
+            const data = await response.json();
+            setWellCasings([...wellCasings, newCasing]);
+        }
+    };
+
+    const createNewCement = async () => {
+        const newCement = {
+            well: props.match.params.id,
+            starting_depth: 0,
+            ending_depth: 0,
+            sacks_pumped: '',
+            cement_type: '',
+        }
+        const options = {
+            method: 'POST',
+            headers:{
+                'Content-Type': 'application/json',
+                'X-CSRFToken': Cookies.get('csrftoken'),
+            },
+            body: JSON.stringify(newCement)
+        };
+        const response = await fetch('/api/wells/cements/', options);
+        if(!response){
+            console.log(response);
+        } else {
+            const data = await response.json();
+            setWellCements([...wellCements, newCement]);
+        }
+    };
+    
+    const createNewPerforation = async () => {
+        const newPerforation = {
+            well: props.match.params.id,
+            starting_depth: 0,
+            ending_depth: 0,
+            perforation_interval: '',
+            perforation_total_holes: '',
+        }
+        const options = {
+            method: 'POST',
+            headers:{
+                'Content-Type': 'application/json',
+                'X-CSRFToken': Cookies.get('csrftoken'),
+            },
+            body: JSON.stringify(newPerforation)
+        };
+        const response = await fetch('/api/wells/perforations/', options);
+        if(!response){
+            console.log(response);
+        } else {
+            const data = await response.json();
+            setWellPerfs([...wellPerfs, newPerforation]);
+        }
+    };
+
+    const createNewPlug = async () => {
+        const newPlug = {
+            well: props.match.params.id,
+            starting_depth: 0,
+            ending_depth: 0,
+            sacks_pumped: '',
+            cement_type: '',
+        }
+        const options = {
+            method: 'POST',
+            headers:{
+                'Content-Type': 'application/json',
+                'X-CSRFToken': Cookies.get('csrftoken'),
+            },
+            body: JSON.stringify(newPlug)
+        };
+        const response = await fetch('/api/wells/plugs/', options);
+        if(!response){
+            console.log(response);
+        } else {
+            const data = await response.json();
+            setWellPlugs([...wellPlugs, newPlug]);
+        }
+    };
 
     let wellInfoHTML;
     if (props.well !== null) {
@@ -359,7 +483,7 @@ function WellView(props) {
                         </div>
                         <div className="scroll-area">
                             {wellHolesHTML}
-                            <button className="new-feature-button" onClick={() => {console.log('create a new Hole!')}}> Add New</button>
+                            <button className="new-feature-button" onClick={createNewHole}> Add New</button>
                         </div>
                     </div>
                     <div className="casing-col col">
@@ -368,7 +492,7 @@ function WellView(props) {
                         </div>
                         <div className="scroll-area">
                             {wellCasingsHTML}
-                            <button className="new-feature-button" onClick={() => {console.log('create a new Casing!')}}> Add New</button>
+                            <button className="new-feature-button" onClick={createNewCasing}> Add New</button>
                         </div>
                     </div>
                     <div className="cement-col col">
@@ -377,7 +501,7 @@ function WellView(props) {
                         </div>
                         <div className="scroll-area">
                             {wellCementsHTML}
-                            <button className="new-feature-button" onClick={() => {console.log('create a new Cement!')}}> Add New</button>
+                            <button className="new-feature-button" onClick={createNewCement}> Add New</button>
                         </div>
                     </div>
                     <div className="perf-col col">
@@ -386,7 +510,7 @@ function WellView(props) {
                         </div>
                         <div className="scroll-area">
                             {wellPerfsHTML}
-                            <button className="new-feature-button" onClick={() => {console.log('create a new Perf!')}}> Add New</button>
+                            <button className="new-feature-button" onClick={createNewPerforation}> Add New</button>
                         </div>
                     </div>
                     <div className="plug-col col">
@@ -395,7 +519,7 @@ function WellView(props) {
                         </div>
                         <div className="scroll-area">
                             {wellPlugsHTML}
-                            <button className="new-feature-button" onClick={() => {console.log('create a new Plug!')}}> Add New</button>
+                            <button className="new-feature-button" onClick={createNewPlug}> Add New</button>
                         </div>
                     </div>
                 </div>
@@ -511,6 +635,32 @@ async function handleBlur(event){
     const data = await response.json();
     console.log('data', data);
 }
+
+
+
+const newHole = async () => {
+    const newHole = {
+        well: props.match.params.id,
+        starting_depth: 0,
+        ending_depth: 0,
+        hole_size: ''
+    }
+    const options = {
+        method: 'POST',
+        headers:{
+            'Content-Type': 'application/json',
+            'X-CSRFToken': Cookies.get('csrftoken'),
+        },
+        body: JSON.stringify(newHole)
+    };
+    const response = await fetch('/api/wells/holes/', options);
+    if(!response){
+        console.log(response);
+    } else {
+        const data = await response.json();
+        setWellHoles([...wellHoles, newHole]);
+    }
+};
 
 
 

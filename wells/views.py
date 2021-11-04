@@ -13,6 +13,29 @@ class WellListAPIView(generics.ListCreateAPIView):
     queryset = Well.objects.all()
     serializer_class = WellSerializer
 
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+
+class HoleListAPIView(generics.ListCreateAPIView):
+    queryset = Hole.objects.all()
+    serializer_class = HoleSerializer
+
+class CasingListAPIView(generics.ListCreateAPIView):
+    queryset = Casing.objects.all()
+    serializer_class = CasingSerializer
+
+class CementListAPIView(generics.ListCreateAPIView):
+    queryset = Cement.objects.all()
+    serializer_class = CementSerializer
+
+class PerforationListAPIView(generics.ListCreateAPIView):
+    queryset = Perforation.objects.all()
+    serializer_class = PerforationSerializer
+
+class PlugListAPIView(generics.ListCreateAPIView):
+    queryset = Plug.objects.all()
+    serializer_class = PlugSerializer
+    
 class WellDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Well.objects.all()
     serializer_class = WellSerializer
@@ -20,6 +43,8 @@ class WellDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     def get_queryset(self):
         pk = self.kwargs['pk']
         return Well.objects.filter(pk=pk)
+    
+    
     
 class PersonalWellsListAPIView(generics.ListCreateAPIView):
     serializer_class = WellSerializer

@@ -7,7 +7,7 @@ import RegistrationForm from './components/RegistrationForm';
 import './App.css';
 import WelcomePage from './components/WelcomePage';
 import WellView from './components/WellView';
-// import WellList from './components/WellList';
+import NewWellModal from './components/NewWellModal';
 
 
 function App() {
@@ -16,6 +16,7 @@ function App() {
   const [userID, setUserID] = useState(null);
   const history = useHistory();
   const [well, setWell] = useState(null);
+  const [showNew, setShowNew] = useState(false);
 
   useEffect(()=> {
     const checkAuth = async () => {
@@ -35,7 +36,6 @@ function App() {
         setIsAuth(true);
         setUserID(ID);
         setUserName(username);
-        // history.push('');
       }
     }
     checkAuth();
@@ -61,7 +61,8 @@ function App() {
             <WellList isAuth={isAuth} history={history} well={well} setWell={setWell}/>
         </Route>        */}
         <Route path=''>
-          <WelcomePage isAuth={isAuth} setIsAuth={setIsAuth} userID={userID} history={history} userName={userName} well={well} setWell={setWell}/>
+          <WelcomePage isAuth={isAuth} setIsAuth={setIsAuth} userID={userID} history={history} userName={userName} well={well} setWell={setWell} setShowNew={setShowNew} showNew={showNew}/>
+          <NewWellModal setShowNew={setShowNew} showNew={showNew} history={history} userID={userID} setUserID={setUserID} setWell={setWell}/>
         </Route>        
       </Switch>
     </div>

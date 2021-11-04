@@ -5,7 +5,8 @@ import Spinner from 'react-bootstrap/esm/Spinner';
 
 function WellList(props){
 
-    const [wellList, setWellList] = useState([])
+    const [wellList, setWellList] = useState([]);
+    
 
     useEffect(()=> {
         const fetchWells = async () => {
@@ -31,14 +32,13 @@ function WellList(props){
     } else {
         list = <> <Spinner animation="grow" variant='primary' /><p>Loading...</p></>
     }
-
     return (
         <div className="well-list-container">
             <p><span className="bold-span"> Your wells: </span></p>
             <ul className="well-ul">
                 {list}
                 <li className="ListItem" id="new-well">
-                    <button className="list-p li-button" onClick={() => {console.log('create a new Well!')}}> Add New Well</button>
+                    <button className="list-p li-button" onClick={() => {console.log("I fired!"); props.setShowNew(true);console.log(props.showNew)}}> Add New Well</button>
                 </li>
             </ul>
         </div>

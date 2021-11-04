@@ -1,10 +1,14 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 function WellPerfs(props){
+    const $faTrashAlt = <FontAwesomeIcon icon={faTrashAlt} inverse pull="right" className="highlight" />
     return(
         <div className="well-perfs">
             <p>Perforation Interval:</p> <input id={props.id} type="text" onChange={props.handlePerforationChange} onBlur={props.handlePerforationBlur} name="perforation_interval" className="input-hidden" value={props.perforation_interval} />
             <p>Total Holes:</p> <input id={props.id} type="text" onChange={props.handlePerforationChange} onBlur={props.handlePerforationBlur} name="perforation_total_holes" className="input-hidden" value={props.perforation_total_holes} />
             <p>Starting Depth:</p> <input id={props.id} type="text" onChange={props.handlePerforationChange} onBlur={props.handlePerforationBlur} name="starting_depth" className="input-hidden" value={props.starting_depth} />
             <p>Ending Depth:</p> <input id={props.id} type="text" onChange={props.handlePerforationChange} onBlur={props.handlePerforationBlur} name="ending_depth" className="input-hidden" value={props.ending_depth} />
+            <p className="trash-icon"><span className="icon" onClick={()=>console.log('Trash it!')}>{$faTrashAlt}</span></p>
             <hr></hr>
         </div>
     )

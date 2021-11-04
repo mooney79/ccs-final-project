@@ -1,5 +1,10 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTrashAlt } from '@fortawesome/free-solid-svg-icons'
+
 function WellCasings(props){
+    const $faTrashAlt = <FontAwesomeIcon icon={faTrashAlt} inverse pull="right" className="highlight"/>
     let gaugeSize;
+
     if (props.gauge === 'lrg'){
         gaugeSize = '13 3/8"';
     } else if (props.gauge === 'med'){
@@ -15,6 +20,7 @@ function WellCasings(props){
             <p>Casing Grading:</p> <input id={props.id} type="text" onChange={props.handleCasingChange} onBlur={props.handleCasingBlur} name="casing_grading" className="input-hidden" value={props.casing_grading} />
             <p>Starting Depth:</p> <input id={props.id} type="text" onChange={props.handleCasingChange} onBlur={props.handleCasingBlur} name="starting_depth" className="input-hidden" value={props.starting_depth} />
             <p>Ending Depth:</p> <input id={props.id} type="text" onChange={props.handleCasingChange} onBlur={props.handleCasingBlur} name="ending_depth" className="input-hidden" value={props.ending_depth} />
+            <p className="trash-icon"><span className="icon" onClick={()=>console.log('Trash it!')}>{$faTrashAlt}</span></p>
             <hr></hr>
         </div>
     )
