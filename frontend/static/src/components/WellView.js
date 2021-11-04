@@ -1,6 +1,7 @@
 // import ReactDOM from 'react-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faImage } from '@fortawesome/free-solid-svg-icons'
+import { faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 import { useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
 import WellHoles from './WellHoles';
@@ -10,26 +11,29 @@ import WellPerfs from './WellPerfs';
 import WellPlugs from './WellPlugs';
 import Spinner from 'react-bootstrap/esm/Spinner';
 import { withRouter } from 'react-router-dom';
+import DeleteConfirmationModal from './DeleteConfirmationModal';
+import DeleteWellModal from './DeleteWellModal';
 
 function WellView(props) {
     
     const $faImage = <FontAwesomeIcon icon={faImage} size="2x" />
+    const $faTrashAlt = <FontAwesomeIcon icon={faTrashAlt} inverse pull="right" className="highlight2" size="2x"/>
     const [wellFeatures, setWellFeatures] = useState([]);
     const [wellHoles, setWellHoles] = useState([]);
     const [wellCasings, setWellCasings] = useState([]);
     const [wellCements, setWellCements] = useState([]);
     const [wellPerfs, setWellPerfs] = useState([]);
     const [wellPlugs, setWellPlugs] = useState([]);
+    const [deleteTarget, setDeleteTarget] = useState({});
+    const [showDelete, setShowDelete] = useState(false);
+    const [isClicked, setIsClicked] = useState(false);
+    const [refresh, setRefresh] = useState(0);
+    const [showWellDel, setShowWellDel] = useState(false);
     let wellHolesHTML;
     let wellCasingsHTML;
     let wellCementsHTML;
     let wellPerfsHTML;
     let wellPlugsHTML;
-    // let currentTarget;
-    // let selected;
-    // let $active;
-    // let id;
-    // let value;
     
     function displayPopup() {
         const $popup = document.getElementById('popup');
@@ -87,12 +91,20 @@ function WellView(props) {
                 setWellCements(data.cements);
                 setWellPerfs(data.perforations);
                 setWellPlugs(data.plugs);
-                console.log(props)
             }
         }
         fetchWell();
         fetchWellFeatures();
-    }, []);
+        setShowDelete(false);
+    }, [refresh]);
+
+    useEffect(() => {
+        if (showDelete === false && isClicked === true) {
+            setShowDelete(true);
+        } else {
+            setShowDelete(false)
+        }
+    },[isClicked]);
 
     async function handleBlur(event){
         const propertyName = event.target.name;
@@ -113,14 +125,13 @@ function WellView(props) {
     }
 
     const handleHoleChange = (event) => {
-        const {name, value, id} = event.target;
-        let index = wellHoles.findIndex(hole => hole.id === id);
-        index++;
+        const id = event.target.id;
+        const propertyName = event.target.name;
+        const value = event.target.value;
+        let index = wellHoles.findIndex((hole) => hole.id == id);
         let test = [...wellHoles]
-        test[index][name] = value;
-        console.log(test);
+        test[index][propertyName] = value;
         setWellHoles(test);
-        console.log(wellHoles);
     }
 
     async function handleHoleBlur(event){
@@ -145,13 +156,12 @@ function WellView(props) {
     if (wellHoles === []){
         wellHolesHTML = <> <Spinner animation="grow" variant='primary' /><p>Loading...</p></>
     } else {
-        wellHolesHTML = wellHoles.map(hole => <WellHoles key={hole.id+1000} {...hole} setWellHoles={setWellHoles} handleHoleChange={handleHoleChange} handleHoleBlur={handleHoleBlur}/>)        
+        wellHolesHTML = wellHoles.map(hole => <WellHoles key={hole.id+1000} {...hole} setWellHoles={setWellHoles} handleHoleChange={handleHoleChange} handleHoleBlur={handleHoleBlur} deleteTarget={deleteTarget} setDeleteTarget={setDeleteTarget} setIsClicked={setIsClicked} setRefresh={setRefresh}/>)        
     }
 
     const handleCasingChange = (event) => {
         const {name, value, id} = event.target;
-        let index = wellCasings.findIndex(casing => casing.id === id);
-        index++;
+        let index = wellCasings.findIndex(casing => casing.id == id);
         let test = [...wellCasings]
         test[index][name] = value;
         setWellCasings(test);
@@ -174,15 +184,14 @@ function WellView(props) {
     }
 
     if (wellCasings !== []){
-        wellCasingsHTML = wellCasings.map(casing => <WellCasings key={casing.id+2000} {...casing} handleCasingChange={handleCasingChange} handleCasingBlur={handleCasingBlur}/>)
+        wellCasingsHTML = wellCasings.map(casing => <WellCasings key={casing.id+2000} {...casing} handleCasingChange={handleCasingChange} handleCasingBlur={handleCasingBlur} deleteTarget={deleteTarget} setDeleteTarget={setDeleteTarget} setIsClicked={setIsClicked} setRefresh={setRefresh}/>)
     } else {
         wellCasingsHTML = <> <Spinner animation="grow" variant='primary' /><p>Loading...</p></>
     }
 
     const handleCementChange = (event) => {
         const {name, value, id} = event.target;
-        let index = wellCements.findIndex(cement => cement.id === id);
-        index++;
+        let index = wellCements.findIndex(cement => cement.id == id);
         let test = [...wellCements]
         test[index][name] = value;
         setWellCements(test);
@@ -204,18 +213,15 @@ function WellView(props) {
         const data = await response.json();
     }
 
-
-
     if (wellCements !== []){
-        wellCementsHTML = wellCements.map(cement => <WellCements key={cement.id+3000} {...cement} handleCementChange={handleCementChange} handleCementBlur={handleCementBlur}/>)
+        wellCementsHTML = wellCements.map(cement => <WellCements key={cement.id+3000} {...cement} handleCementChange={handleCementChange} handleCementBlur={handleCementBlur} deleteTarget={deleteTarget} setDeleteTarget={setDeleteTarget} setIsClicked={setIsClicked} setRefresh={setRefresh}/>)
     } else {
         wellCementsHTML = <> <Spinner animation="grow" variant='primary' /><p>Loading...</p></>
     }
 
     const handlePerforationChange = (event) => {
         const {name, value, id} = event.target;
-        let index = wellPerfs.findIndex(perf => perf.id === id);
-        index++;
+        let index = wellPerfs.findIndex(perf => perf.id == id);
         let test = [...wellPerfs]
         test[index][name] = value;
         setWellPerfs(test);
@@ -237,18 +243,15 @@ function WellView(props) {
         const data = await response.json();
     }
 
-
-
     if (wellPerfs !== []){
-        wellPerfsHTML = wellPerfs.map(perf => <WellPerfs key={perf.id+4000} {...perf} handlePerforationChange={handlePerforationChange} handlePerforationBlur={handlePerforationBlur}/>)
+        wellPerfsHTML = wellPerfs.map(perf => <WellPerfs key={perf.id+4000} {...perf} handlePerforationChange={handlePerforationChange} handlePerforationBlur={handlePerforationBlur} deleteTarget={deleteTarget} setDeleteTarget={setDeleteTarget} setIsClicked={setIsClicked} setRefresh={setRefresh}/>)
     } else {
         wellPerfsHTML = <> <Spinner animation="grow" variant='primary' /><p>Loading...</p></>
     }
 
     const handlePlugChange = (event) => {
         const {name, value, id} = event.target;
-        let index = wellPlugs.findIndex(plug => plug.id === id);
-        index++;
+        let index = wellPlugs.findIndex(plug => plug.id == id);
         let test = [...wellPlugs]
         test[index][name] = value;
         setWellPlugs(test);
@@ -272,7 +275,7 @@ function WellView(props) {
 
 
     if (wellPlugs !== []){
-        wellPlugsHTML = wellPlugs.map(plug => <WellPlugs key={plug.id+5000} {...plug} handlePlugChange={handlePlugChange} handlePlugBlur={handlePlugBlur}/>)
+        wellPlugsHTML = wellPlugs.map(plug => <WellPlugs key={plug.id+5000} {...plug} handlePlugChange={handlePlugChange} handlePlugBlur={handlePlugBlur} deleteTarget={deleteTarget} setDeleteTarget={setDeleteTarget} setIsClicked={setIsClicked} setRefresh={setRefresh}/>)
     } else {
         wellPlugsHTML = <> <Spinner animation="grow" variant='primary' /><p>Loading...</p></>
     }
@@ -298,6 +301,7 @@ function WellView(props) {
         } else {
             const data = await response.json();
             setWellHoles([...wellHoles, newHole]);
+            setRefresh(Math.random())
         }
     };
 
@@ -324,6 +328,7 @@ function WellView(props) {
         } else {
             const data = await response.json();
             setWellCasings([...wellCasings, newCasing]);
+            setRefresh(Math.random())
         }
     };
 
@@ -349,6 +354,7 @@ function WellView(props) {
         } else {
             const data = await response.json();
             setWellCements([...wellCements, newCement]);
+            setRefresh(Math.random())
         }
     };
     
@@ -374,6 +380,7 @@ function WellView(props) {
         } else {
             const data = await response.json();
             setWellPerfs([...wellPerfs, newPerforation]);
+            setRefresh(Math.random())
         }
     };
 
@@ -399,8 +406,13 @@ function WellView(props) {
         } else {
             const data = await response.json();
             setWellPlugs([...wellPlugs, newPlug]);
+            setRefresh(Math.random())
         }
     };
+
+    function handleDeleteWell(event){
+        setShowWellDel(true);
+    }
 
     let wellInfoHTML;
     if (props.well !== null) {
@@ -408,10 +420,11 @@ function WellView(props) {
         <div className="well-info">
                 <div className="well-table-top row">
                     <div className="col-lg-8"> 
-                        <h2>{props.well.lease} {props.well.well_number} <span className="icon" onClick={displayPopup}>{$faImage}</span></h2>
+                        <h2>{props.well.lease} {props.well.well_number} <span className="icon" onClick={displayPopup}>{$faImage}</span> </h2>
                     </div>
                     <div id="popup" className="plat-pop-up"> I'm a PLAT!</div>
                     <div className="col-lg-4 text-right">
+                        <span className="icon-trash-lrg" onClick={handleDeleteWell}>{$faTrashAlt}</span>
                         <span className="bold-span">Last Updated: </span>{formatDate()}
                     </div>                    
                 </div>
@@ -528,16 +541,11 @@ function WellView(props) {
         wellInfoHTML = <div>Loading...</div>;
     }
         
-        
-        
-        
-        
-
-
-
     return (
         <div className="well-container">
             {wellInfoHTML}
+            <DeleteConfirmationModal deleteTarget={deleteTarget} setDeleteTarget={setDeleteTarget} showDelete={showDelete} setShowDelete={setShowDelete} history={props.history} setRefresh={setRefresh}/>
+            <DeleteWellModal history={props.history} setRefresh={setRefresh} showWellDel={showWellDel} setShowWellDel={setShowWellDel}/>
             <div className="canvas-frame">
                 <canvas id="canvas" width="25vw" height="90vh"></canvas>
             </div>

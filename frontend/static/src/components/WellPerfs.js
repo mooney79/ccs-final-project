@@ -2,13 +2,21 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 function WellPerfs(props){
     const $faTrashAlt = <FontAwesomeIcon icon={faTrashAlt} inverse pull="right" className="highlight" />
+    function handleDelete(event){
+        const $delTarget = event.currentTarget.parentElement.parentElement;
+        let getClass = $delTarget.attributes.class.value;
+        getClass = getClass.slice(5, getClass.length);
+        let getID = $delTarget.children[1].id;
+        props.setDeleteTarget({'id': getID, element: getClass});
+        props.setIsClicked(true);
+    }   
     return(
         <div className="well-perfs">
             <p>Perforation Interval:</p> <input id={props.id} type="text" onChange={props.handlePerforationChange} onBlur={props.handlePerforationBlur} name="perforation_interval" className="input-hidden" value={props.perforation_interval} />
             <p>Total Holes:</p> <input id={props.id} type="text" onChange={props.handlePerforationChange} onBlur={props.handlePerforationBlur} name="perforation_total_holes" className="input-hidden" value={props.perforation_total_holes} />
             <p>Starting Depth:</p> <input id={props.id} type="text" onChange={props.handlePerforationChange} onBlur={props.handlePerforationBlur} name="starting_depth" className="input-hidden" value={props.starting_depth} />
             <p>Ending Depth:</p> <input id={props.id} type="text" onChange={props.handlePerforationChange} onBlur={props.handlePerforationBlur} name="ending_depth" className="input-hidden" value={props.ending_depth} />
-            <p className="trash-icon"><span className="icon" onClick={()=>console.log('Trash it!')}>{$faTrashAlt}</span></p>
+            <p className="trash-icon"><span className="icon" onClick={handleDelete}>{$faTrashAlt}</span></p>
             <hr></hr>
         </div>
     )

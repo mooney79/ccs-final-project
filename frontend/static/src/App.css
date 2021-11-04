@@ -246,16 +246,29 @@ li:nth-child(even){
 }
 
 .highlight{
-  color: red;
+  color: rgba(241, 241, 241, 1.0);
   transform: translateX(-15%);
 }
 
 .trash-icon{
   cursor: pointer;
-  background-color: rgba(184, 156, 45, 0.4);
+  background-color: rgba(184, 156, 45, 0.8);
   display: inline-block;
   padding: 6px;
   border-radius: 50%;
+  box-shadow: 0 0 3pt 2pt rgba(184, 156, 45, 1.0);
+}
+
+.icon-trash-lrg{
+  color: rgba(184, 156, 45, 1.0);
+  color: red;
+}
+
+.highlight2{
+  color: rgb(155, 88, 25);
+  transform: translate(-50%, -150%);
+  cursor: pointer;
+  /* transform: translateX(-20%); */
 }
 
 @media screen and (max-width: 768px) {
