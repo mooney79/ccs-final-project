@@ -374,3 +374,7 @@ li:nth-child(even){
   background-color: transparent;
   z-index: 20;
 }
+
+.prev{
+  width: 100%;
+}

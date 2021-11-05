@@ -13,11 +13,12 @@ import Spinner from 'react-bootstrap/esm/Spinner';
 import { withRouter } from 'react-router-dom';
 import DeleteConfirmationModal from './DeleteConfirmationModal';
 import DeleteWellModal from './DeleteWellModal';
+import PlatImageModal from './PlatImageModal';
 import Diagram from './Diagram';
 
 function WellView(props) {
     
-    const $faImage = <FontAwesomeIcon icon={faImage} size="2x" />
+    const $faImage = <FontAwesomeIcon icon={faImage} />
     const $faTrashAlt = <FontAwesomeIcon icon={faTrashAlt} inverse pull="right" className="highlight2" size="2x"/>
     const [wellFeatures, setWellFeatures] = useState([]);
     const [wellHoles, setWellHoles] = useState([]);
@@ -30,20 +31,25 @@ function WellView(props) {
     const [isClicked, setIsClicked] = useState(false);
     const [refresh, setRefresh] = useState(0);
     const [showWellDel, setShowWellDel] = useState(false);
+    const [showImage, setShowImage] = useState(false);
     let wellHolesHTML;
     let wellCasingsHTML;
     let wellCementsHTML;
     let wellPerfsHTML;
     let wellPlugsHTML;
-    
+    /*
+    <div id="popup" className="plat-pop-up"> I'm a PLAT!</div>
+    */
     function displayPopup() {
-        const $popup = document.getElementById('popup');
-        if ($popup.style.display === 'none'){
-            $popup.style.display = 'block';
-        } else {
-            $popup.style.display = 'none';
-        }
+        setShowImage(true);
+        // const $popup = document.getElementById('popup');
+        // if ($popup.style.display === 'none'){
+        //     $popup.style.display = 'block';
+        // } else {
+        //     $popup.style.display = 'none';
+        // }
     }
+    
 
     const handleChange = (event) => {
         const {name, value} = event.target;
@@ -423,7 +429,7 @@ function WellView(props) {
                     <div className="col-lg-8"> 
                         <h2>{props.well.lease} {props.well.well_number} <span className="icon" onClick={displayPopup}>{$faImage}</span> </h2>
                     </div>
-                    <div id="popup" className="plat-pop-up"> I'm a PLAT!</div>
+                    
                     <div className="col-lg-4 text-right">
                         <span className="icon-trash-lrg" onClick={handleDeleteWell}>{$faTrashAlt}</span>
                         <span className="bold-span">Last Updated: </span>{formatDate()}
@@ -547,6 +553,7 @@ function WellView(props) {
             {wellInfoHTML}
             <DeleteConfirmationModal deleteTarget={deleteTarget} setDeleteTarget={setDeleteTarget} showDelete={showDelete} setShowDelete={setShowDelete} history={props.history} setRefresh={setRefresh}/>
             <DeleteWellModal history={props.history} setRefresh={setRefresh} showWellDel={showWellDel} setShowWellDel={setShowWellDel}/>
+            <PlatImageModal well={props.well} setWell={props.setWell} showImage={showImage} setShowImage={setShowImage}/>
             <Diagram wellFeatures={wellFeatures} wellCements={wellCements} wellCasings={wellCasings} wellPerfs={wellPerfs} wellPlugs={wellPlugs} well={props.well} refresh={refresh}/>
         </div>
     );

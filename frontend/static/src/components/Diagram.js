@@ -48,12 +48,14 @@ function Diagram(props){
         img.onload = () => {
             ptrn = ctx1.createPattern(img, 'repeat');
             ctx1.fillStyle = ptrn;
+            ctx2.fillStyle = ptrn;
             drawCements(props.wellCements);
+            placePlugs(props.wellPlugs);
         }
 
         placePerforations(props.wellPerfs);
 
-        placePlugs(props.wellPlugs);
+        
 
     }, [props.wellCasings, props.wellCements, props.wellPerforations, props.wellPlugs, props.refresh]);
 
@@ -122,7 +124,7 @@ function Diagram(props){
     }
 
     function drawPlug(x,y,w,h){
-        ctx2Ref.current.fillStyle="black";
+        // ctx2Ref.current.fillStyle="gray";
         ctx2Ref.current.fillRect(x, y, w, h);
         // ctx2Ref.current.clearRect(x+5, y+5, w-10, h*0.6);
         // ctx2Ref.current.fillRect(x+10, y+10, w-20, h*0.3);
