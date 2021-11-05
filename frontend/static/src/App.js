@@ -8,6 +8,8 @@ import './App.css';
 import WelcomePage from './components/WelcomePage';
 import WellView from './components/WellView';
 import NewWellModal from './components/NewWellModal';
+//FOR TESTING, BELOW
+import Diagram from './components/Diagram';
 
 
 function App() {
@@ -56,7 +58,10 @@ function App() {
         </Route>       
         <Route path='/wellinfo/:id'>
             <WellView well={well} setWell={setWell}/>
-        </Route>       
+        </Route>
+        <Route path='/diagram'>
+            <Diagram />
+        </Route>              
         {/* <Route path='/wellslist'>
             <WellList isAuth={isAuth} history={history} well={well} setWell={setWell}/>
         </Route>        */}

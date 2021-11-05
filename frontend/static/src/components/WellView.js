@@ -13,6 +13,7 @@ import Spinner from 'react-bootstrap/esm/Spinner';
 import { withRouter } from 'react-router-dom';
 import DeleteConfirmationModal from './DeleteConfirmationModal';
 import DeleteWellModal from './DeleteWellModal';
+import Diagram from './Diagram';
 
 function WellView(props) {
     
@@ -546,9 +547,7 @@ function WellView(props) {
             {wellInfoHTML}
             <DeleteConfirmationModal deleteTarget={deleteTarget} setDeleteTarget={setDeleteTarget} showDelete={showDelete} setShowDelete={setShowDelete} history={props.history} setRefresh={setRefresh}/>
             <DeleteWellModal history={props.history} setRefresh={setRefresh} showWellDel={showWellDel} setShowWellDel={setShowWellDel}/>
-            <div className="canvas-frame">
-                <canvas id="canvas" width="25vw" height="90vh"></canvas>
-            </div>
+            <Diagram wellFeatures={wellFeatures} wellCements={wellCements} wellCasings={wellCasings} wellPerfs={wellPerfs} wellPlugs={wellPlugs} well={props.well} refresh={refresh}/>
         </div>
     );
 };
