@@ -2,12 +2,15 @@ from rest_framework import generics
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from .models import Well, Plug, Perforation, Casing, Cement, Hole
 from .serializers import WellSerializer, PlugSerializer, PerforationSerializer, CasingSerializer, CementSerializer, HoleSerializer, WellFeaturesSerializer
-# from .permissions import IsOwnerOrReadOnly 
+from .permissions import IsOwnerOrReadOnly 
 
 
 class WellFeaturesDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Well.objects.all()
     serializer_class = WellFeaturesSerializer
+    permission_classes = (IsOwnerOrReadOnly,)
+
+
 
 class WellListAPIView(generics.ListCreateAPIView):
     queryset = Well.objects.all()
@@ -39,6 +42,7 @@ class PlugListAPIView(generics.ListCreateAPIView):
 class WellDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Well.objects.all()
     serializer_class = WellSerializer
+    permission_classes = (IsOwnerOrReadOnly,)
 
     def get_queryset(self):
         pk = self.kwargs['pk']

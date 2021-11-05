@@ -9,7 +9,7 @@ import WelcomePage from './components/WelcomePage';
 import WellView from './components/WellView';
 import NewWellModal from './components/NewWellModal';
 //FOR TESTING, BELOW
-import Diagram from './components/Diagram';
+// import Diagram from './components/Diagram';
 
 
 function App() {
@@ -31,7 +31,7 @@ function App() {
       if (!response.ok) {
         setIsAuth(false);
         if (history.location.pathname !== '/register') {
-          history.push('/login'); // THIS LINE IS PUSHING FROM REGISTRATION BACK TO LOGIN.  DISABLE?
+          history.push('/login');
         }
       } else {
         const data = await response.json();
@@ -59,11 +59,11 @@ function App() {
             <LoginForm  isAuth={isAuth} setIsAuth={setIsAuth} history={history}/>
         </Route>       
         <Route path='/wellinfo/:id'>
-            <WellView well={well} setWell={setWell}/>
+            <WellView well={well} setWell={setWell} userID={userID} setUserID={setUserID} history={history}/>
         </Route>
-        <Route path='/diagram'>
+        {/* <Route path='/diagram'>
             <Diagram />
-        </Route>              
+        </Route>               */}
         {/* <Route path='/wellslist'>
             <WellList isAuth={isAuth} history={history} well={well} setWell={setWell}/>
         </Route>        */}

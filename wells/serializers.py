@@ -42,4 +42,4 @@ class WellFeaturesSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Well
-        fields = ['API_number', 'holes', 'perforations', 'casings', 'plugs', 'cements']
+        fields = ['API_number', 'holes', 'perforations', 'casings', 'plugs', 'cements', 'user']

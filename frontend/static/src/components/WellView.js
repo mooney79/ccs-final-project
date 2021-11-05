@@ -40,6 +40,8 @@ function WellView(props) {
     /*
     <div id="popup" className="plat-pop-up"> I'm a PLAT!</div>
     */
+    
+    console.log(props);
     function displayPopup() {
         setShowImage(true);
         // const $popup = document.getElementById('popup');
@@ -65,6 +67,7 @@ function WellView(props) {
     }
 
     useEffect(() => {
+          
         const fetchWell = async () => {
             const response = await fetch(`/api/wells/${props.match.params.id}/`, 
             {headers: {
@@ -75,13 +78,14 @@ function WellView(props) {
             if (!response.ok) {
                 console.log('Error fetching well');
             } else {
-                const data = await response.json();
-                props.setWell(data);
+                const data = await response.json();                
+                props.setWell(data);               
             }
           }
 
 
         const fetchWellFeatures = async () => {
+                      
             const response = await fetch(`/api/wells/${props.match.params.id}/features`, 
             {headers: {
                     'Content-Type': 'application/json',
@@ -100,9 +104,10 @@ function WellView(props) {
                 setWellPlugs(data.plugs);
             }
         }
+        
         fetchWell();
         fetchWellFeatures();
-        setShowDelete(false);
+        setShowDelete(false);        
     }, [refresh]);
 
     useEffect(() => {
@@ -545,7 +550,7 @@ function WellView(props) {
                 </div>
             </div>;
     } else {
-        wellInfoHTML = <div>Loading...</div>;
+        wellInfoHTML = <div>Loading...<br />If this screen does not go away, you may not have permission to view this well.</div>;
     }
         
     return (
