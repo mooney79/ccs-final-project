@@ -46,6 +46,10 @@ function LoginForm(props){
         return <Redirect to="/" />
     } //Could flip it to protect "profileForm" and redirect them to login
 
+    function directToRegister(){
+        props.history.push('/register');
+    }
+
     return(
         <div className="form-container">
         <form className="mt-3 col-6 login-form" onSubmit={handleSubmit} >
@@ -74,7 +78,7 @@ function LoginForm(props){
                 />
             </div>
             <button type="submit" className="btn btn-primary mt-3" >Log in</button>            
-            <p className="text-center">Not  a member?  Click <a href="/register">here</a> to register.</p>
+            <p className="text-center">Not  a member?  Click <a href="" onClick={directToRegister}>here</a> to register.</p>
         </form>
         
         </div>

@@ -2,8 +2,10 @@ import { useEffect, useRef } from "react";
 import dirt from '../StaticImages/cement-texture.jpeg';
 
 function Diagram(props){
+    const canvas0Ref = useRef(null);
     const canvas1Ref = useRef(null);
     const canvas2Ref = useRef(null);
+    const ctx0Ref = useRef(null);
     const ctx1Ref = useRef(null);
     const ctx2Ref = useRef(null);
     const lrgEndRef = useRef(null);
@@ -14,6 +16,18 @@ function Diagram(props){
    
 
     useEffect(() => {
+        const canvas0 = canvas0Ref.current;
+        const ctx0 = canvas0.getContext('2d');
+        ctx0Ref.current = ctx0;
+
+        ctx0.width = window.innerWidth;
+        ctx0.height = window.innerHeight;
+
+        canvas0.addEventListener('resize', function() {
+        ctx0.width = window.innerWidth;
+        ctx0.height = window.innerHeight;
+        });
+
         const canvas1 = canvas1Ref.current;
         const ctx1 = canvas1.getContext('2d');
         ctx1Ref.current = ctx1;
@@ -55,9 +69,13 @@ function Diagram(props){
 
         placePerforations(props.wellPerfs);
 
+        if (props.well){
+            drawDepthGuides(props.well.total_depth);
+        }
+
         
 
-    }, [props.wellCasings, props.wellCements, props.wellPerforations, props.wellPlugs, props.refresh]);
+    }, [props.wellCasings, props.wellCements, props.wellPerfs, props.wellPlugs, props.refresh]);
 
     function drawCement(x, y, w, h){
         ctx1Ref.current.strokestyle = "darkgray";
@@ -68,6 +86,32 @@ function Diagram(props){
         ctx1Ref.current.moveTo(x+w, y);
         ctx1Ref.current.lineTo(x+w,y+h);
         ctx1Ref.current.stroke();
+    }
+
+    function drawDepthGuides(depth){
+        ctx0Ref.current.strokeStyle = "white";
+        ctx0Ref.current.lineWidth=2;
+        const x = canvas0Ref.current.width;
+        const topLine = Math.round(depth*0.25);
+        ctx0Ref.current.fillStyle = "white";
+        ctx0Ref.current.font = '16px Oxygen';
+        ctx0Ref.current.fillText(topLine, 10, 891*0.25-10);
+        const midLine = Math.round(depth*0.5);
+        ctx0Ref.current.fillText(midLine, 10, 891*0.5-10);
+        const botLine = Math.round(depth*0.75);
+        ctx0Ref.current.fillText(botLine, 10, 891*0.75-10);
+        ctx0Ref.current.beginPath();
+        ctx0Ref.current.setLineDash([5, 15]);
+        ctx0Ref.current.moveTo(0, 891*0.25);
+        ctx0Ref.current.lineTo(x,891*0.25);
+        ctx0Ref.current.stroke();
+        ctx0Ref.current.moveTo(0, 891*0.5);
+        ctx0Ref.current.lineTo(x,  891*0.5);
+        ctx0Ref.current.stroke();
+        ctx0Ref.current.moveTo(0, 891*0.75);
+        ctx0Ref.current.lineTo(x, 891*0.75);
+        ctx0Ref.current.stroke();
+        // ctx1Ref.current.setLineDash([]);
     }
 
     function drawPipe(x, y, w, h, a){
@@ -244,6 +288,7 @@ function Diagram(props){
 
     return (
         <>
+            <canvas id="canvas0" width="444" height="900" ref={canvas0Ref}></canvas>
             <canvas id="canvas1" width="444" height="900" ref={canvas1Ref}></canvas>
             <canvas id="canvas2" width="444" height="900" ref={canvas2Ref}></canvas>
         </>

@@ -22,6 +22,7 @@ function DeleteWellModal(props) {
         if(!response){
             console.log(response);
         } else {
+            props.setRefresh(Math.random())
             props.history.push('');
         }
     }

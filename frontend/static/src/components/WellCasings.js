@@ -13,18 +13,36 @@ function WellCasings(props){
         props.setIsClicked(true);
     }   
     
-    let gaugeSize;
+    let gaugeHTML;
     if (props.gauge === 'lrg'){
-        gaugeSize = '13 3/8"';
+        gaugeHTML = 
+        <select id={props.id} onChange={props.handleCasingChange} onBlur={props.handleCasingBlur} name="gauge" className="input-hidden" defaultValue="lrg" >
+            <option value="lrg" >13 3/8"</option>
+            <option value="med" >9 5/8"</option>
+            <option value="sml" >5 1/2"</option>
+        </select>
+        // gaugeSize = '13 3/8"';
     } else if (props.gauge === 'med'){
-        gaugeSize = '9 5/8"';
+        gaugeHTML = 
+        <select id={props.id} onChange={props.handleCasingChange} onBlur={props.handleCasingBlur} name="gauge" className="input-hidden"  defaultValue="med" >
+            <option value="lrg" >13 3/8"</option>
+            <option value="med" >9 5/8"</option>
+            <option value="sml" >5 1/2"</option>
+        </select>
+        // gaugeSize = '9 5/8"';
     } else if (props.gauge === 'sml'){
-        gaugeSize = '5 1/2"';
+        gaugeHTML = 
+        <select id={props.id} onChange={props.handleCasingChange} onBlur={props.handleCasingBlur} name="gauge" className="input-hidden"  defaultValue="sml" >
+            <option value="lrg" >13 3/8"</option>
+            <option value="med" >9 5/8"</option>
+            <option value="sml"  >5 1/2"</option>
+        </select>
+        // gaugeSize = '5 1/2"';
     }
-
+//value={gaugeSize}
     return(
         <div className="well-casing">
-            <p>Casing Gauge:</p> <input id={props.id} type="text" onChange={props.handleCasingChange} onBlur={props.handleCasingBlur} name="gauge" className="input-hidden" value={gaugeSize} />
+            <p>Casing Gauge:</p> {gaugeHTML}
             <p>Casing Weight:</p> <input id={props.id} type="text" onChange={props.handleCasingChange} onBlur={props.handleCasingBlur} name="casing_weight" className="input-hidden" value={props.casing_weight} />
             <p>Casing Grading:</p> <input id={props.id} type="text" onChange={props.handleCasingChange} onBlur={props.handleCasingBlur} name="casing_grading" className="input-hidden" value={props.casing_grading} />
             <p>Starting Depth:</p> <input id={props.id} type="text" onChange={props.handleCasingChange} onBlur={props.handleCasingBlur} name="starting_depth" className="input-hidden" value={props.starting_depth} />

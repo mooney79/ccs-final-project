@@ -552,7 +552,7 @@ function WellView(props) {
         <div className="well-container">
             {wellInfoHTML}
             <DeleteConfirmationModal deleteTarget={deleteTarget} setDeleteTarget={setDeleteTarget} showDelete={showDelete} setShowDelete={setShowDelete} history={props.history} setRefresh={setRefresh}/>
-            <DeleteWellModal history={props.history} setRefresh={setRefresh} showWellDel={showWellDel} setShowWellDel={setShowWellDel}/>
+            <DeleteWellModal history={props.history} setRefresh={setRefresh} showWellDel={showWellDel} setShowWellDel={setShowWellDel} setRefresh={setRefresh}/>
             <PlatImageModal well={props.well} setWell={props.setWell} showImage={showImage} setShowImage={setShowImage}/>
             <Diagram wellFeatures={wellFeatures} wellCements={wellCements} wellCasings={wellCasings} wellPerfs={wellPerfs} wellPlugs={wellPlugs} well={props.well} refresh={refresh}/>
         </div>

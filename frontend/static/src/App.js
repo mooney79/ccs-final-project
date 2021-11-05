@@ -30,7 +30,9 @@ function App() {
       });
       if (!response.ok) {
         setIsAuth(false);
-        history.push('/login'); // THIS LINE IS PUSHING FROM REGISTRATION BACK TO LOGIN.  DISABLE?
+        if (history.location.pathname !== '/register') {
+          history.push('/login'); // THIS LINE IS PUSHING FROM REGISTRATION BACK TO LOGIN.  DISABLE?
+        }
       } else {
         const data = await response.json();
         const ID=data.pk;
@@ -41,7 +43,7 @@ function App() {
       }
     }
     checkAuth();
-  }, [history, isAuth])
+  }, [isAuth]) //history, 
 
   if (isAuth === null){
     return <Spinner animation="grow" variant='primary' />
@@ -54,7 +56,7 @@ function App() {
           <RegistrationForm isAuth={isAuth} setIsAuth={setIsAuth}/>
         </Route>
         <Route path='/login'>
-            <LoginForm  isAuth={isAuth} setIsAuth={setIsAuth}/>
+            <LoginForm  isAuth={isAuth} setIsAuth={setIsAuth} history={history}/>
         </Route>       
         <Route path='/wellinfo/:id'>
             <WellView well={well} setWell={setWell}/>
