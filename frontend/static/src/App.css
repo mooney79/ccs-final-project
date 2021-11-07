@@ -45,7 +45,7 @@ body{
 .fp-h1 {
   font-family: 'Oswald', sans-serif;
   font-weight: 700;
-  font-size: 48px;
+  font-size: 36px;
   margin-bottom: 16px;
 }
 
@@ -266,7 +266,7 @@ li:nth-child(even){
 
 .highlight2{
   color: rgb(155, 88, 25);
-  transform: translate(-50%, -150%);
+  transform: translate(-0%, -10%);
   cursor: pointer;
   /* transform: translateX(-20%); */
 }
@@ -363,7 +363,6 @@ li:nth-child(even){
   background-image: url("./StaticImages/dirt-texture.jpeg");
   background-size: contain;
   background-repeat: repeat;
-
 }
 
 #canvas1{
@@ -385,4 +384,40 @@ li:nth-child(even){
 
 .prev{
   width: 100%;
+}
+
+.chart{
+  width: 75%;
+}
+
+.chart-buttons{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  margin-top: 10px;
+}
+
+.logo{
+  width: 100%;
+}
+
+.splash{
+  background-color: rgba(184, 156, 45, 1.0);
+}
+
+.splash-body{
+  background-color: rgba(184, 156, 45, 0.6);
+}
+
+.WTI-prompt{
+  cursor: pointer;
+}
+
+.WTI-prompt:hover{
+  transform: scale(1.2);
+}
+
+.price-chart{
+  width: 75%;
 }

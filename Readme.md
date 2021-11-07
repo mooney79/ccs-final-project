@@ -17,5 +17,6 @@ Pillow 8.4.0
 Bootstrap 5.1.3
 React Bootstrap
 JS-Cookie
+JSCharting for React v. 1.0.3
 
 Maybe: API -- PDFShift# ccs-final-project

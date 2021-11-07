@@ -1,6 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import Cookies from 'js-cookie'
 import WellList from './WellList';
+import Chart from './Chart';
 
 function WelcomePage(props){
 
@@ -35,8 +36,7 @@ function WelcomePage(props){
 
 
     return (
-        <div className="welcome-container">
-            <h1 className="fp-h1 text-center"> Welcome back, {props.userName}! </h1>
+        <div className="welcome-container">           
             <WellList setWell={props.setWell} well={props.well} setShowNew={props.setShowNew} showNew={props.showNew}/> 
             {logHTML}            
         </div>
@@ -44,9 +44,3 @@ function WelcomePage(props){
 }
 
 export default WelcomePage
-
-/*
-<p className="fp-p"> Blank(ish) Landing Page </p>
-{IDtestHTML}
-
-*/

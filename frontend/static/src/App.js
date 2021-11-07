@@ -10,6 +10,9 @@ import WellView from './components/WellView';
 import NewWellModal from './components/NewWellModal';
 //FOR TESTING, BELOW
 // import Diagram from './components/Diagram';
+// import Test from './components/Test';
+import SplashModal from './components/SplashModal';
+
 
 
 function App() {
@@ -19,6 +22,7 @@ function App() {
   const history = useHistory();
   const [well, setWell] = useState(null);
   const [showNew, setShowNew] = useState(false);
+  const [showSplash, setShowSplash] = useState(true);
 
   useEffect(()=> {
     const checkAuth = async () => {
@@ -57,18 +61,29 @@ function App() {
         </Route>
         <Route path='/login'>
             <LoginForm  isAuth={isAuth} setIsAuth={setIsAuth} history={history}/>
+            <SplashModal userName={userName} setShowSplash={setShowSplash} showSplash={showSplash}/>
         </Route>       
         <Route path='/wellinfo/:id'>
             <WellView well={well} setWell={setWell} userID={userID} setUserID={setUserID} history={history}/>
         </Route>
-        {/* <Route path='/diagram'>
-            <Diagram />
-        </Route>               */}
+        
+
+        {/* <Route path='/test'>
+            <Test userName={userName} setShowSplash={setShowSplash} showSplash={showSplash}/>
+        </Route>           */}
+
+        {/* <Route path='/chart'>
+            <Chart />
+        </Route>           
+        
+        */}
+       
         {/* <Route path='/wellslist'>
             <WellList isAuth={isAuth} history={history} well={well} setWell={setWell}/>
         </Route>        */}
         <Route path=''>
           <WelcomePage isAuth={isAuth} setIsAuth={setIsAuth} userID={userID} history={history} userName={userName} well={well} setWell={setWell} setShowNew={setShowNew} showNew={showNew}/>
+          <SplashModal userName={userName} setShowSplash={setShowSplash} showSplash={showSplash}/>
           <NewWellModal setShowNew={setShowNew} showNew={showNew} history={history} userID={userID} setUserID={setUserID} setWell={setWell}/>
         </Route>        
       </Switch>
