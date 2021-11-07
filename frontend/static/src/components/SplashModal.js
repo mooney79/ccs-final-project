@@ -58,7 +58,7 @@ function SplashModal(props) {
                 <Chart />
               </div>
             </Collapse>
-            
+            {welcomeHTML}
           </Modal.Body>
           <Modal.Footer className="splash">
             <Button variant="warning" onClick={handleClose}>
