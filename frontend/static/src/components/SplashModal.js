@@ -37,7 +37,7 @@ function SplashModal(props) {
     if (props.userName){
       welcomeHTML=<h2 className="fp-h1 text-center"> Welcome back, {props.userName}! </h2>
     } else {
-      welcomeHTML=<h2 className="fp-h1 text-center"> Welcome! Please <NavLink to='/login'>log in</NavLink></h2>
+      welcomeHTML=<h2 className="fp-h1 text-center"> Welcome! Please <NavLink onClick={handleClose} to='/login'>log in</NavLink></h2>
     }
            
     return (

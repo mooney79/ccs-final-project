@@ -362,8 +362,29 @@ li:nth-child(even){
   height: 100vh;
   background-image: url("./StaticImages/dirt-texture.jpeg");
   background-size: contain;
-  background-repeat: repeat;
+  background-repeat: repeat;  
 }
+/* .bg-pseudo{  
+  position: relative;
+  background-color: white;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  width: 25%;
+  bottom: 0;
+  left: 0;
+}
+
+.bg-pseudo::before {    
+  content: "";
+  
+  opacity: 1;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+      bottom: 0px;
+      left: 0px;
+} */
 
 #canvas1{
   position: absolute;
@@ -380,6 +401,15 @@ li:nth-child(even){
   height: 100vh;
   background-color: transparent;
   z-index: 20;
+}
+
+#canvas3{
+  position: absolute;
+  top: 0%;
+  right: 0%;
+  height: 100vh;
+  background-color: transparent;
+  z-index: 30;
 }
 
 .prev{

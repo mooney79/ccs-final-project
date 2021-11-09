@@ -46,13 +46,19 @@ class Casing(models.Model):
     ending_depth = models.IntegerField()
     casing_weight = models.CharField(max_length=100, blank=True, null=True)
     casing_grading = models.CharField(max_length=100, blank=True, null=True)
+    XLARGE = 'xlg'
     LARGE = 'lrg'
     MEDIUM = 'med'
+    REGULAR = 'reg'
     SMALL = 'sml'
+    XSMALL = 'xsm'
     GAUGE_CHOICES = [
-        (LARGE, '13 3/8"'),
-        (MEDIUM, '9 5/8"'),
+        (XLARGE, '13 3/8"'),
+        (LARGE, '9 5/8"'),
+        (MEDIUM, '8 5/8"'),
+        (REGULAR, '7"'),
         (SMALL, '5 1/2"'),
+        (XSMALL, '4 1/2"'),
     ]
     gauge = models.CharField(
         max_length=3,
@@ -71,8 +77,22 @@ class Plug(models.Model):
     well = models.ForeignKey(Well, on_delete=models.CASCADE, null=True, related_name="plugs")
     starting_depth = models.IntegerField()
     ending_depth = models.IntegerField()
+    set_depth = models.IntegerField(blank=True, null=True)
     sacks_pumped = models.IntegerField(blank=True, null=True)
     cement_type = models.CharField(max_length=100, blank=True, null=True)
+    VALVE = 'DV'
+    CEMENT = 'CP'
+    MECHANICAL = 'MP'
+    PLUG_CHOICES = [
+        (VALVE, 'Diverter Valve'),
+        (CEMENT, 'Cement Plug'),
+        (MECHANICAL, 'Mechanical Plug'),
+    ]
+    plug_type = models.CharField(
+        max_length=2,
+        choices=PLUG_CHOICES,
+        default=CEMENT,
+    )
 
 class Hole(models.Model):
     well = models.ForeignKey(Well, on_delete=models.CASCADE, null=True, related_name="holes")

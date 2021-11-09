@@ -41,7 +41,7 @@ function WellView(props) {
     <div id="popup" className="plat-pop-up"> I'm a PLAT!</div>
     */
     
-    console.log(props);
+    // console.log(props);
     function displayPopup() {
         setShowImage(true);
         // const $popup = document.getElementById('popup');

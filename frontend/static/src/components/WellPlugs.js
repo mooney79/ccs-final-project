@@ -11,17 +11,47 @@ function WellPlugs(props){
         props.setDeleteTarget({'id': getID, element: getClass});
         props.setIsClicked(true);
     }   
-
-    return(
-        <div className="well-plug">
-        <p>Cement Type:</p> <input id={props.id} type="text" onChange={props.handlePlugChange} onBlur={props.handlePlugBlur} name="cement_type" className="input-hidden" value={props.cement_type} />
+    let plugHTML;
+    let plugChoiceHTML;  
+    
+    if(props.plug_type === 'CP') {
+        plugHTML = <div className="well-plug">
+            {plugChoiceHTML}
         <p>Sacks Pumped:</p> <input id={props.id} type="text" onChange={props.handlePlugChange} onBlur={props.handlePlugBlur} name="sacks_pumped" className="input-hidden" value={props.sacks_pumped} />
         <p>Starting Depth:</p> <input id={props.id} type="text" onChange={props.handlePlugChange} onBlur={props.handlePlugBlur} name="starting_depth" className="input-hidden" value={props.starting_depth} />
         <p>Ending Depth:</p> <input id={props.id} type="text" onChange={props.handlePlugChange} onBlur={props.handlePlugBlur} name="ending_depth" className="input-hidden" value={props.ending_depth} />
         <p className="trash-icon"><span className="icon" onClick={handleDelete}>{$faTrashAlt}</span></p>
         <hr></hr>
-    </div>
+        </div>
+    } else if (props.plug_type === 'MP') {
+        plugHTML = <div className="well-plug">
+            {plugChoiceHTML}
+        <p>Starting Depth:</p> <input id={props.id} type="text" onChange={props.handlePlugChange} onBlur={props.handlePlugBlur} name="starting_depth" className="input-hidden" value={props.starting_depth} />
+        <p>Ending Depth:</p> <input id={props.id} type="text" onChange={props.handlePlugChange} onBlur={props.handlePlugBlur} name="ending_depth" className="input-hidden" value={props.ending_depth} />
+        <p className="trash-icon"><span className="icon" onClick={handleDelete}>{$faTrashAlt}</span></p>
+        <hr></hr>
+        </div>
+    } else if (props.plug_type === 'DV') {
+        plugHTML = <div className="well-plug">
+            {plugChoiceHTML}
+        <p>Set Depth:</p> <input id={props.id} type="text" onChange={props.handlePlugChange} onBlur={props.handlePlugBlur} name="set_depth" className="input-hidden" value={props.set_depth} />
+        <p className="trash-icon"><span className="icon" onClick={handleDelete}>{$faTrashAlt}</span></p>
+        <hr></hr>
+        </div>
+    }
+
+    return(
+        <>
+        <select id={props.id} onChange={props.handlePlugChange} onBlur={props.handlePlugBlur} name="plug_type" className="input-hidden" defaultValue={props.plug_type} >
+            <option value="CP" >Cement Plug</option>
+            <option value="MP" >Mechanical Plug</option>
+            <option value="DV" >Diverter Valve</option>
+        </select>
+        {plugHTML}
+        </>
     )
 }
 
 export default WellPlugs;
+
+//<p>Cement Type:</p> <input id={props.id} type="text" onChange={props.handlePlugChange} onBlur={props.handlePlugBlur} name="cement_type" className="input-hidden" value={props.cement_type} />

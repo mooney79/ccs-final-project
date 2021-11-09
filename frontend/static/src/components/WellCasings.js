@@ -14,32 +14,17 @@ function WellCasings(props){
     }   
     
     let gaugeHTML;
-    if (props.gauge === 'lrg'){
-        gaugeHTML = 
-        <select id={props.id} onChange={props.handleCasingChange} onBlur={props.handleCasingBlur} name="gauge" className="input-hidden" defaultValue="lrg" >
-            <option value="lrg" >13 3/8"</option>
-            <option value="med" >9 5/8"</option>
-            <option value="sml" >5 1/2"</option>
-        </select>
-        // gaugeSize = '13 3/8"';
-    } else if (props.gauge === 'med'){
-        gaugeHTML = 
-        <select id={props.id} onChange={props.handleCasingChange} onBlur={props.handleCasingBlur} name="gauge" className="input-hidden"  defaultValue="med" >
-            <option value="lrg" >13 3/8"</option>
-            <option value="med" >9 5/8"</option>
-            <option value="sml" >5 1/2"</option>
-        </select>
-        // gaugeSize = '9 5/8"';
-    } else if (props.gauge === 'sml'){
-        gaugeHTML = 
-        <select id={props.id} onChange={props.handleCasingChange} onBlur={props.handleCasingBlur} name="gauge" className="input-hidden"  defaultValue="sml" >
-            <option value="lrg" >13 3/8"</option>
-            <option value="med" >9 5/8"</option>
-            <option value="sml"  >5 1/2"</option>
-        </select>
-        // gaugeSize = '5 1/2"';
-    }
-//value={gaugeSize}
+
+    gaugeHTML = 
+    <select id={props.id} onChange={props.handleCasingChange} onBlur={props.handleCasingBlur} name="gauge" className="input-hidden" defaultValue={props.gauge} >
+        <option value="xlg" >13 3/8"</option>
+        <option value="lrg" >9 5/8"</option>
+        <option value="med" >8 5/8"</option>
+        <option value="reg" >7"</option>
+        <option value="sml" >5 1/2"</option>
+        <option value="xsm" >4 1/2"</option>
+    </select>
+
     return(
         <div className="well-casing">
             <p>Casing Gauge:</p> {gaugeHTML}
