@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Route, Switch, withRouter, useHistory } from 'react-router-dom';
+import { Route, Switch, useHistory } from 'react-router-dom'; //withRouter, 
 import Cookies from 'js-cookie'
 import Spinner from 'react-bootstrap/Spinner';
 import LoginForm from './components/LoginForm';
@@ -47,7 +47,7 @@ function App() {
       }
     }
     checkAuth();
-  }, [isAuth]) //history, 
+  }, [isAuth, history]) //history, 
 
   if (isAuth === null){
     return <Spinner animation="grow" variant='primary' />

@@ -1,7 +1,7 @@
-import { NavLink } from 'react-router-dom';
+// import { NavLink } from 'react-router-dom';
 import Cookies from 'js-cookie'
 import WellList from './WellList';
-import Chart from './Chart';
+// import Chart from './Chart';
 
 function WelcomePage(props){
 
@@ -25,12 +25,12 @@ function WelcomePage(props){
     };
 
     let logHTML;
-    let IDtestHTML;
+    // let IDtestHTML;
     if(props.isAuth){
-        IDtestHTML = <p>User ID: {props.userID}</p>
+        // IDtestHTML = <p>User ID: {props.userID}</p>
         logHTML = <div className="welcome-page-log-button" onClick={handleLogout}>Logout</div>
     } else {
-        IDtestHTML = <></>
+        // IDtestHTML = <></>
         logHTML = <div className="welcome-page-log-button" onClick={() => props.history.push('/login')}>Login</div>
     }
 

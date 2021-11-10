@@ -117,7 +117,7 @@ function WellView(props) {
         } else {
             setShowDelete(false)
         }
-    },[isClicked]);
+    },[isClicked]);//showDelete
 
     async function handleBlur(event){
         const propertyName = event.target.name;
@@ -133,7 +133,10 @@ function WellView(props) {
             body: JSON.stringify({[propertyName]: value})
         };
         const response = await fetch(`/api/wells/${props.match.params.id}/`, options);
-        const data = await response.json();
+        if (!response.ok) {
+            console.log('Error updating well information');
+        }
+        // const data = await response.json();
         // console.log(propertyName, value);
         if (propertyName === "total_depth"){
             setRefresh(Math.random());
@@ -145,7 +148,7 @@ function WellView(props) {
         const id = event.target.id;
         const propertyName = event.target.name;
         const value = event.target.value;
-        let index = wellHoles.findIndex((hole) => hole.id == id);
+        let index = wellHoles.findIndex((hole) => hole.id === parseInt(id));
         let test = [...wellHoles]
         test[index][propertyName] = value;
         setWellHoles(test);
@@ -167,7 +170,10 @@ function WellView(props) {
             body: JSON.stringify({[propertyName]: value})
         };
         const response = await fetch(`/api/wells/holes/${id}/`, options);
-        const data = await response.json();
+        if (!response.ok) {
+            console.log('Error updating hole information');
+        }
+        // const data = await response.json();
     }
     
     if (wellHoles === []){
@@ -178,7 +184,7 @@ function WellView(props) {
 
     const handleCasingChange = (event) => {
         const {name, value, id} = event.target;
-        let index = wellCasings.findIndex(casing => casing.id == id);
+        let index = wellCasings.findIndex(casing => casing.id === parseInt(id));
         let test = [...wellCasings]
         test[index][name] = value;
         setWellCasings(test);
@@ -197,7 +203,10 @@ function WellView(props) {
             body: JSON.stringify({[propertyName]: value})
         };
         const response = await fetch(`/api/wells/casings/${id}/`, options);
-        const data = await response.json();
+        if (!response.ok) {
+            console.log('Error updating casing information');
+        }
+        // const data = await response.json();
     }
 
     if (wellCasings !== []){
@@ -208,7 +217,7 @@ function WellView(props) {
 
     const handleCementChange = (event) => {
         const {name, value, id} = event.target;
-        let index = wellCements.findIndex(cement => cement.id == id);
+        let index = wellCements.findIndex(cement => cement.id === parseInt(id));
         let test = [...wellCements]
         test[index][name] = value;
         setWellCements(test);
@@ -227,7 +236,10 @@ function WellView(props) {
             body: JSON.stringify({[propertyName]: value})
         };
         const response = await fetch(`/api/wells/cements/${id}/`, options);
-        const data = await response.json();
+        if (!response.ok) {
+            console.log('Error updating cement information');
+        }
+        // const data = await response.json();
     }
 
     if (wellCements !== []){
@@ -238,7 +250,7 @@ function WellView(props) {
 
     const handlePerforationChange = (event) => {
         const {name, value, id} = event.target;
-        let index = wellPerfs.findIndex(perf => perf.id == id);
+        let index = wellPerfs.findIndex(perf => perf.id === parseInt(id));
         let test = [...wellPerfs]
         test[index][name] = value;
         setWellPerfs(test);
@@ -257,7 +269,10 @@ function WellView(props) {
             body: JSON.stringify({[propertyName]: value})
         };
         const response = await fetch(`/api/wells/perforations/${id}/`, options);
-        const data = await response.json();
+        if (!response.ok) {
+            console.log('Error updating perforation information');
+        }
+        // const data = await response.json();
     }
 
     if (wellPerfs !== []){
@@ -268,7 +283,7 @@ function WellView(props) {
 
     const handlePlugChange = (event) => {
         const {name, value, id} = event.target;
-        let index = wellPlugs.findIndex(plug => plug.id == id);
+        let index = wellPlugs.findIndex(plug => plug.id === parseInt(id));
         let test = [...wellPlugs]
         test[index][name] = value;
         setWellPlugs(test);
@@ -287,7 +302,10 @@ function WellView(props) {
             body: JSON.stringify({[propertyName]: value})
         };
         const response = await fetch(`/api/wells/plugs/${id}/`, options);
-        const data = await response.json();
+        if (!response.ok) {
+            console.log('Error updating plug information');
+        }
+        // const data = await response.json();
     }
 
 
@@ -316,7 +334,7 @@ function WellView(props) {
         if(!response){
             console.log(response);
         } else {
-            const data = await response.json();
+            // const data = await response.json();
             setWellHoles([...wellHoles, newHole]);
             setRefresh(Math.random())
         }
@@ -343,7 +361,7 @@ function WellView(props) {
         if(!response){
             console.log(response);
         } else {
-            const data = await response.json();
+            // const data = await response.json();
             setWellCasings([...wellCasings, newCasing]);
             setRefresh(Math.random())
         }
@@ -369,7 +387,7 @@ function WellView(props) {
         if(!response){
             console.log(response);
         } else {
-            const data = await response.json();
+            // const data = await response.json();
             setWellCements([...wellCements, newCement]);
             setRefresh(Math.random())
         }
@@ -395,7 +413,7 @@ function WellView(props) {
         if(!response){
             console.log(response);
         } else {
-            const data = await response.json();
+            // const data = await response.json();
             setWellPerfs([...wellPerfs, newPerforation]);
             setRefresh(Math.random())
         }
@@ -421,7 +439,7 @@ function WellView(props) {
         if(!response){
             console.log(response);
         } else {
-            const data = await response.json();
+            // const data = await response.json();
             setWellPlugs([...wellPlugs, newPlug]);
             setRefresh(Math.random())
         }
@@ -568,9 +586,9 @@ function WellView(props) {
     return (
         <div className="well-container">
             {wellInfoHTML}
-            <DeleteConfirmationModal deleteTarget={deleteTarget} setDeleteTarget={setDeleteTarget} showDelete={showDelete} setShowDelete={setShowDelete} history={props.history} setRefresh={setRefresh}/>
-            <DeleteWellModal history={props.history} setRefresh={setRefresh} showWellDel={showWellDel} setShowWellDel={setShowWellDel} setRefresh={setRefresh}/>
-            <PlatImageModal well={props.well} setWell={props.setWell} showImage={showImage} setShowImage={setShowImage}/>
+            <DeleteConfirmationModal deleteTarget={deleteTarget} setDeleteTarget={setDeleteTarget} showDelete={showDelete} setShowDelete={setShowDelete} history={props.history} setRefresh={setRefresh} setIsClicked={setIsClicked}/>
+            <DeleteWellModal history={props.history} setRefresh={setRefresh} showWellDel={showWellDel} setShowWellDel={setShowWellDel}/>
+            <PlatImageModal well={props.well} setWell={props.setWell} showImage={showImage} setShowImage={setShowImage} history={props.history} refresh={refresh} setRefresh={setRefresh}/>
             <Diagram wellFeatures={wellFeatures} wellCements={wellCements} wellCasings={wellCasings} wellPerfs={wellPerfs} wellPlugs={wellPlugs} well={props.well} refresh={refresh}/>
         </div>
     );

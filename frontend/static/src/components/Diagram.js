@@ -24,8 +24,8 @@ function Diagram(props){
         'sml':smlEndRef,
         'xsm': xsmEndRef,
     });
-    const [activeTable, setActiveTable] = useState('');
-    const [cArray, setCArray] = useState([]);
+    // const [activeTable, setActiveTable] = useState('');
+    // const [cArray, setCArray] = useState([]);
 
     useEffect(() => {
         const canvas0 = canvas0Ref.current;
@@ -94,7 +94,8 @@ function Diagram(props){
             drawDepthGuides(props.well.total_depth);
         }
 
-    }, [props.wellCasings, props.wellCements, props.wellPerfs, props.wellPlugs, props.refresh]);//[]
+    }, [props.wellCasings, props.wellCements, props.wellPerfs, props.wellPlugs, props.refresh]);
+        // drawCasings, drawCements, placePerforations, placePlugs, props.well]);//[]
 
 
 
@@ -185,6 +186,9 @@ function Diagram(props){
             case 'xsm': ctx2Ref.current.lineWidth= 1;
                 next = 15;
                 break;
+            default: 
+                console.log('Error setting casing width');
+                break;
         }
         ctx2Ref.current.strokestyle = "black";
         ctx2Ref.current.fillStyle=`rgba(182, 112, 37, ${a})`;
@@ -218,6 +222,9 @@ function Diagram(props){
             case 'sml': lineWidth = 1;
                 break;
             case 'xsm': lineWidth = 0.5;
+                break;
+            default: 
+                console.log('Error setting casing width');
                 break;
         }
 
@@ -622,22 +629,22 @@ function Diagram(props){
     function findPipeXAtY(y, table){
         // console.log(table);
         if (y < table['xlg']){
-            setActiveTable('xlg');
+            // setActiveTable('xlg');
             return 222-90
         } else if (y < table['lrg']){
-            setActiveTable('xlg');
+            // setActiveTable('xlg');
             return 222-75
         } else if (y < table['med']){
-            setActiveTable('lrg');
+            // setActiveTable('lrg');
             return 222-60
         } else if (y < table['reg']){
-            setActiveTable('med');
+            // setActiveTable('med');
             return 222-45
         } else if (y <= table['sml']){
-            setActiveTable('reg');
+            // setActiveTable('reg');
             return 222-30
         } else if (y <= table['xsm']){
-            setActiveTable('sml');
+            // setActiveTable('sml');
             return 222-15
         }
     };

@@ -50,6 +50,12 @@ function LoginForm(props){
         props.history.push('/register');
     }
 
+    const buttonStyle = {
+        color: 'blue',
+        textDecoration: 'underline',
+        cursor: 'pointer',
+    }
+
     return(
         <div className="form-container">
         <form className="mt-3 col-6 login-form" onSubmit={handleSubmit} >
@@ -78,7 +84,7 @@ function LoginForm(props){
                 />
             </div>
             <button type="submit" className="btn btn-primary mt-3" >Log in</button>            
-            <p className="text-center">Not  a member?  Click <a href="" onClick={directToRegister}>here</a> to register.</p>
+            <p className="text-center">Not  a member?  Click <span className="link-button" style={buttonStyle} onClick={directToRegister}>here</span> to register.</p>
         </form>
         
         </div>

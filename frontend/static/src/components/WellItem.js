@@ -23,7 +23,7 @@ function WellItem(props) {
     }
 
     function handleClick(event){
-      const wellID = event.target.parentElement.id;
+      // const wellID = event.target.parentElement.id;
       fetchWell();
     }
 

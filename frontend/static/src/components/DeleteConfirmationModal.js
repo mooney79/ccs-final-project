@@ -30,6 +30,7 @@ function DeleteConfirmationModal(props) {
             // props.setShowDelete(false);
             handleClose();
             props.setDeleteTarget({});
+            props.setIsClicked(false);
             props.setRefresh(Math.random());
             
             // handleClose();
@@ -54,7 +55,7 @@ function DeleteConfirmationModal(props) {
             }
         }
         fetchDeleteDetails();        
-    }, [props.showDelete]);
+    }, [props.showDelete]); //urlPicker
 
     // console.log(props);
     if (props.showDelete === true) {

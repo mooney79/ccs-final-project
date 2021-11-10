@@ -1,13 +1,16 @@
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
-import { useState } from 'react';
+import { useState } from 'react'; //useState, useEffect
 import Cookies from 'js-cookie'
+import { withRouter } from 'react-router-dom';
+// import { useEffect } from 'react';
 // import DeleteDetails from './DeleteDetails';
 
 function PlatImageModal(props) {
   const handleClose = () => props.setShowImage(false);
-
+  // const [imageHTML, setImageHTML] = useState('');
   const [preview, setPreview] = useState('');
+  let imageHTML;
 
   const handleImage = (event) => {
     const file = event.target.files[0];
@@ -22,6 +25,60 @@ function PlatImageModal(props) {
     reader.readAsDataURL(file); //returns URL
   }
 
+  // const [source, setSource] = useState('');
+
+  // useEffect(() => {    
+  //   // if (!props.well){
+  //   //   const fetchWell = async () => {
+  //   //     const response = await fetch(`/api/wells/${props.match.params.id}/`, 
+  //   //     {headers: {
+  //   //             'Content-Type': 'application/json',
+  //   //             'X-CSRFToken': Cookies.get('csrftoken'),
+  //   //             }
+  //   //     });
+  //   //     if (!response.ok) {
+  //   //         console.log('Error fetching well');
+  //   //     } else {
+  //   //         const data = await response.json();                
+  //   //         props.setWell(data);                                 
+  //   //     }
+  //   //   }
+  //   //   fetchWell();
+  //   // }
+  // }, [preview])
+
+   
+
+
+  // console.log(props);
+  // if (preview) {
+  //   setSource(preview);
+  // } else if (props.well){
+  //   setSource(props.well.plat_image);
+  // }
+
+    if(props.well){  
+      let source;
+      if (preview) {
+         source = preview;
+      } else if (props.well.plat_image){
+        source = props.well.plat_image;
+      }    
+      imageHTML=
+     <div className="ImageForm">
+       {/* if (props.well.plat_image) {
+         <img src={props.well.plat_image} alt="plat_image" />
+       } else {*/}
+       {props.well.plat_image && <img className="prev" src={source} alt ="" />}
+       <input type="file" name="plat_image" onChange={handleImage}/>
+     </div>
+   } else {
+      imageHTML=<></>
+   }
+
+
+//
+// src={source}
     // const urlId=props.history.location.pathname.slice(10);
     // const urlPicker=`/api/wells/${urlId}`;
 
@@ -57,21 +114,13 @@ function PlatImageModal(props) {
       }
       fetch(`/api/wells/${props.well.id}/`, options); 
       // fetch(`/media/`, options); 
+      setPreview('');
+      props.setRefresh(Math.random());
+      handleClose();
     }
 
-    let imageHTML;
-    if(props.well){      
-      imageHTML=
-      <div className="ImageForm">
-        {/* if (props.well.plat_image) {
-          <img src={props.well.plat_image} alt="plat_image" />
-        } else {*/}
-        {props.well.plat_image && <img className="prev" src={props.well.plat_image} alt ="" />}
-        <input type="file" name="plat_image" onChange={handleImage}/>
-      </div>
-    } else {
-      imageHTML=<></>
-    }
+    // let imageHTML;
+  
   
     return (
       <>  
@@ -93,7 +142,7 @@ function PlatImageModal(props) {
 }
 
 
-export default PlatImageModal;
+export default withRouter(PlatImageModal);
 
 /*
 
