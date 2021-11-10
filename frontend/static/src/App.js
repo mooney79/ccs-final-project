@@ -64,7 +64,7 @@ function App() {
             <SplashModal userName={userName} setShowSplash={setShowSplash} showSplash={showSplash}/>
         </Route>       
         <Route path='/wellinfo/:id'>
-            <WellView well={well} setWell={setWell} userID={userID} setUserID={setUserID} history={history}/>
+            <WellView well={well} setWell={setWell} userID={userID} setUserID={setUserID} history={history} setShowSplash={setShowSplash}/>
         </Route>
         
 

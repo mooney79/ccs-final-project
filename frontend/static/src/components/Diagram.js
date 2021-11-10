@@ -448,26 +448,19 @@ function Diagram(props){
                 const casingH=Math.round(casing.ending_depth*891/props.well.total_depth)-casingY;
                 casingArray.push(casingX);
                 
-                // let casingA;
-                // if (casingX in cArray){
-                //     casingA = 0;
-                // } else {
-                //     casingA = 1
-                // }
                 if (aIndex.includes(casing.id)){
                      casingA=0;
                 } else {
                      casingA=1;
                 }
-
-                // console.log(cArray);
                 
                 const xlgEnd = casingY+casingH;
                 xlgEndRef.current = xlgEnd;
-                
-                drawPipe(casingX, casingY, casingW, casingH, casingA, casing.gauge);
-                
-                drawCasingSet(casingX, casingY+casingH, casingW, casing.gauge);
+
+                if (casingH > 0){
+                    drawPipe(casingX, casingY, casingW, casingH, casingA, casing.gauge);
+                    drawCasingSet(casingX, casingY+casingH, casingW, casing.gauge);
+                }
             }
             setTable(prevState => ({  
                 ...prevState,        
@@ -489,9 +482,10 @@ function Diagram(props){
                 }
                 const lrgEnd = casingY+casingH;
                 lrgEndRef.current = lrgEnd; 
-                drawPipe(casingX, casingY, casingW, casingH, casingA, casing.gauge);
-                drawCasingSet(casingX, casingY+casingH, casingW, casing.gauge);
-                setTable(prevState => ({  
+                if (casingH > 0){
+                    drawPipe(casingX, casingY, casingW, casingH, casingA, casing.gauge);
+                    drawCasingSet(casingX, casingY+casingH, casingW, casing.gauge);
+                }                setTable(prevState => ({  
                     ...prevState,        
                     'lrg': lrgEndRef.current
                 }));
@@ -512,8 +506,10 @@ function Diagram(props){
                 }
                 const medEnd = casingY+casingH;
                 medEndRef.current = medEnd; 
-                drawPipe(casingX, casingY, casingW, casingH, casingA, casing.gauge);
-                drawCasingSet(casingX, casingY+casingH, casingW, casing.gauge);
+                if (casingH > 0){
+                    drawPipe(casingX, casingY, casingW, casingH, casingA, casing.gauge);
+                    drawCasingSet(casingX, casingY+casingH, casingW, casing.gauge);
+                }
                 setTable(prevState => ({  
                     ...prevState,        
                     'med': medEndRef.current
@@ -535,8 +531,10 @@ function Diagram(props){
                 }
                 const regEnd = casingY+casingH;
                 regEndRef.current = regEnd; 
-                drawPipe(casingX, casingY, casingW, casingH, casingA, casing.gauge);
-                drawCasingSet(casingX, casingY+casingH, casingW, casing.gauge);
+                if (casingH > 0){
+                    drawPipe(casingX, casingY, casingW, casingH, casingA, casing.gauge);
+                    drawCasingSet(casingX, casingY+casingH, casingW, casing.gauge);
+                }
                 setTable(prevState => ({  
                     ...prevState,        
                     'reg': regEndRef.current
@@ -558,8 +556,10 @@ function Diagram(props){
                 }
                 const smlEnd = casingY+casingH;
                 smlEndRef.current = smlEnd; 
-                drawPipe(casingX, casingY, casingW, casingH, casingA, casing.gauge);
-                drawCasingSet(casingX, casingY+casingH, casingW, casing.gauge);
+                if (casingH > 0){
+                    drawPipe(casingX, casingY, casingW, casingH, casingA, casing.gauge);
+                    drawCasingSet(casingX, casingY+casingH, casingW, casing.gauge);
+                }
                 setTable(prevState => ({  
                     ...prevState,        
                     'sml': smlEndRef.current
@@ -581,8 +581,10 @@ function Diagram(props){
                 }
                 const xsmEnd = casingY+casingH;
                 xsmEndRef.current = xsmEnd; 
-                drawPipe(casingX, casingY, casingW, casingH, casingA, casing.gauge);
-                drawCasingSet(casingX, casingY+casingH, casingW, casing.gauge);
+                if (casingH > 0){
+                    drawPipe(casingX, casingY, casingW, casingH, casingA, casing.gauge);
+                    drawCasingSet(casingX, casingY+casingH, casingW, casing.gauge);
+                }
                 setTable(prevState => ({  
                     ...prevState,        
                     'xsm': xsmEndRef.current
@@ -611,7 +613,9 @@ function Diagram(props){
                 deltaX = cementX2;
             }
             const cementW = findPipeWAtY(cementBottom, table);
-            drawCement(cementX, cementY, cementW, cementH, deltaX);
+            if (cementH > 0){
+                drawCement(cementX, cementY, cementW, cementH, deltaX);
+            }
         })
     }
 
@@ -691,7 +695,9 @@ function Diagram(props){
             const perfH=Math.round(perf.ending_depth*891/props.well.total_depth)-perfY;
             const perfX = findPipeXAtY(perfY+perfH, table);
             const perfW = findPipeWAtY(perfY+perfH, table);
-            drawPerfPair(perfX, perfY, perfW);
+            if (perfH > 0){
+                drawPerfPair(perfX, perfY, perfW);
+            }
         })
     }
 
@@ -705,54 +711,56 @@ function Diagram(props){
             } else {
                 const plugY=plug.starting_depth*891/props.well.total_depth;
                 const plugH=(plug.ending_depth*891/props.well.total_depth)-plugY;
-                if (plugY+plugH <= xlgEndRef.current){
-                    const plugX=222-90;
-                    const plugW=180;
-                    if (plug.plug_type === "CP"){
-                        drawCementPlug(plugX, plugY, plugW, plugH);
+                if (plugH > 0){
+                    if (plugY+plugH <= xlgEndRef.current){
+                        const plugX=222-90;
+                        const plugW=180;
+                        if (plug.plug_type === "CP"){
+                            drawCementPlug(plugX, plugY, plugW, plugH);
+                        } else {
+                            drawMechPlug(plugX, plugY, plugW, plugH);
+                        }
+                    } else if (plugY+plugH <= lrgEndRef.current){
+                        const plugX=222-75;
+                        const plugW=150;
+                        if (plug.plug_type === "CP"){
+                            drawCementPlug(plugX, plugY, plugW, plugH);
+                        } else {
+                            drawMechPlug(plugX, plugY, plugW, plugH);
+                        }                    
+                    } else if (plugY+plugH <= medEndRef.current){
+                        const plugX=222-60;
+                        const plugW=120;
+                        if (plug.plug_type === "CP"){
+                            drawCementPlug(plugX, plugY, plugW, plugH);
+                        } else {
+                            drawMechPlug(plugX, plugY, plugW, plugH);
+                        }    
+                    } else if (plugY+plugH <= regEndRef.current){
+                        const plugX=222-45;
+                        const plugW=90;
+                        if (plug.plug_type === "CP"){
+                            drawCementPlug(plugX, plugY, plugW, plugH);
+                        } else {
+                            drawMechPlug(plugX, plugY, plugW, plugH);
+                        }    
+                    } else if (plugY+plugH <= smlEndRef.current){
+                        const plugX=222-30;
+                        const plugW=60;
+                        if (plug.plug_type === "CP"){
+                            drawCementPlug(plugX, plugY, plugW, plugH);
+                        } else {
+                            drawMechPlug(plugX, plugY, plugW, plugH);
+                        }    
                     } else {
-                        drawMechPlug(plugX, plugY, plugW, plugH);
+                        const plugX=222-15;
+                        const plugW=30;
+                        if (plug.plug_type === "CP"){
+                            drawCementPlug(plugX, plugY, plugW, plugH);
+                        } else {
+                            drawMechPlug(plugX, plugY, plugW, plugH);
+                        }    
                     }
-                } else if (plugY+plugH <= lrgEndRef.current){
-                    const plugX=222-75;
-                    const plugW=150;
-                    if (plug.plug_type === "CP"){
-                        drawCementPlug(plugX, plugY, plugW, plugH);
-                    } else {
-                        drawMechPlug(plugX, plugY, plugW, plugH);
-                    }                    
-                } else if (plugY+plugH <= medEndRef.current){
-                    const plugX=222-60;
-                    const plugW=120;
-                    if (plug.plug_type === "CP"){
-                        drawCementPlug(plugX, plugY, plugW, plugH);
-                    } else {
-                        drawMechPlug(plugX, plugY, plugW, plugH);
-                    }    
-                } else if (plugY+plugH <= regEndRef.current){
-                    const plugX=222-45;
-                    const plugW=90;
-                    if (plug.plug_type === "CP"){
-                        drawCementPlug(plugX, plugY, plugW, plugH);
-                    } else {
-                        drawMechPlug(plugX, plugY, plugW, plugH);
-                    }    
-                } else if (plugY+plugH <= smlEndRef.current){
-                    const plugX=222-30;
-                    const plugW=60;
-                    if (plug.plug_type === "CP"){
-                        drawCementPlug(plugX, plugY, plugW, plugH);
-                    } else {
-                        drawMechPlug(plugX, plugY, plugW, plugH);
-                    }    
-                } else {
-                    const plugX=222-15;
-                    const plugW=30;
-                    if (plug.plug_type === "CP"){
-                        drawCementPlug(plugX, plugY, plugW, plugH);
-                    } else {
-                        drawMechPlug(plugX, plugY, plugW, plugH);
-                    }    
                 }
             }
         })

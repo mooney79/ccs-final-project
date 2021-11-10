@@ -15,6 +15,7 @@ import DeleteConfirmationModal from './DeleteConfirmationModal';
 import DeleteWellModal from './DeleteWellModal';
 import PlatImageModal from './PlatImageModal';
 import Diagram from './Diagram';
+import Button from 'react-bootstrap/esm/Button';
 
 function WellView(props) {
     
@@ -122,7 +123,7 @@ function WellView(props) {
         const propertyName = event.target.name;
         const value = event.target.value;
         // const {propertyName, value} = event.target;
-        console.log(event.target);
+        // console.log(event.target);
         const options = {
             method: 'PATCH',
             headers:{
@@ -133,7 +134,11 @@ function WellView(props) {
         };
         const response = await fetch(`/api/wells/${props.match.params.id}/`, options);
         const data = await response.json();
-        console.log(propertyName, value);
+        // console.log(propertyName, value);
+        if (propertyName === "total_depth"){
+            setRefresh(Math.random());
+        }
+
     }
 
     const handleHoleChange = (event) => {
@@ -426,6 +431,11 @@ function WellView(props) {
         setShowWellDel(true);
     }
 
+    function handleBack(){
+        props.setShowSplash(false)
+        props.history.goBack();
+    }
+
     let wellInfoHTML;
     if (props.well !== null) {
         wellInfoHTML = 
@@ -434,7 +444,9 @@ function WellView(props) {
                     <div className="col-lg-8"> 
                         <h2>{props.well.lease} {props.well.well_number} <span className="icon" onClick={displayPopup}>{$faImage}</span> </h2>
                     </div>
-                    
+                    <div>
+                    <Button className="btn" variant="warning" onClick={handleBack}> well selection </Button>
+                    </div>
                     <div className="col-lg-4 text-right">
                         <span className="icon-trash-lrg" onClick={handleDeleteWell}>{$faTrashAlt}</span>
                         <span className="bold-span">Last Updated: </span>{formatDate()}
