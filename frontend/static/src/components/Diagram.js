@@ -25,6 +25,7 @@ function Diagram(props){
         'xsm': xsmEndRef,
     });
     const [activeTable, setActiveTable] = useState('');
+    const [cArray, setCArray] = useState([]);
 
     useEffect(() => {
         const canvas0 = canvas0Ref.current;
@@ -93,17 +94,14 @@ function Diagram(props){
             drawDepthGuides(props.well.total_depth);
         }
 
-    }, [props.wellCasings, props.wellCements, props.wellPerfs, props.wellPlugs, props.refresh]);
+    }, [props.wellCasings, props.wellCements, props.wellPerfs, props.wellPlugs, props.refresh]);//[]
+
+
+
 
     function drawCement(x, y, w, h, x2){
-        ctx1Ref.current.fillRect(x-x2, y, x2, h)
-        ctx1Ref.current.fillRect(x+w, y, x2, h)
-        // ctx1Ref.current.strokeStyle="white";
-        // ctx1Ref.current.moveTo(x,y);
-        // ctx1Ref.current.lineTo(x,y+h);
-        // ctx1Ref.current.moveTo(x+w, y);
-        // ctx1Ref.current.lineTo(x+w,y+h);
-        // ctx1Ref.current.stroke();
+        ctx1Ref.current.fillRect(x-x2, y, x2, h);
+        ctx1Ref.current.fillRect(x+w, y, x2, h);
     }
 
     function drawDepthGuides(depth){
@@ -131,32 +129,108 @@ function Diagram(props){
         ctx0Ref.current.stroke();
     }
 
-    function drawPipe(x, y, w, h, a){
-        ctx2Ref.current.strokestyle = "brown";
-        ctx2Ref.current.lineWidth= 3;    
+    function drawPipe(x, y, w, h, a, size){
+        ctx2Ref.current.beginPath();
+        let next;
+        switch (size){
+            case 'xlg': ctx2Ref.current.lineWidth= 6;
+                if (table['lrg']['current'] !== null ){
+                    next = 15;
+                } else if (table['med']['current']  !== null ){
+                    next = 30;
+                } else if (table['reg']['current']  !== null ){
+                    next = 45;
+                } else if (table['sml']['current']  !== null ){
+                    next = 60;
+                } else if (table['xsm']['current']  !== null ){
+                    next = 75;
+                } else {next = 90}
+                break;
+            case 'lrg': ctx2Ref.current.lineWidth= 5;
+                if (table['med']['current']  !== null ){
+                    next = 15;
+                } else if (table['reg']['current']  !== null ){
+                    next = 30;
+                } else if (table['sml']['current']  !== null ){
+                    next = 45;
+                } else if (table['xsm']['current']  !== null ){
+                    next = 60;
+                } else {next = 75}
+                break;
+            case 'med': ctx2Ref.current.lineWidth= 4;
+                if (table['reg']['current']  !== null ){
+                    next = 15;
+                } else if (table['sml']['current'] !== null ){
+                    next = 30;
+                } else if (table['xsm']['current']  !== null ){
+                    next = 45;
+                } else {next = 60}
+                break;
+            case 'reg': ctx2Ref.current.lineWidth= 3;
+                if (table['sml']  !== null ){
+                    next = 15;
+                } else if (table['xsm']['current']  !== null ){
+                    next = 30;
+                } else {
+                    next = 45;
+                }
+                break;
+            case 'sml': ctx2Ref.current.lineWidth= 2;
+                if (table['xsm']['current']  !== null ){
+                    next = 15;
+                } else {
+                    next = 30;
+                }
+                break;
+            case 'xsm': ctx2Ref.current.lineWidth= 1;
+                next = 15;
+                break;
+        }
+        ctx2Ref.current.strokestyle = "black";
         ctx2Ref.current.fillStyle=`rgba(182, 112, 37, ${a})`;
         ctx2Ref.current.fillRect(x, y, w, h, a);
         ctx2Ref.current.moveTo(x,y);
         ctx2Ref.current.lineTo(x,y+h);
-        ctx2Ref.current.lineTo(x+30, y+h);
+        ctx2Ref.current.lineTo(x+next, y+h); //Change to get next pipe?
+        ctx2Ref.current.stroke();
+        ctx2Ref.current.closePath();
+
+        ctx2Ref.current.beginPath();
         ctx2Ref.current.moveTo(x+w, y);
         ctx2Ref.current.lineTo(x+w,y+h);
-        ctx2Ref.current.lineTo(x+w-30, y+h)
+        ctx2Ref.current.lineTo(x+w-next, y+h)
         ctx2Ref.current.stroke();
+        ctx2Ref.current.closePath();
     }
     
-    function drawCasingSet(x, y, w){
+    function drawCasingSet(x, y, w, size){
         ctx2Ref.current.fillStyle="black";
+        let lineWidth;
+        switch (size){
+            case 'xlg': lineWidth = 3;
+                break;
+            case 'lrg': lineWidth = 2.5;
+                break;
+            case 'med': lineWidth = 2;
+                break;
+            case 'reg': lineWidth = 1.5;
+                break;
+            case 'sml': lineWidth = 1;
+                break;
+            case 'xsm': lineWidth = 0.5;
+                break;
+        }
+
         ctx2Ref.current.beginPath();
-        ctx2Ref.current.moveTo(x,y);
-        ctx2Ref.current.lineTo(x-30,y);
-        ctx2Ref.current.lineTo(x,y-30);
+        ctx2Ref.current.moveTo(x,y+lineWidth);
+        ctx2Ref.current.lineTo(x-30,y+lineWidth);
+        ctx2Ref.current.lineTo(x,y-30+lineWidth);
         ctx2Ref.current.fill();
 
         ctx2Ref.current.beginPath();
-        ctx2Ref.current.moveTo(x+w,y);
-        ctx2Ref.current.lineTo(x+w+30, y);
-        ctx2Ref.current.lineTo(x+w,y-30);
+        ctx2Ref.current.moveTo(x+w,y+lineWidth);
+        ctx2Ref.current.lineTo(x+w+30, y+lineWidth);
+        ctx2Ref.current.lineTo(x+w,y-30+lineWidth);
         ctx2Ref.current.fill();
     }
 
@@ -177,11 +251,16 @@ function Diagram(props){
     function drawEachPerf(x2,y2) {
         ctx2Ref.current.fillStyle = "black";
         ctx2Ref.current.beginPath();
-        ctx2Ref.current.moveTo(x2, y2);
-        ctx2Ref.current.lineTo(x2-30, y2+5);
-        ctx2Ref.current.lineTo(x2, y2+10);
-        ctx2Ref.current.lineTo(x2+30, y2+5);
+        ctx2Ref.current.strokeStyle = "white";
+        ctx2Ref.current.moveTo(x2, y2-5);
+        ctx2Ref.current.lineTo(x2-30, y2);
+        ctx2Ref.current.lineTo(x2, y2+5);
+        ctx2Ref.current.lineTo(x2+30, y2);
+        ctx2Ref.current.lineTo(x2, y2-5);
+        ctx2Ref.current.stroke();
+        ctx2Ref.current.closePath();
         ctx2Ref.current.fill();
+        ctx2Ref.current.strokeStyle = "black";
     }
 
     function drawCementPlug(x,y,w,h){
@@ -195,11 +274,13 @@ function Diagram(props){
 
     function drawDVPlug(x, y, w){
         ctx2Ref.current.beginPath();
+        ctx2Ref.current.lineWidth = 6;
         ctx2Ref.current.moveTo(x, y);
         ctx2Ref.current.lineTo(x-15, y+15);
         ctx2Ref.current.moveTo(x+w, y);
         ctx2Ref.current.lineTo(x+w+15, y+15);
         ctx2Ref.current.stroke();
+        ctx2Ref.current.closePath();
     }
 
     //CenterX 222px
@@ -208,19 +289,185 @@ function Diagram(props){
     //ED/TD = X/891
     //X = ED/TD * 891
 
+    function findA(casings, cements){
+        let casingArray={};
+        let cementArray=[];
+        casings.forEach(casing => {
+            if (casing.gauge === 'xlg'){  
+                const xlgEnd = Math.round(casing.ending_depth*891/props.well.total_depth);
+                xlgEndRef.current = xlgEnd;
+                casingArray['xlg'] = {
+                    id: casing.id,
+                    x: 132,
+                    depth: xlgEndRef.current}; 
+            } else if (casingArray['xlg'] === undefined){
+                casingArray['xlg'] = {
+                    x: 0,
+                    depth: 0,
+                };
+            }
+            if (casing.gauge === 'lrg'){
+                const lrgEnd = Math.round(casing.ending_depth*891/props.well.total_depth);
+                lrgEndRef.current = lrgEnd;
+                casingArray['lrg'] = {
+                    id: casing.id,
+                    x: 147,
+                    depth: lrgEndRef.current};
+            } else if (casingArray['lrg'] === undefined){
+                casingArray['lrg'] = {
+                    x: 0,
+                    depth: 0,
+                };
+            }
+            if (casing.gauge === 'med'){
+                const medEnd = Math.round(casing.ending_depth*891/props.well.total_depth);
+                medEndRef.current = medEnd;
+                casingArray['med'] = {
+                    id: casing.id,
+                    x: 162,
+                    depth: medEndRef.current};
+            } else if (casingArray['med'] === undefined){
+                casingArray['med'] = {
+                    x: 0,
+                    depth: 0,
+                };
+            }
+            if (casing.gauge === 'reg'){
+                const regEnd = Math.round(casing.ending_depth*891/props.well.total_depth);
+                regEndRef.current = regEnd;
+                casingArray['reg'] = {
+                    id: casing.id,
+                    x: 177,
+                    depth: regEndRef.current};
+            } else if (casingArray['reg'] === undefined){
+                casingArray['reg'] = {
+                    x: 0,
+                    depth: 0,
+                };
+            }
+            if (casing.gauge === 'sml'){
+                const smlEnd = Math.round(casing.ending_depth*891/props.well.total_depth);
+                smlEndRef.current = smlEnd;
+                casingArray['sml'] = {
+                    id: casing.id,
+                    x: 192,
+                    depth: smlEndRef.current};
+            } else if (casingArray['sml'] === undefined) {
+                casingArray['sml'] = {
+                    x: 0,
+                    depth: 0,
+                };
+            }
+            if (casing.gauge === 'xsm'){
+                const xsmEnd = Math.round(casing.ending_depth*891/props.well.total_depth);
+                xsmEndRef.current = xsmEnd;
+                casingArray['xsm'] = {
+                    id: casing.id,
+                    x: 207,
+                    depth: xsmEndRef.current};
+            }
+            else if (casingArray['xsm'] === undefined){
+                casingArray['xsm'] = {
+                    x: 0,
+                    depth: 0,
+                };
+            }
+        });
+
+        cements.forEach(cement => {
+            const cementY=Math.round(cement.starting_depth*891/props.well.total_depth);
+            const cementBottom = Math.round(cement.ending_depth*891/props.well.total_depth);
+            let cementXTop;
+            let cementXBottom;
+            if (cementY < casingArray['xlg']['depth']){
+                cementXTop = 132;
+            } else if (cementY < casingArray['lrg']['depth']){
+                cementXTop = 147;
+            } else if (cementY < casingArray['med']['depth']){
+                cementXTop = 162;
+            } else if (cementY < casingArray['reg']['depth']){
+                cementXTop = 177;
+            } else if (cementY < casingArray['sml']['depth']){
+                cementXTop = 192;
+            } else if (cementY < casingArray['xsm']['depth']){
+                cementXTop = 207; 
+            }
+            if (cementBottom <= casingArray['xlg']['depth'] +1){
+                cementXBottom = 132;
+            } else if (cementBottom <= casingArray['lrg']['depth'] +1){
+                cementXBottom = 147;
+            } else if (cementBottom <= casingArray['med']['depth'] +1){
+                cementXBottom = 162;
+            } else if (cementBottom <= casingArray['reg']['depth'] +1){
+                cementXBottom = 177;
+            } else if (cementBottom <= casingArray['sml']['depth'] +1){
+                cementXBottom = 192;
+            } else if (cementBottom <= casingArray['xsm']['depth'] +1){
+                cementXBottom = 207; 
+            }
+
+            let cementW = cementXTop = cementXBottom;
+            if (cementW === 0){
+                cementW = 15;
+            }
+
+            cementArray.push({TopY: cementY, BottomY: cementBottom, TopX: cementXTop, BottomX: cementXBottom, W: cementW});
+        });                        
+        
+        let idArray=[];
+        for (let i = 0; i < cementArray.length; i++){
+            if (cementArray[i]['TopX']-cementArray[i]['W'] <= casingArray['xlg']['x'] && cementArray[i]['TopY'] < casingArray['xlg']['depth'] && cementArray[i]['bottomY'] !== cementArray[i]['TopY'] && (idArray.indexOf(casingArray['xlg']['id']) === -1)){
+                idArray.push(casingArray['xlg']['id']);
+            } else if (cementArray[i]['TopX'] - cementArray[i]['W'] <= casingArray['lrg']['x'] && cementArray[i]['TopY'] < casingArray['lrg']['depth'] && cementArray[i]['bottomY'] !== cementArray[i]['TopY'] && (idArray.indexOf(casingArray['lrg']['id']) === -1)){
+                idArray.push(casingArray['lrg']['id']);
+            } else if (cementArray[i]['TopX'] -cementArray[i]['W'] <= casingArray['med']['x'] && cementArray[i]['TopY'] < casingArray['med']['depth'] && cementArray[i]['bottomY'] !== cementArray[i]['TopY'] && (idArray.indexOf(casingArray['med']['id']) === -1)){
+                idArray.push(casingArray['med']['id']);
+            } else if (cementArray[i]['TopX'] -cementArray[i]['W'] <= casingArray['reg']['x'] && cementArray[i]['TopY'] < casingArray['reg']['depth'] && cementArray[i]['bottomY'] !== cementArray[i]['TopY'] && (idArray.indexOf(casingArray['reg']['id']) === -1)){
+                idArray.push(casingArray['reg']['id']);
+            } else if (cementArray[i]['TopX'] -cementArray[i]['W'] <= casingArray['sml']['x'] && cementArray[i]['TopY'] < casingArray['sml']['depth'] && cementArray[i]['bottomY'] !== cementArray[i]['TopY'] && (idArray.indexOf(casingArray['sml']['id']) === -1)){
+                idArray.push(casingArray['sml']['id']);
+            } else if (cementArray[i]['TopX'] -cementArray[i]['W'] <= casingArray['xsm']['x'] && cementArray[i]['TopY'] < casingArray['xsm']['depth'] && cementArray[i]['bottomY'] !== cementArray[i]['TopY'] && (idArray.indexOf(casingArray['xsm']['id']) === -1)){
+                idArray.push(casingArray['xsm']['id']);
+            }
+        }
+        idArray.pop();
+        return idArray;
+    }
+
+
     
     function drawCasings(casings){
+        const aIndex = findA(props.wellCasings, props.wellCements);
+        let casingArray=[];
         casings.forEach(casing => {
+            let casingA;
             if (casing.gauge === 'xlg' && casing.ending_depth > casing.starting_depth){
                 const casingX=222-90;
                 const casingY=Math.round(casing.starting_depth*891/props.well.total_depth);
                 const casingW=180;
                 const casingH=Math.round(casing.ending_depth*891/props.well.total_depth)-casingY;
-                const casingA=0;
+                casingArray.push(casingX);
+                
+                // let casingA;
+                // if (casingX in cArray){
+                //     casingA = 0;
+                // } else {
+                //     casingA = 1
+                // }
+                if (aIndex.includes(casing.id)){
+                     casingA=0;
+                } else {
+                     casingA=1;
+                }
+
+                // console.log(cArray);
+                
                 const xlgEnd = casingY+casingH;
-                xlgEndRef.current = xlgEnd; 
-                drawPipe(casingX, casingY, casingW, casingH, casingA);
-                drawCasingSet(casingX, casingY+casingH, casingW);
+                xlgEndRef.current = xlgEnd;
+                
+                drawPipe(casingX, casingY, casingW, casingH, casingA, casing.gauge);
+                
+                drawCasingSet(casingX, casingY+casingH, casingW, casing.gauge);
             }
             setTable(prevState => ({  
                 ...prevState,        
@@ -228,16 +475,22 @@ function Diagram(props){
             }));      
         })
         casings.forEach(casing => {
+            let casingA;
             if (casing.gauge === 'lrg' && casing.ending_depth > casing.starting_depth){
                 const casingX=222-75;
                 const casingY=Math.round(casing.starting_depth*891/props.well.total_depth);
                 const casingW=150;
                 const casingH=Math.round(casing.ending_depth*891/props.well.total_depth)-casingY;
-                const casingA=0;
+                casingArray.push(casingX);
+                if (aIndex.includes(casing.id)){
+                     casingA=0;
+                } else {
+                     casingA=1;
+                }
                 const lrgEnd = casingY+casingH;
                 lrgEndRef.current = lrgEnd; 
-                drawPipe(casingX, casingY, casingW, casingH, casingA);
-                drawCasingSet(casingX, casingY+casingH, casingW);
+                drawPipe(casingX, casingY, casingW, casingH, casingA, casing.gauge);
+                drawCasingSet(casingX, casingY+casingH, casingW, casing.gauge);
                 setTable(prevState => ({  
                     ...prevState,        
                     'lrg': lrgEndRef.current
@@ -245,16 +498,22 @@ function Diagram(props){
             }
         })
         casings.forEach(casing => {
+            let casingA;
             if (casing.gauge === 'med' && casing.ending_depth > casing.starting_depth){
                 const casingX=222-60;
                 const casingY=Math.round(casing.starting_depth*891/props.well.total_depth);
                 const casingW=120;
                 const casingH=Math.round(casing.ending_depth*891/props.well.total_depth)-casingY;
-                const casingA=0;
+                casingArray.push(casingX);
+                if (aIndex.includes(casing.id)){
+                     casingA=0;
+                } else {
+                     casingA=1;
+                }
                 const medEnd = casingY+casingH;
                 medEndRef.current = medEnd; 
-                drawPipe(casingX, casingY, casingW, casingH, casingA);
-                drawCasingSet(casingX, casingY+casingH, casingW);
+                drawPipe(casingX, casingY, casingW, casingH, casingA, casing.gauge);
+                drawCasingSet(casingX, casingY+casingH, casingW, casing.gauge);
                 setTable(prevState => ({  
                     ...prevState,        
                     'med': medEndRef.current
@@ -262,16 +521,22 @@ function Diagram(props){
             }
         })
         casings.forEach(casing => {
+            let casingA;
             if (casing.gauge === 'reg' && casing.ending_depth > casing.starting_depth){
                 const casingX=222-45;
                 const casingY=Math.round(casing.starting_depth*891/props.well.total_depth);
                 const casingW=90;
                 const casingH=Math.round(casing.ending_depth*891/props.well.total_depth)-casingY;
-                const casingA=0;
+                casingArray.push(casingX);
+                if (aIndex.includes(casing.id)){
+                     casingA=0;
+                } else {
+                     casingA=1;
+                }
                 const regEnd = casingY+casingH;
                 regEndRef.current = regEnd; 
-                drawPipe(casingX, casingY, casingW, casingH, casingA);
-                drawCasingSet(casingX, casingY+casingH, casingW);
+                drawPipe(casingX, casingY, casingW, casingH, casingA, casing.gauge);
+                drawCasingSet(casingX, casingY+casingH, casingW, casing.gauge);
                 setTable(prevState => ({  
                     ...prevState,        
                     'reg': regEndRef.current
@@ -279,16 +544,22 @@ function Diagram(props){
             }
         })
         casings.forEach(casing => {
+            let casingA;
             if (casing.gauge === 'sml' && casing.ending_depth > casing.starting_depth){
                 const casingX=222-30;
                 const casingY=Math.round(casing.starting_depth*891/props.well.total_depth);
                 const casingW=60;
                 const casingH=Math.round(casing.ending_depth*891/props.well.total_depth)-casingY;
-                const casingA=1;
+                casingArray.push(casingX);
+                if (aIndex.includes(casing.id)){
+                     casingA=0;
+                } else {
+                     casingA=1;
+                }
                 const smlEnd = casingY+casingH;
                 smlEndRef.current = smlEnd; 
-                drawPipe(casingX, casingY, casingW, casingH, casingA);
-                drawCasingSet(casingX, casingY+casingH, casingW);
+                drawPipe(casingX, casingY, casingW, casingH, casingA, casing.gauge);
+                drawCasingSet(casingX, casingY+casingH, casingW, casing.gauge);
                 setTable(prevState => ({  
                     ...prevState,        
                     'sml': smlEndRef.current
@@ -296,16 +567,22 @@ function Diagram(props){
             }
         });
         casings.forEach(casing => {
+            let casingA;
             if (casing.gauge === 'xsm' && casing.ending_depth > casing.starting_depth){
                 const casingX=222-15;
                 const casingY=Math.round(casing.starting_depth*891/props.well.total_depth);
                 const casingW=30;
                 const casingH=Math.round(casing.ending_depth*891/props.well.total_depth)-casingY;
-                const casingA=1;
+                casingArray.push(casingX);
+                if (aIndex.includes(casing.id)){
+                     casingA=0;
+                } else {
+                     casingA=1;
+                }
                 const xsmEnd = casingY+casingH;
                 xsmEndRef.current = xsmEnd; 
-                drawPipe(casingX, casingY, casingW, casingH, casingA);
-                drawCasingSet(casingX, casingY+casingH, casingW);
+                drawPipe(casingX, casingY, casingW, casingH, casingA, casing.gauge);
+                drawCasingSet(casingX, casingY+casingH, casingW, casing.gauge);
                 setTable(prevState => ({  
                     ...prevState,        
                     'xsm': xsmEndRef.current
@@ -325,7 +602,9 @@ function Diagram(props){
             const cementXtop = findPipeXAtY(cementY, table);
             const cementX2 = findNextPipeXAtY(cementX, cementXtop, cementY, table);
             let deltaX;
-            // console.log(cementX, cementX2, cementXtop);
+            // findA(cementXtop, cementX);
+            // console.log(cArray);
+            // console.log(cement.id, cementX, cementX2, cementXtop);
             if (cementX2 === 0){  
                 deltaX = 15;
             } else {
@@ -337,6 +616,7 @@ function Diagram(props){
     }
 
     function findPipeXAtY(y, table){
+        // console.log(table);
         if (y < table['xlg']){
             setActiveTable('xlg');
             return 222-90
@@ -349,7 +629,7 @@ function Diagram(props){
         } else if (y < table['reg']){
             setActiveTable('med');
             return 222-45
-        } else if (y < table['sml']){
+        } else if (y <= table['sml']){
             setActiveTable('reg');
             return 222-30
         } else if (y <= table['xsm']){
@@ -361,11 +641,11 @@ function Diagram(props){
     function findPipeWAtY(y, table){
         if (y <= table['xlg']){
             return 180
-        } else if (y <= table['lrg']){
+        } else if (y < table['lrg']){
             return 150
-        } else if (y <= table['med']){
+        } else if (y < table['med']){
             return 120
-        } else if (y <= table['reg']){
+        } else if (y < table['reg']){
             return 90
         } else if (y <= table['sml']){
             return 60
@@ -375,6 +655,7 @@ function Diagram(props){
     };
 
     function findNextPipeXAtY(x, x2, y, table){
+        //Y is already set for x, x2.
         let xArray = [];
         if (xlgEndRef.current !== null){
             xArray.push(findPipeXAtY(xlgEndRef.current-1, table));
