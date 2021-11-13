@@ -57,8 +57,8 @@ function LoginForm(props){
     }
 
     return(
-        <div className="form-container">
-        <form className="mt-3 col-6 login-form" onSubmit={handleSubmit} >
+        <div className="form-container login-page">
+        <form className="mt-3 col-10 col-md-5 login-form" onSubmit={handleSubmit} >
             <div className="form-group text-left mb-3">
                 <label htmlFor='username'>Username</label>
                 <input type="text" 
@@ -83,7 +83,7 @@ function LoginForm(props){
                     value={userLog.password1}
                 />
             </div>
-            <button type="submit" className="btn btn-primary mt-3" >Log in</button>            
+            <button type="submit" className="btn btn-warning mt-1" >Log in</button>            
             <p className="text-center">Not  a member?  Click <span className="link-button" style={buttonStyle} onClick={directToRegister}>here</span> to register.</p>
         </form>
         

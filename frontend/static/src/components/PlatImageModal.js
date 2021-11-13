@@ -125,14 +125,14 @@ function PlatImageModal(props) {
     return (
       <>  
         <Modal show={props.showImage} onHide={handleClose}>
-          <Modal.Header closeButton>
+          <Modal.Header className="splash" closeButton>
             <Modal.Title>Plat</Modal.Title>
           </Modal.Header>
-          <Modal.Body>
+          <Modal.Body className="splash-body">
             {imageHTML}
           </Modal.Body>
-          <Modal.Footer>           
-            <Button variant="primary" onClick={handleUpload}>
+          <Modal.Footer className="splash">           
+            <Button variant="warning" onClick={handleUpload}>
               Upload Photo
             </Button>
           </Modal.Footer>

@@ -36,7 +36,7 @@ function WelcomePage(props){
 
 
     return (
-        <div className="welcome-container">           
+        <div className="welcome-container col-10 col-md-5">           
             <WellList setWell={props.setWell} well={props.well} setShowNew={props.setShowNew} showNew={props.showNew}/> 
             {logHTML}            
         </div>

@@ -30,17 +30,17 @@ function DeleteWellModal(props) {
     return (
       <>  
         <Modal show={props.showWellDel} onHide={handleClose}>
-          <Modal.Header closeButton>
+          <Modal.Header className="splash" closeButton>
             <Modal.Title>Delete Well</Modal.Title>
           </Modal.Header>
-          <Modal.Body>
+          <Modal.Body className="splash-body">
             <p>Are you sure you want to delete this Well? This action cannot be undone.</p>
           </Modal.Body>
-          <Modal.Footer>
+          <Modal.Footer className="splash">
             <Button variant="secondary" onClick={handleClose}>
               Keep Well
             </Button>
-            <Button variant="primary" onClick={handleDelete}>
+            <Button variant="warning" onClick={handleDelete}>
               Delete
             </Button>
           </Modal.Footer>

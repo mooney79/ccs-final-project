@@ -57,7 +57,7 @@ function App() {
     <div className="App">
       <Switch>
         <Route path='/register' >
-          <RegistrationForm isAuth={isAuth} setIsAuth={setIsAuth}/>
+          <RegistrationForm isAuth={isAuth} setIsAuth={setIsAuth} history={history}/>
         </Route>
         <Route path='/login'>
             <LoginForm  isAuth={isAuth} setIsAuth={setIsAuth} history={history}/>

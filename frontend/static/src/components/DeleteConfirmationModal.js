@@ -118,7 +118,7 @@ function DeleteConfirmationModal(props) {
     // }
     if (deleteDetails !== {}) {
         const detailPairs = Object.entries(deleteDetails);
-        console.log(detailPairs);
+        // console.log(detailPairs);
         delHTML = detailPairs.map(pair => <DeleteDetails key={Math.random()*450} {...pair} />);
     }
     }
@@ -126,21 +126,21 @@ function DeleteConfirmationModal(props) {
     return (
       <>  
         <Modal show={props.showDelete} onHide={handleClose}>
-          <Modal.Header closeButton>
+          <Modal.Header  className="splash" closeButton>
             <Modal.Title>Delete Entry</Modal.Title>
           </Modal.Header>
-          <Modal.Body>
+          <Modal.Body className="splash-body">
             <p>Are you sure you want to delete this entry? This action cannot be undone.</p>
             <br />
             <div>
                 {delHTML}
             </div>
           </Modal.Body>
-          <Modal.Footer>
+          <Modal.Footer className="splash">
             <Button variant="secondary" onClick={handleClose}>
               Keep Data
             </Button>
-            <Button variant="primary" onClick={handleDelete}>
+            <Button variant="warning" onClick={handleDelete}>
               Delete
             </Button>
           </Modal.Footer>

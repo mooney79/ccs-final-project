@@ -49,10 +49,20 @@ function RegistrationForm(props){
         }
     }
 
+    const buttonStyle = {
+        color: 'blue',
+        textDecoration: 'underline',
+        cursor: 'pointer',
+    }
+    
+    function directToLogin(){
+        props.history.push('/login');
+    }
+
 
     return(
-        <div className="form-container">
-        <form className="mt-3 col-6 register-form" onSubmit={handleSubmit} >
+        <div className="form-container register-page">
+        <form className="mt-3 col-10 col-md-5 register-form" onSubmit={handleSubmit} >
             <div className="form-group text-left mb-3">
                 <label htmlFor='username'>Username</label>
                 <input type="text" 
@@ -102,8 +112,12 @@ function RegistrationForm(props){
                 />
                 {error &&<span className="text-danger"> {error}</span>}
             </div>
-            <button type="submit" className="btn btn-primary mt-3" >Register</button>
+            <div className='split-register'>
+            <p>Already have an account? <span className="link-button" style={buttonStyle} onClick={directToLogin}>Log in!</span> </p>
+            <button type="submit" className="btn btn-warning mt-3" >Register</button>
+            </div>
         </form>
+        
         </div>
     )
 

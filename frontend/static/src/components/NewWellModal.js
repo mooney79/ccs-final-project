@@ -42,16 +42,16 @@ function NewWellModal(props) {
             [name]:value,
         }))
     }
-  
+   
     return (
       <>  
-        <Modal show={props.showNew} onHide={handleClose}>
-          <Modal.Header closeButton>
+        <Modal show={props.showNew} onHide={handleClose} className="new-well-modal">
+          <Modal.Header className="new-modal" closeButton>
             <Modal.Title>Add New Well</Modal.Title>
           </Modal.Header>
-          <Modal.Body>
-            <div className="form-container">
-            <form className="mt-3 col-6 register-form" >
+          <Modal.Body className="new-modal">
+            <div className="form-container new-well">
+            <form className="col-12 new-well-form" >
                 <div className="form-group text-left mb-3">
                     <label htmlFor='lease'>Lease Name:</label>
                     <input type="text" 
@@ -103,11 +103,11 @@ function NewWellModal(props) {
             </form>
             </div>
           </Modal.Body>
-          <Modal.Footer>
+          <Modal.Footer className="new-modal">
             <Button variant="secondary" onClick={handleClose}>
               Discard
             </Button>
-            <Button variant="primary" onClick={handleSave}>
+            <Button variant="warning" onClick={handleSave}>
               Save
             </Button>
           </Modal.Footer>

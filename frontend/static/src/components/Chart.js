@@ -107,20 +107,20 @@ function Chart() {
     };
 
     const divStyle = {
-        maxWidth: '700px',
-        height: '400px',
+        maxWidth: '100%',
+        height: '300px',
         margin: '0px auto',
     };
 
     return (
-        <>
-        
+        <div className="chart-div">
         <div className="chart" style={divStyle}><JSCharting options={config} mutable={false} /></div>
         <div className="chart-buttons">
             <Button className="chart-button" onClick={handleMonth} variant="warning">Past Month</Button>
             <Button className="chart-button" onClick={handleWeek} variant="warning">Past Week</Button>
         </div>
-        </>
+        </div>
+
     );
 }
 

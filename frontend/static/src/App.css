@@ -1,31 +1,111 @@
 body{
   background-image: url("./StaticImages/background.jpg");
   background-size: fit;
-  background-position-y: 45%;
+  /* background-position-y: 45%; */
+  background-position: right bottom;
   background-repeat: no-repeat;
   font-family: 'Oxygen', sans-serif; 
-  background-color: rgb(184, 156, 45);
+  /* background-color: rgb(184, 156, 45); */
+  height: 100vh;
 }
 
+
+
+/* LOGIN FORM */
 .login-form{
-  background-color: rgba(241, 241, 241, 1.0);
+  background-color: rgba(184, 156, 45, 0.3);
   padding: 20px;
   border-radius: 10px;
   margin-top: 100px;
+  align-self: center;
+  display: flex;
+  flex-direction: column;
 }
 
-.register-form{
-  background-color: rgba(241, 241, 241, 1.0);;
-  padding: 20px;
-  border-radius: 10px;
-  margin-top: 100px;
+.login-form > button{
+align-self: flex-end;
 }
+
+.login-form label{
+  width: 100%;
+  background: transparent;
+  /* background: rgba(184, 156, 45, 0.3); */
+}
+
+.login-page{
+  max-height: 100vh;
+  min-height: 100vh;
+}
+
+.login-form p{
+  width: 100%;
+  background: transparent;
+  /* background: rgba(184, 156, 45, 0.3);  */
+}
+
+span{
+  background: inherit;
+}
+
+
+/* REGISTER FORM */
+.register-form{
+  background-color: rgba(184, 156, 45, 0.3);
+  padding: 10px;
+  border-radius: 10px;
+  margin-top: 80px;
+  width: inherit;
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.register-form > button{
+  align-self: flex-end;
+  }
+  
+.register-form label{
+  width: 100%;
+  background: transparent;
+  /* background: rgba(184, 156, 45, 0.3); */
+}
+  
+.register-page{
+  max-height: 100vh;
+  min-height: 100vh;
+}
+
+.register-form p{
+  width: 100%;
+  background: transparent;
+  /* background: rgba(184, 156, 45, 0.3);  */
+}
+
+.split-register{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+/* SPLASH MODAL STYLING */
+
+.new-well-form{
+  background-color: rgba(184, 156, 45, 0.3);
+  padding: 10px;
+  border-radius: 10px;
+  /* margin-top: 10px; */
+  width: inherit;
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+}
+
 
 .form-container{
+  margin: 0 auto;
   display: flex;
-  align-items: center;
   justify-content: center;
-  height: 100vh;
+  height: auto;
 }
 
 .welcome-container{
@@ -36,7 +116,7 @@ body{
   background-color: rgba(241, 241, 241, 1.0);;
   padding: 20px;
   border-radius: 10px;
-  margin-top: 35vh;
+  /* margin-top: 35vh; */
   width: 35vw;
   margin-left: auto;
   margin-right: auto;
@@ -47,6 +127,7 @@ body{
   font-weight: 700;
   font-size: 36px;
   margin-bottom: 16px;
+  background-color: transparent;
 }
 
 .fp-p {
@@ -105,7 +186,7 @@ h2{
 
 .perf-col, .casing-col, .cement-col, .hole-col, .plug-col{
   height: 70vh;
-  max-height: 70vh;
+  max-height: 70vh; 
   
   background-color: rgba(241, 241, 241, 1.0);
   border-right: 1px black solid;
@@ -273,12 +354,12 @@ li:nth-child(even){
 
 @media screen and (max-width: 768px) {
   
-  * {
-    background-color: rgb(184, 156, 45, 0.2);
-  }
-  body{
+  /* * {
+    background-color: rgba(241, 241, 241, 1.0);
+  } */
+  /* body{
     background-image: none;
-  }
+  } */
 
   .welcome-container{
     width: 90vw;
@@ -302,6 +383,11 @@ li:nth-child(even){
     margin-left: auto;
     margin-right: auto;
   }
+
+  .login-form label{
+    background: rgba(184, 156, 45, 0.3);
+  }
+
 }
 
 
@@ -323,6 +409,8 @@ li:nth-child(even){
   position: relative;
   background-color: rgba(241, 241, 241, 0.6);
 }
+
+
 
 .label1{
   position: absolute;
@@ -416,8 +504,15 @@ li:nth-child(even){
   width: 100%;
 }
 
+.chart-div{
+  /* transform: translateX(-5%); */
+  background-color: transparent;
+}
 .chart{
-  width: 75%;
+  width: 100%;
+  align-self: 'center';
+  margin: 60;
+  background-color: transparent;
 }
 
 .chart-buttons{
@@ -425,23 +520,34 @@ li:nth-child(even){
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
-  margin-top: 10px;
+  margin-top: 50px;
+  background-color: transparent;
+  /* margin-top: -30px; */
 }
 
 .logo{
-  width: 100%;
+  width: 60%;
+  /* margin: 0 auto; */
+  align-self: center;
+  background-color: transparent;
 }
 
 .splash{
   background-color: rgba(184, 156, 45, 1.0);
 }
 
+
+
 .splash-body{
   background-color: rgba(184, 156, 45, 0.6);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .WTI-prompt{
   cursor: pointer;
+  background-color: transparent;
 }
 
 .WTI-prompt:hover{
@@ -449,5 +555,68 @@ li:nth-child(even){
 }
 
 .price-chart{
-  width: 75%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  background-color: transparent;
 }
+
+.new-well-modal{
+  margin-top: 10vh;
+  height: auto;
+}
+
+.new-modal{
+  background-color: rgba(241, 241, 241, 1.0);
+}
+
+
+/* .list-p{
+  background: transparent;
+} */
+
+span{
+  background-color: transparent;
+}
+
+#splash-modal{
+  margin-top: 20vh;
+}
+
+.welcome-container{
+  transform: translateY(20vh);  
+  /* margin-top: 20vh; */
+}
+
+
+
+
+/*input:-internal-autofill-selected*/
+input:-webkit-internal-autofill-selected {
+  /* animation-delay: 0s; Safari support - any positive time runs instantly */
+  /* animation-name: autofill;
+  animation-fill-mode: both; */
+  /* transition: background-color; */
+  box-shadow: 0 0 0px 1000px rgba(184, 156, 45, 0.1) inset !important;
+  /* background-color: transparent !important; */
+}
+
+@keyframes autofill {
+  0%,100% {
+      /* color: #333; */
+      background: rgba(184, 156, 45, 0.1);
+  }
+}
+
+
+/*
+onKeyPress={(e) => handleKeyPress(e)}   on input
+function handleKeyPress(e) {
+        if (e.key=== 'Enter') {
+            handleBlur(e)
+        }
+    }
+
+*/
