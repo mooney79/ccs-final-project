@@ -28,10 +28,10 @@ function WellCasings(props){
     return(
         <div className="well-casing">
             <p>Casing Gauge:</p> {gaugeHTML}
-            <p>Casing Weight:</p> <input id={props.id} type="text" onChange={props.handleCasingChange} onBlur={props.handleCasingBlur} name="casing_weight" className="input-hidden" value={props.casing_weight} />
-            <p>Casing Grading:</p> <input id={props.id} type="text" onChange={props.handleCasingChange} onBlur={props.handleCasingBlur} name="casing_grading" className="input-hidden" value={props.casing_grading} />
-            <p>Starting Depth:</p> <input id={props.id} type="text" onChange={props.handleCasingChange} onBlur={props.handleCasingBlur} name="starting_depth" className="input-hidden" value={props.starting_depth} />
-            <p>Ending Depth:</p> <input id={props.id} type="text" onChange={props.handleCasingChange} onBlur={props.handleCasingBlur} name="ending_depth" className="input-hidden" value={props.ending_depth} />
+            <p>Casing Weight:</p> <input id={props.id} type="text" onChange={props.handleCasingChange} onBlur={props.handleCasingBlur} onKeyPress={(e) => props.handleCasingKeyPress(e)} name="casing_weight" className="input-hidden" value={props.casing_weight} />
+            <p>Casing Grading:</p> <input id={props.id} type="text" onChange={props.handleCasingChange} onBlur={props.handleCasingBlur} onKeyPress={(e) => props.handleCasingKeyPress(e)} name="casing_grading" className="input-hidden" value={props.casing_grading} />
+            <p>Starting Depth:</p> <input id={props.id} type="text" onChange={props.handleCasingChange} onBlur={props.handleCasingBlur} onKeyPress={(e) => props.handleCasingKeyPress(e)} name="starting_depth" className="input-hidden" value={props.starting_depth} />
+            <p>Ending Depth:</p> <input id={props.id} type="text" onChange={props.handleCasingChange} onBlur={props.handleCasingBlur} onKeyPress={(e) => props.handleCasingKeyPress(e)} name="ending_depth" className="input-hidden" value={props.ending_depth} />
             <p className="trash-icon"><span className="icon" onClick={handleDelete}>{$faTrashAlt}</span></p>
             <hr></hr>
         </div>

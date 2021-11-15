@@ -179,7 +179,7 @@ function WellView(props) {
     if (wellHoles === []){
         wellHolesHTML = <> <Spinner animation="grow" variant='primary' /><p>Loading...</p></>
     } else {
-        wellHolesHTML = wellHoles.map(hole => <WellHoles key={hole.id+1000} {...hole} setWellHoles={setWellHoles} handleHoleChange={handleHoleChange} handleHoleBlur={handleHoleBlur} deleteTarget={deleteTarget} setDeleteTarget={setDeleteTarget} setIsClicked={setIsClicked} setRefresh={setRefresh}/>)        
+        wellHolesHTML = wellHoles.map(hole => <WellHoles key={hole.id+1000} {...hole} setWellHoles={setWellHoles} handleHoleChange={handleHoleChange} handleHoleBlur={handleHoleBlur} deleteTarget={deleteTarget} setDeleteTarget={setDeleteTarget} setIsClicked={setIsClicked} setRefresh={setRefresh} handleHoleKeyPress={handleHoleKeyPress}/>)        
     }
 
     const handleCasingChange = (event) => {
@@ -210,7 +210,7 @@ function WellView(props) {
     }
 
     if (wellCasings !== []){
-        wellCasingsHTML = wellCasings.map(casing => <WellCasings key={casing.id+2000} {...casing} handleCasingChange={handleCasingChange} handleCasingBlur={handleCasingBlur} deleteTarget={deleteTarget} setDeleteTarget={setDeleteTarget} setIsClicked={setIsClicked} setRefresh={setRefresh}/>)
+        wellCasingsHTML = wellCasings.map(casing => <WellCasings key={casing.id+2000} {...casing} handleCasingChange={handleCasingChange} handleCasingBlur={handleCasingBlur} deleteTarget={deleteTarget} setDeleteTarget={setDeleteTarget} setIsClicked={setIsClicked} setRefresh={setRefresh} handleCasingKeyPress={handleCasingKeyPress}/>)
     } else {
         wellCasingsHTML = <> <Spinner animation="grow" variant='primary' /><p>Loading...</p></>
     }
@@ -243,7 +243,7 @@ function WellView(props) {
     }
 
     if (wellCements !== []){
-        wellCementsHTML = wellCements.map(cement => <WellCements key={cement.id+3000} {...cement} handleCementChange={handleCementChange} handleCementBlur={handleCementBlur} deleteTarget={deleteTarget} setDeleteTarget={setDeleteTarget} setIsClicked={setIsClicked} setRefresh={setRefresh}/>)
+        wellCementsHTML = wellCements.map(cement => <WellCements key={cement.id+3000} {...cement} handleCementChange={handleCementChange} handleCementBlur={handleCementBlur} deleteTarget={deleteTarget} setDeleteTarget={setDeleteTarget} setIsClicked={setIsClicked} setRefresh={setRefresh} handleCementKeyPress={handleCementKeyPress}/>)
     } else {
         wellCementsHTML = <> <Spinner animation="grow" variant='primary' /><p>Loading...</p></>
     }
@@ -276,7 +276,7 @@ function WellView(props) {
     }
 
     if (wellPerfs !== []){
-        wellPerfsHTML = wellPerfs.map(perf => <WellPerfs key={perf.id+4000} {...perf} handlePerforationChange={handlePerforationChange} handlePerforationBlur={handlePerforationBlur} deleteTarget={deleteTarget} setDeleteTarget={setDeleteTarget} setIsClicked={setIsClicked} setRefresh={setRefresh}/>)
+        wellPerfsHTML = wellPerfs.map(perf => <WellPerfs key={perf.id+4000} {...perf} handlePerforationChange={handlePerforationChange} handlePerforationBlur={handlePerforationBlur} deleteTarget={deleteTarget} setDeleteTarget={setDeleteTarget} setIsClicked={setIsClicked} setRefresh={setRefresh} handlePerfKeyPress={handlePerfKeyPress}/>)
     } else {
         wellPerfsHTML = <> <Spinner animation="grow" variant='primary' /><p>Loading...</p></>
     }
@@ -310,10 +310,54 @@ function WellView(props) {
 
 
     if (wellPlugs !== []){
-        wellPlugsHTML = wellPlugs.map(plug => <WellPlugs key={plug.id+5000} {...plug} handlePlugChange={handlePlugChange} handlePlugBlur={handlePlugBlur} deleteTarget={deleteTarget} setDeleteTarget={setDeleteTarget} setIsClicked={setIsClicked} setRefresh={setRefresh}/>)
+        wellPlugsHTML = wellPlugs.map(plug => <WellPlugs key={plug.id+5000} {...plug} handlePlugChange={handlePlugChange} handlePlugBlur={handlePlugBlur} deleteTarget={deleteTarget} setDeleteTarget={setDeleteTarget} setIsClicked={setIsClicked} setRefresh={setRefresh} handlePlugKeyPress={handlePlugKeyPress}/>)
     } else {
         wellPlugsHTML = <> <Spinner animation="grow" variant='primary' /><p>Loading...</p></>
     }
+
+    function handleKeyPress(e) {
+        if (e.key=== 'Enter') {
+            handleBlur(e)
+            e.target.blur();
+        }
+    }
+
+    function handleHoleKeyPress(e) {
+        if (e.key=== 'Enter') {
+            handleHoleBlur(e)
+            e.target.blur();
+        }
+    }
+
+    function handleCasingKeyPress(e) {
+        if (e.key=== 'Enter') {
+            handleCasingBlur(e)
+            e.target.blur();
+        }
+    }
+
+    function handleCementKeyPress(e) {
+        if (e.key=== 'Enter') {
+            handleCementBlur(e)
+            e.target.blur();
+        }
+    }
+
+    function handlePerfKeyPress(e) {
+        if (e.key=== 'Enter') {
+            handlePerforationBlur(e)
+            e.target.blur();
+        }
+    }
+
+    function handlePlugKeyPress(e) {
+        if (e.key=== 'Enter') {
+            handlePlugBlur(e)
+            e.target.blur();
+
+        }
+    }
+
 
     const createNewHole = async () => {
         const newHole = {
@@ -472,63 +516,63 @@ function WellView(props) {
                 </div>
                 <div className="well-table-id row">
                     <div className="col-lg-3">
-                        <span className="bold-span">API Number: </span><input type="text" onChange={handleChange} onBlur={handleBlur} name="API_number" className="input-hidden" value={props.well.API_number} />
+                        <span className="bold-span">API Number: </span><input type="text" onChange={handleChange} onBlur={handleBlur} onKeyPress={handleKeyPress} name="API_number" className="input-hidden" value={props.well.API_number} />
                     </div>
                     <div className="col-lg-3">
-                        <span className="bold-span">Company: </span><input type="text" onChange={handleChange} onBlur={handleBlur} name="company" className="input-hidden" value={props.well.company} />
+                        <span className="bold-span">Company: </span><input type="text" onChange={handleChange} onBlur={handleBlur} onKeyPress={handleKeyPress} name="company" className="input-hidden" value={props.well.company} />
                     </div>
                     <div className="col-lg-3">
-                        <span className="bold-span">Permit Number: </span><input type="text" onChange={handleChange} onBlur={handleBlur} name="permit_number"className="input-hidden" value={props.well.permit_number} />
+                        <span className="bold-span">Permit Number: </span><input type="text" onChange={handleChange} onBlur={handleBlur} onKeyPress={handleKeyPress} name="permit_number"className="input-hidden" value={props.well.permit_number} />
                     </div>
                     <div className="col-lg-3">
-                        <span className="bold-span">Current Status: </span><input type="text" onChange={handleChange} onBlur={handleBlur} name="current_status" className="input-hidden" value={props.well.current_status} />
+                        <span className="bold-span">Current Status: </span><input type="text" onChange={handleChange} onBlur={handleBlur} onKeyPress={handleKeyPress} name="current_status" className="input-hidden" value={props.well.current_status} />
                     </div>
                 </div>
                 <div className="well-table-location row">
                     <div className="col-lg-3">
-                        <span className="bold-span">Location: </span><input type="text" onChange={handleChange} onBlur={handleBlur} name="location" className="input-hidden" value={props.well.location} />
+                        <span className="bold-span">Location: </span><input type="text" onChange={handleChange} onBlur={handleBlur} onKeyPress={handleKeyPress} name="location" className="input-hidden" value={props.well.location} />
                     </div>
                     <div className="col-lg-3">
-                        <span className="bold-span">Section: </span><input type="text" onChange={handleChange} onBlur={handleBlur} name="section" className="input-hidden" value={props.well.section} />
+                        <span className="bold-span">Section: </span><input type="text" onChange={handleChange} onBlur={handleBlur} onKeyPress={handleKeyPress} name="section" className="input-hidden" value={props.well.section} />
                     </div>
                     <div className="col-lg-3">
-                        <span className="bold-span">Survey: </span><input type="text" onChange={handleChange} onBlur={handleBlur} name="survey" className="input-hidden" value={props.well.survey} />
+                        <span className="bold-span">Survey: </span><input type="text" onChange={handleChange} onBlur={handleBlur} onKeyPress={handleKeyPress} name="survey" className="input-hidden" value={props.well.survey} />
                     </div>
                     <div className="col-lg-3 county-state">
                         <div>
-                            <span className="bold-span">County: </span><input type="text" onChange={handleChange} onBlur={handleBlur} name="county" className="input-hidden county" value={props.well.county} />
+                            <span className="bold-span">County: </span><input type="text" onChange={handleChange} onBlur={handleBlur} onKeyPress={handleKeyPress} name="county" className="input-hidden county" value={props.well.county} />
                         </div>
                         <div>
-                            <span className="bold-span">State: </span> <input type="text" onChange={handleChange} onBlur={handleBlur} name="state" className="input-hidden state" value={props.well.state} />
+                            <span className="bold-span">State: </span> <input type="text" onChange={handleChange} onBlur={handleBlur} onKeyPress={handleKeyPress} name="state" className="input-hidden state" value={props.well.state} />
                         </div>
                     </div>
                 </div>
                 <div className="well-table-field row">
                     <div className="col-lg-3">
-                        <span className="bold-span">Field: </span><input type="text" onChange={handleChange} onBlur={handleBlur} name="field" className="input-hidden" value={props.well.field} />
+                        <span className="bold-span">Field: </span><input type="text" onChange={handleChange} onBlur={handleBlur} onKeyPress={handleKeyPress} name="field" className="input-hidden" value={props.well.field} />
                     </div>
                     <div className="col-lg-3">
-                        <span className="bold-span">Initial Formation: </span><input type="text" onChange={handleChange} onBlur={handleBlur} name="initial_formation" className="input-hidden" value={props.well.initial_formation} />
+                        <span className="bold-span">Initial Formation: </span><input type="text" onChange={handleChange} onBlur={handleBlur} onKeyPress={handleKeyPress} name="initial_formation" className="input-hidden" value={props.well.initial_formation} />
                     </div>
                     <div className="col-lg-3">
-                        <span className="bold-span">Spud Date: </span><input type="text" onChange={handleChange} onBlur={handleBlur} name="spud_date" className="input-hidden" value={props.well.spud_date} />
+                        <span className="bold-span">Spud Date: </span><input type="text" onChange={handleChange} onBlur={handleBlur} onKeyPress={handleKeyPress} name="spud_date" className="input-hidden" value={props.well.spud_date} />
                     </div>
                     <div className="col-lg-3">
-                        <span className="bold-span">Comp Date: </span><input type="text" onChange={handleChange} onBlur={handleBlur} name="completion_date" className="input-hidden" value={props.well.completion_date} />
+                        <span className="bold-span">Comp Date: </span><input type="text" onChange={handleChange} onBlur={handleBlur} onKeyPress={handleKeyPress} name="completion_date" className="input-hidden" value={props.well.completion_date} />
                     </div>
                 </div>
                 <div className="well-table-depths row mb-3">
                     <div className="col-lg-3">
-                        <span className="bold-span">Ground Level: </span><input type="text" onChange={handleChange} onBlur={handleBlur} name="ground_level" className="input-hidden" value={props.well.ground_level} />
+                        <span className="bold-span">Ground Level: </span><input type="text" onChange={handleChange} onBlur={handleBlur} onKeyPress={handleKeyPress} name="ground_level" className="input-hidden" value={props.well.ground_level} />
                     </div>
                     <div className="col-lg-3">
-                        <span className="bold-span">Kelley Bushing: </span><input type="text" onChange={handleChange} onBlur={handleBlur} name="kelley_bushing" className="input-hidden" value={props.well.kelley_bushing} />
+                        <span className="bold-span">Kelley Bushing: </span><input type="text" onChange={handleChange} onBlur={handleBlur} onKeyPress={handleKeyPress} name="kelley_bushing" className="input-hidden" value={props.well.kelley_bushing} />
                     </div>
                     <div className="col-lg-3">
-                        <span className="bold-span">Derrick Floor: </span><input type="text" onChange={handleChange} onBlur={handleBlur} name="derrick_floor" className="input-hidden" value={props.well.derrick_floor} />
+                        <span className="bold-span">Derrick Floor: </span><input type="text" onChange={handleChange} onBlur={handleBlur} onKeyPress={handleKeyPress} name="derrick_floor" className="input-hidden" value={props.well.derrick_floor} />
                     </div>
                     <div className="col-lg-3">
-                        <span className="bold-span">Total Depth: </span><input type="text" onChange={handleChange} onBlur={handleBlur} name="total_depth" className="input-hidden" value={props.well.total_depth} />
+                        <span className="bold-span">Total Depth: </span><input type="text" onChange={handleChange} onBlur={handleBlur} onKeyPress={handleKeyPress} name="total_depth" className="input-hidden" value={props.well.total_depth} />
                     </div>
                 </div>
                 <div className="labels row">

@@ -303,10 +303,7 @@ li:nth-child(even){
   transform: scale(1.1); 
 }
 
-.input-hidden{
-  background-color: transparent;
-  border: none;
-}
+
 
 .county-state{
   display: flex;
@@ -603,12 +600,7 @@ input:-webkit-internal-autofill-selected {
   /* background-color: transparent !important; */
 }
 
-@keyframes autofill {
-  0%,100% {
-      /* color: #333; */
-      background: rgba(184, 156, 45, 0.1);
-  }
-}
+
 
 
 /*
@@ -620,3 +612,26 @@ function handleKeyPress(e) {
     }
 
 */
+
+
+.input-hidden{
+  background-color: transparent;
+  border: none;
+  transition: all 0s 50000s;
+}
+
+.input-hidden:-webkit-autofill,
+.input-hidden:-webkit-autofill:hover,
+.input-hidden:-webkit-autofill:focus,
+.input-hidden:-webkit-autofill:active,
+.input-hidden:-webkit-autofill-previewed,
+.input-hidden:-webkit-autofill-selected {
+  /* -webkit-text-fill-color: black; */ /* You can change text color here */
+  animation: input_autofill 0s forwards;
+}
+
+@keyframes input_autofill {
+  100% {
+    background-color: transparent;
+  }
+}

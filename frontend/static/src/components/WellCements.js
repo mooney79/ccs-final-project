@@ -14,10 +14,10 @@ function WellCements(props){
 
     return(
         <div className="well-cement">
-        <p>Cement Type:</p> <input id={props.id} type="text" onChange={props.handleCementChange} onBlur={props.handleCementBlur} name="cement_type" className="input-hidden" value={props.cement_type} />
-        <p>Sacks Pumped: </p><input id={props.id} type="text" onChange={props.handleCementChange} onBlur={props.handleCementBlur} name="sacks_pumped" className="input-hidden" value={props.sacks_pumped} />
-        <p>Top of Cement: </p><input id={props.id} type="text" onChange={props.handleCementChange} onBlur={props.handleCementBlur} name="starting_depth" className="input-hidden" value={props.starting_depth} />
-        <p>Bottom of Cement: </p><input id={props.id} type="text" onChange={props.handleCementChange} onBlur={props.handleCementBlur} name="ending_depth" className="input-hidden" value={props.ending_depth} />
+        <p>Cement Type:</p> <input id={props.id} type="text" onChange={props.handleCementChange} onBlur={props.handleCementBlur} onKeyPress={(e) => props.handleCementKeyPress(e)} name="cement_type" className="input-hidden" value={props.cement_type} />
+        <p>Sacks Pumped: </p><input id={props.id} type="text" onChange={props.handleCementChange} onBlur={props.handleCementBlur} onKeyPress={(e) => props.handleCementKeyPress(e)} name="sacks_pumped" className="input-hidden" value={props.sacks_pumped} />
+        <p>Top of Cement: </p><input id={props.id} type="text" onChange={props.handleCementChange} onBlur={props.handleCementBlur} onKeyPress={(e) => props.handleCementKeyPress(e)} name="starting_depth" className="input-hidden" value={props.starting_depth} />
+        <p>Bottom of Cement: </p><input id={props.id} type="text" onChange={props.handleCementChange} onBlur={props.handleCementBlur} onKeyPress={(e) => props.handleCementKeyPress(e)} name="ending_depth" className="input-hidden" value={props.ending_depth} />
         <p className="trash-icon"><span className="icon" onClick={handleDelete}>{$faTrashAlt}</span></p>
         <hr></hr>
     </div>

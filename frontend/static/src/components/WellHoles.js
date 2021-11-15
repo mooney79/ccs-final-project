@@ -15,9 +15,9 @@ function WellHoles(props){
 
     return(
         <div className="well-hole">
-            <p>Hole Size:</p> <input id={props.id} type="text" onChange={props.handleHoleChange} onBlur={props.handleHoleBlur} name="hole_size" className="input-hidden" value={props.hole_size} />
-            <p>Starting Depth:</p> <input id={props.id} type="text" onChange={props.handleHoleChange} onBlur={props.handleHoleBlur} name="starting_depth" className="input-hidden" value={props.starting_depth} />
-            <p>Ending Depth:</p> <input id={props.id} type="text" onChange={props.handleHoleChange} onBlur={props.handleHoleBlur} name="ending_depth" className="input-hidden" value={props.ending_depth} />
+            <p>Hole Size:</p> <input id={props.id} type="text" onChange={props.handleHoleChange} onBlur={props.handleHoleBlur} onKeyPress={(e) => props.handleHoleKeyPress(e)} name="hole_size" className="input-hidden" value={props.hole_size} />
+            <p>Starting Depth:</p> <input id={props.id} type="text" onChange={props.handleHoleChange} onBlur={props.handleHoleBlur} onKeyPress={(e) => props.handleHoleKeyPress(e)} name="starting_depth" className="input-hidden" value={props.starting_depth} />
+            <p>Ending Depth:</p> <input id={props.id} type="text" onChange={props.handleHoleChange} onBlur={props.handleHoleBlur} onKeyPress={(e) => props.handleHoleKeyPress(e)} name="ending_depth" className="input-hidden" value={props.ending_depth} />
             <p className="trash-icon"><span className="icon" onClick={handleDelete}>{$faTrashAlt}</span></p>
             <hr></hr>
         </div>

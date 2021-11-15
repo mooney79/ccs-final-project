@@ -17,24 +17,24 @@ function WellPlugs(props){
     if(props.plug_type === 'CP') {
         plugHTML = <div className="well-plug">
             {plugChoiceHTML}
-        <p>Sacks Pumped:</p> <input id={props.id} type="text" onChange={props.handlePlugChange} onBlur={props.handlePlugBlur} name="sacks_pumped" className="input-hidden" value={props.sacks_pumped} />
-        <p>Starting Depth:</p> <input id={props.id} type="text" onChange={props.handlePlugChange} onBlur={props.handlePlugBlur} name="starting_depth" className="input-hidden" value={props.starting_depth} />
-        <p>Ending Depth:</p> <input id={props.id} type="text" onChange={props.handlePlugChange} onBlur={props.handlePlugBlur} name="ending_depth" className="input-hidden" value={props.ending_depth} />
+        <p>Sacks Pumped:</p> <input id={props.id} type="text" onChange={props.handlePlugChange} onBlur={props.handlePlugBlur} onKeyPress={(e) => props.handlePlugKeyPress(e)} name="sacks_pumped" className="input-hidden" value={props.sacks_pumped} />
+        <p>Starting Depth:</p> <input id={props.id} type="text" onChange={props.handlePlugChange} onBlur={props.handlePlugBlur} onKeyPress={(e) => props.handlePlugKeyPress(e)} name="starting_depth" className="input-hidden" value={props.starting_depth} />
+        <p>Ending Depth:</p> <input id={props.id} type="text" onChange={props.handlePlugChange} onBlur={props.handlePlugBlur} onKeyPress={(e) => props.handlePlugKeyPress(e)} name="ending_depth" className="input-hidden" value={props.ending_depth} />
         <p className="trash-icon"><span className="icon" onClick={handleDelete}>{$faTrashAlt}</span></p>
         <hr></hr>
         </div>
     } else if (props.plug_type === 'MP') {
         plugHTML = <div className="well-plug">
             {plugChoiceHTML}
-        <p>Starting Depth:</p> <input id={props.id} type="text" onChange={props.handlePlugChange} onBlur={props.handlePlugBlur} name="starting_depth" className="input-hidden" value={props.starting_depth} />
-        <p>Ending Depth:</p> <input id={props.id} type="text" onChange={props.handlePlugChange} onBlur={props.handlePlugBlur} name="ending_depth" className="input-hidden" value={props.ending_depth} />
+        <p>Starting Depth:</p> <input id={props.id} type="text" onChange={props.handlePlugChange} onBlur={props.handlePlugBlur} onKeyPress={(e) => props.handlePlugKeyPress(e)} name="starting_depth" className="input-hidden" value={props.starting_depth} />
+        <p>Ending Depth:</p> <input id={props.id} type="text" onChange={props.handlePlugChange} onBlur={props.handlePlugBlur} onKeyPress={(e) => props.handlePlugKeyPress(e)} name="ending_depth" className="input-hidden" value={props.ending_depth} />
         <p className="trash-icon"><span className="icon" onClick={handleDelete}>{$faTrashAlt}</span></p>
         <hr></hr>
         </div>
     } else if (props.plug_type === 'DV') {
         plugHTML = <div className="well-plug">
             {plugChoiceHTML}
-        <p>Set Depth:</p> <input id={props.id} type="text" onChange={props.handlePlugChange} onBlur={props.handlePlugBlur} name="set_depth" className="input-hidden" value={props.set_depth} />
+        <p>Set Depth:</p> <input id={props.id} type="text" onChange={props.handlePlugChange} onBlur={props.handlePlugBlur} onKeyPress={(e) => props.handlePlugKeyPress(e)} name="set_depth" className="input-hidden" value={props.set_depth} />
         <p className="trash-icon"><span className="icon" onClick={handleDelete}>{$faTrashAlt}</span></p>
         <hr></hr>
         </div>
