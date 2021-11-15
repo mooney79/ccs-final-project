@@ -17,7 +17,7 @@ import DeleteWellModal from './DeleteWellModal';
 import PlatImageModal from './PlatImageModal';
 import Diagram from './Diagram';
 import Button from 'react-bootstrap/esm/Button';
-import Collapse from 'react-bootstrap/esm/Collapse';
+// import Collapse from 'react-bootstrap/esm/Collapse';
 
 function WellViewToo(props) {
     
@@ -36,7 +36,7 @@ function WellViewToo(props) {
     const [refresh, setRefresh] = useState(0);
     const [showWellDel, setShowWellDel] = useState(false);
     const [showImage, setShowImage] = useState(false);
-    const [showCollapse, setShowCollapse] = useState(false);
+    // const [showCollapse, setShowCollapse] = useState(false);
     let wellHolesHTML;
     let wellCasingsHTML;
     let wellCementsHTML;
@@ -500,7 +500,7 @@ function WellViewToo(props) {
 
     function handleBack(){
         props.setShowSplash(false)
-        props.history.goBack();
+        props.history.push('');
     }
 
     let wellInfoHTML;
@@ -667,7 +667,7 @@ function WellViewToo(props) {
             <Diagram wellFeatures={wellFeatures} wellCements={wellCements} wellCasings={wellCasings} wellPerfs={wellPerfs} wellPlugs={wellPlugs} well={props.well} refresh={refresh} />
            {/* {diagramHTML} */}
            <a href="#top" className="float" id="float">
-                <span className="my-float">{$faCaret}</span>
+                <i className="my-float">{$faCaret}</i>
             </a>
         </div>
         <DeleteConfirmationModal deleteTarget={deleteTarget} setDeleteTarget={setDeleteTarget} showDelete={showDelete} setShowDelete={setShowDelete} history={props.history} setRefresh={setRefresh} setIsClicked={setIsClicked}/>
