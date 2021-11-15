@@ -16,6 +16,7 @@ import DeleteWellModal from './DeleteWellModal';
 import PlatImageModal from './PlatImageModal';
 import Diagram from './Diagram';
 import Button from 'react-bootstrap/esm/Button';
+import Collapse from 'react-bootstrap/esm/Collapse';
 
 function WellViewToo(props) {
     
@@ -33,11 +34,13 @@ function WellViewToo(props) {
     const [refresh, setRefresh] = useState(0);
     const [showWellDel, setShowWellDel] = useState(false);
     const [showImage, setShowImage] = useState(false);
+    const [showCollapse, setShowCollapse] = useState(false);
     let wellHolesHTML;
     let wellCasingsHTML;
     let wellCementsHTML;
     let wellPerfsHTML;
     let wellPlugsHTML;
+    // let marginStyle={marginTop: "101vh"}
     /*
     <div id="popup" className="plat-pop-up"> I'm a PLAT!</div>
     */
@@ -499,17 +502,19 @@ function WellViewToo(props) {
     }
 
     let wellInfoHTML;
+    // style={marginStyle}
     if (props.well !== null) {
         wellInfoHTML = 
-        <div className="well-info-grid">
+        <div className="well-info-grid" >
                 <div className="well-view-grid-top">
                     <div className="left-group"> 
                         <h2>{props.well.lease} {props.well.well_number} <span className="icon" onClick={displayPopup}>{$faImage}</span> </h2>
                     </div>
                     <Button className="btn" variant="warning" onClick={handleBack}> well selection </Button>
                     <div className="right-group">
-                        <span className="icon-trash-lrg" onClick={handleDeleteWell}>{$faTrashAlt}</span>
+                        
                         <span className="bold-span">Last Updated: </span>{formatDate()}
+                        <span className="icon-trash-lrg" onClick={handleDeleteWell}>{$faTrashAlt}</span>
                     </div>                    
                     
                 </div>
@@ -625,12 +630,40 @@ function WellViewToo(props) {
     } else {
         wellInfoHTML = <div>Loading...<br />If this screen does not go away, you may not have permission to view this well.</div>;
     }
+
+    // let diagramHTML;
+    // if (window.innerWidth < 768) {
+    //     diagramHTML = 
+    //     <>
+    //     <p onClick={() => setShowCollapse(!showCollapse)} 
+    //     area-controls="diagram-collapse"
+    //     aria-expanded={showCollapse}>
+    //         Show/Hide</p>
+    //     <Collapse in={showCollapse} >
+    //     <div className="diagram-collapse">
+    //             <Diagram wellFeatures={wellFeatures} wellCements={wellCements} wellCasings={wellCasings} wellPerfs={wellPerfs} wellPlugs={wellPlugs} well={props.well} refresh={refresh} />
+    //     </div>
+    //     </Collapse>
+    //     </>
+    // } else {
+    //     diagramHTML =  <Diagram wellFeatures={wellFeatures} wellCements={wellCements} wellCasings={wellCasings} wellPerfs={wellPerfs} wellPlugs={wellPlugs} well={props.well} refresh={refresh} />
+    // }
         
+    
+    // useEffect(() => {
+    //     if (marginStyle==='margin-top: "101vh"'){
+    //         marginStyle='margin-top: "1vh"';
+    //     } else {
+    //         marginStyle='margin-top: "101vh"';
+    //     }        
+    // }, [showCollapse])
+
     return (
         <>
         <div className="well-container-grid">
             {wellInfoHTML}
-            <Diagram wellFeatures={wellFeatures} wellCements={wellCements} wellCasings={wellCasings} wellPerfs={wellPerfs} wellPlugs={wellPlugs} well={props.well} refresh={refresh}/>
+            <Diagram wellFeatures={wellFeatures} wellCements={wellCements} wellCasings={wellCasings} wellPerfs={wellPerfs} wellPlugs={wellPlugs} well={props.well} refresh={refresh} />
+           {/* {diagramHTML} */}
         </div>
         <DeleteConfirmationModal deleteTarget={deleteTarget} setDeleteTarget={setDeleteTarget} showDelete={showDelete} setShowDelete={setShowDelete} history={props.history} setRefresh={setRefresh} setIsClicked={setIsClicked}/>
             <DeleteWellModal history={props.history} setRefresh={setRefresh} showWellDel={showWellDel} setShowWellDel={setShowWellDel}/>
@@ -644,6 +677,11 @@ export default withRouter(WellViewToo)
 
 
 /*
+
+<Collapse in={showCollapse}>
+        <Diagram wellFeatures={wellFeatures} wellCements={wellCements} wellCasings={wellCasings} wellPerfs={wellPerfs} wellPlugs={wellPlugs} well={props.well} refresh={refresh} />
+</Collapse>
+
 
 <div className="well-info">
     <h2>{props.well.lease} {props.well.well_number}</h2>

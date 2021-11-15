@@ -335,16 +335,12 @@ li:nth-child(even){
   box-shadow: 0 0 3pt 2pt rgba(184, 156, 45, 1.0);
 }
 
-.icon-trash-lrg{
-  color: rgba(184, 156, 45, 1.0);
-  color: red;
-}
-
 .highlight2{
-  color: rgb(155, 88, 25);
-  transform: translate(-0%, -10%);
+  color: #FFA900;
+  background-color: rgba(155, 88, 25);
+  background-color: black;
+  transform: translate(-30%, -10%);
   cursor: pointer;
-  /* transform: translateX(-20%); */
 }
 
 @media screen and (max-width: 768px) {
@@ -624,34 +620,37 @@ span{
     width: 100%;
   }
 
+  .diagram-collapse{
+    position: absolute;
+  }
+
   .bg-pseudo{    
     position: absolute;
   } 
 
   .well-view-grid-top{
-    margin-top: 101vh;
+    margin-top: 0vh;
+    margin-bottom: 103vh;
+  } 
+
+  .well-view-grid-top > .btn{
+    margin-right: 32px;
   }
 
+  .left-group{
+    padding-right: 32px;
+  }
+  
   #canvas0, #canvas1, #canvas2, #canvas3{
     position: absolute;
-    top: 0%;
+    top: 8vh;
     left: 0%;
-  
-    /* display: none; */
-    /* bottom: 0px; */
-    /* left: 0; */
   }
-
-  /* .well-info-grid{
-    background-color:rgba(184, 156, 45, 0.4);
-  } */
 
   body{
     background-image: none;
     height: fit-content;
     max-height: none;
-    /* background-color:rgba(184, 156, 45, 1); */
-    /* background:rgba(184, 173, 129, 1) */
   }
 
   .labels-row{

@@ -773,12 +773,17 @@ function Diagram(props){
         })
     }
 
+    // function handleCollapse(){
+    //     props.setShowCollapse(!props.showCollapse);
+    //     console.log(props.showCollapse);
+    // };
+//onClick={handleCollapse}
     return (
-        <div className="bg-pseudo">
+        <div className="bg-pseudo" >
             <canvas id="canvas0" width="444" height="900" ref={canvas0Ref}></canvas>
             <canvas id="canvas1" width="444" height="900" ref={canvas1Ref}></canvas>
             <canvas id="canvas2" width="444" height="900" ref={canvas2Ref}></canvas>
-            <canvas id="canvas3" width="444" height="900" ref={canvas3Ref}></canvas>
+            <canvas id="canvas3" width="444" height="900" ref={canvas3Ref} ></canvas>
         </div>
     )
 }
