@@ -16,6 +16,7 @@ function WellPerfs(props){
             <p>Total Holes:</p> <input id={props.id} type="text" onChange={props.handlePerforationChange} onBlur={props.handlePerforationBlur} onKeyPress={(e) => props.handlePerfKeyPress(e)} name="perforation_total_holes" className="input-hidden" value={props.perforation_total_holes} />
             <p>Starting Depth:</p> <input id={props.id} type="text" onChange={props.handlePerforationChange} onBlur={props.handlePerforationBlur} onKeyPress={(e) => props.handlePerfKeyPress(e)} name="starting_depth" className="input-hidden" value={props.starting_depth} />
             <p>Ending Depth:</p> <input id={props.id} type="text" onChange={props.handlePerforationChange} onBlur={props.handlePerforationBlur} onKeyPress={(e) => props.handlePerfKeyPress(e)} name="ending_depth" className="input-hidden" value={props.ending_depth} />
+            <br />
             <p className="trash-icon"><span className="icon" onClick={handleDelete}>{$faTrashAlt}</span></p>
             <hr></hr>
         </div>

@@ -12,6 +12,7 @@ import NewWellModal from './components/NewWellModal';
 // import Diagram from './components/Diagram';
 // import Test from './components/Test';
 import SplashModal from './components/SplashModal';
+import WellViewToo from './components/WellViewToo';
 
 
 
@@ -64,8 +65,12 @@ function App() {
             <SplashModal userName={userName} setShowSplash={setShowSplash} showSplash={showSplash}/>
         </Route>       
         <Route path='/wellinfo/:id'>
-            <WellView well={well} setWell={setWell} userID={userID} setUserID={setUserID} history={history} setShowSplash={setShowSplash}/>
+            <WellViewToo well={well} setWell={setWell} userID={userID} setUserID={setUserID} history={history} setShowSplash={setShowSplash}/>
         </Route>
+
+        {/* <Route path='/welltest/:id'>
+            <WellViewToo well={well} setWell={setWell} userID={userID} setUserID={setUserID} history={history} setShowSplash={setShowSplash}/>
+        </Route> */}
         
 
         {/* <Route path='/test'>

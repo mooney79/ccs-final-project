@@ -1,11 +1,9 @@
 body{
   background-image: url("./StaticImages/background.jpg");
   background-size: fit;
-  /* background-position-y: 45%; */
   background-position: right bottom;
   background-repeat: no-repeat;
   font-family: 'Oxygen', sans-serif; 
-  /* background-color: rgb(184, 156, 45); */
   height: 100vh;
 }
 
@@ -449,27 +447,6 @@ li:nth-child(even){
   background-size: contain;
   background-repeat: repeat;  
 }
-/* .bg-pseudo{  
-  position: relative;
-  background-color: white;
-  top: 0;
-  right: 0;
-  height: 100vh;
-  width: 25%;
-  bottom: 0;
-  left: 0;
-}
-
-.bg-pseudo::before {    
-  content: "";
-  
-  opacity: 1;
-  position: absolute;
-  top: 0px;
-  right: 0px;
-      bottom: 0px;
-      left: 0px;
-} */
 
 #canvas1{
   position: absolute;
@@ -504,6 +481,7 @@ li:nth-child(even){
 .chart-div{
   /* transform: translateX(-5%); */
   background-color: transparent;
+  width: 100%;
 }
 .chart{
   width: 100%;
@@ -588,32 +566,6 @@ span{
 }
 
 
-
-
-/*input:-internal-autofill-selected*/
-input:-webkit-internal-autofill-selected {
-  /* animation-delay: 0s; Safari support - any positive time runs instantly */
-  /* animation-name: autofill;
-  animation-fill-mode: both; */
-  /* transition: background-color; */
-  box-shadow: 0 0 0px 1000px rgba(184, 156, 45, 0.1) inset !important;
-  /* background-color: transparent !important; */
-}
-
-
-
-
-/*
-onKeyPress={(e) => handleKeyPress(e)}   on input
-function handleKeyPress(e) {
-        if (e.key=== 'Enter') {
-            handleBlur(e)
-        }
-    }
-
-*/
-
-
 .input-hidden{
   background-color: transparent;
   border: none;
@@ -626,7 +578,6 @@ function handleKeyPress(e) {
 .input-hidden:-webkit-autofill:active,
 .input-hidden:-webkit-autofill-previewed,
 .input-hidden:-webkit-autofill-selected {
-  /* -webkit-text-fill-color: black; */ /* You can change text color here */
   animation: input_autofill 0s forwards;
 }
 
@@ -635,3 +586,164 @@ function handleKeyPress(e) {
     background-color: transparent;
   }
 }
+
+/*VVV WELL VIEW TOO STUFF VVV*/
+
+.well-container-grid{
+  padding-top: 16px;
+  padding-left: 16px;
+  display: grid;
+  grid-template-columns: (auto-fit, minmax(320px, 1fr));
+}
+
+.well-info-grid{
+  display: grid;
+  width: 75%;
+  height: 100vh;
+}
+
+.well-view-grid-top{
+ /* display: grid; 
+ grid-template-columns: 2fr 1fr 1fr; /*repeat(auto-fit, minmax(320px, 1fr));*/
+ /*grid-template-rows: repeat(4, 1fr);
+ width: 75%; */
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+}
+
+.hole-col{
+  width: 100%;
+}
+
+@media screen and (max-width: 768px) {
+
+  .bg-pseudo{
+    
+    position: absolute;
+  } 
+
+  .well-view-grid-top{
+    margin-top: 101vh;
+  }
+
+  #canvas0, #canvas1, #canvas2, #canvas3{
+    position: absolute;
+    top: 0%;
+    left: 0%;
+  
+    /* display: none; */
+    /* bottom: 0px; */
+    /* left: 0; */
+  }
+
+  /* .well-info-grid{
+    background-color:rgba(184, 156, 45, 0.4);
+  } */
+
+  body{
+    background-image: none;
+    height: fit-content;
+    max-height: none;
+    /* background-color:rgba(184, 156, 45, 1); */
+    /* background:rgba(184, 173, 129, 1) */
+  }
+
+  .labels-row{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+
+  .perf-col, .casing-col, .cement-col, .hole-col, .plug-col{
+    background-color: rgba(241, 241, 241, 1.0);
+    border-right: none;
+    height: auto;
+    max-height: 5000vh;
+    width: 100%;
+  }
+
+  .scroll-area{
+    overflow-y: scroll; 
+    height: min-content;
+    max-height: 1000vh;
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    justify-content: center;
+  }
+
+  .well-cement, .well-hole, .well-casing, .well-plug, .well-perfs{
+    width: 100%;
+    height: auto;
+  }
+
+  .new-feature-button{
+    margin-bottom: 16px;
+    margin-left: 40px;
+    margin-right: 40px;
+  }
+
+  .label1{
+    position: absolute;
+    top: 5%;
+    left: 42.5%;
+  }
+  
+  .label2{
+    position: absolute;
+    top: 5%;
+    left: 38.5%;
+  }
+  
+  .label3{
+    position: absolute;
+    top: 5%;
+    left: 38.5%;
+  }
+  
+  .label4{
+    position: absolute;
+    top: 5%;
+    left: 27.5%;
+  }
+  
+  .label5{
+    position: absolute;
+    top: 5%;
+    left: 40%;
+  }
+
+  .chart{
+    width: 85%;
+    align-self: 'flex-start';
+    margin-left: -60px;
+    background-color: transparent;
+    overflow: hidden;
+    overflow-X: scroll;
+  }
+
+  .trash-icon{
+    position: relative;
+    justify-self: flex-end;
+    align-self: flex-end;
+    float: right;
+    transform: translateY(-100%);
+  }
+
+ 
+}
+
+.trash-icon{
+  position: relative;
+  justify-self: flex-end;
+  align-self: flex-end;
+  float: right;
+  transform: translateY(-100%);
+}
+
+

@@ -20,6 +20,7 @@ function WellPlugs(props){
         <p>Sacks Pumped:</p> <input id={props.id} type="text" onChange={props.handlePlugChange} onBlur={props.handlePlugBlur} onKeyPress={(e) => props.handlePlugKeyPress(e)} name="sacks_pumped" className="input-hidden" value={props.sacks_pumped} />
         <p>Starting Depth:</p> <input id={props.id} type="text" onChange={props.handlePlugChange} onBlur={props.handlePlugBlur} onKeyPress={(e) => props.handlePlugKeyPress(e)} name="starting_depth" className="input-hidden" value={props.starting_depth} />
         <p>Ending Depth:</p> <input id={props.id} type="text" onChange={props.handlePlugChange} onBlur={props.handlePlugBlur} onKeyPress={(e) => props.handlePlugKeyPress(e)} name="ending_depth" className="input-hidden" value={props.ending_depth} />
+        <br />
         <p className="trash-icon"><span className="icon" onClick={handleDelete}>{$faTrashAlt}</span></p>
         <hr></hr>
         </div>
@@ -28,6 +29,7 @@ function WellPlugs(props){
             {plugChoiceHTML}
         <p>Starting Depth:</p> <input id={props.id} type="text" onChange={props.handlePlugChange} onBlur={props.handlePlugBlur} onKeyPress={(e) => props.handlePlugKeyPress(e)} name="starting_depth" className="input-hidden" value={props.starting_depth} />
         <p>Ending Depth:</p> <input id={props.id} type="text" onChange={props.handlePlugChange} onBlur={props.handlePlugBlur} onKeyPress={(e) => props.handlePlugKeyPress(e)} name="ending_depth" className="input-hidden" value={props.ending_depth} />
+        <br />
         <p className="trash-icon"><span className="icon" onClick={handleDelete}>{$faTrashAlt}</span></p>
         <hr></hr>
         </div>
@@ -35,6 +37,7 @@ function WellPlugs(props){
         plugHTML = <div className="well-plug">
             {plugChoiceHTML}
         <p>Set Depth:</p> <input id={props.id} type="text" onChange={props.handlePlugChange} onBlur={props.handlePlugBlur} onKeyPress={(e) => props.handlePlugKeyPress(e)} name="set_depth" className="input-hidden" value={props.set_depth} />
+        <br />
         <p className="trash-icon"><span className="icon" onClick={handleDelete}>{$faTrashAlt}</span></p>
         <hr></hr>
         </div>

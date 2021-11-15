@@ -18,6 +18,7 @@ function WellCements(props){
         <p>Sacks Pumped: </p><input id={props.id} type="text" onChange={props.handleCementChange} onBlur={props.handleCementBlur} onKeyPress={(e) => props.handleCementKeyPress(e)} name="sacks_pumped" className="input-hidden" value={props.sacks_pumped} />
         <p>Top of Cement: </p><input id={props.id} type="text" onChange={props.handleCementChange} onBlur={props.handleCementBlur} onKeyPress={(e) => props.handleCementKeyPress(e)} name="starting_depth" className="input-hidden" value={props.starting_depth} />
         <p>Bottom of Cement: </p><input id={props.id} type="text" onChange={props.handleCementChange} onBlur={props.handleCementBlur} onKeyPress={(e) => props.handleCementKeyPress(e)} name="ending_depth" className="input-hidden" value={props.ending_depth} />
+        <br />
         <p className="trash-icon"><span className="icon" onClick={handleDelete}>{$faTrashAlt}</span></p>
         <hr></hr>
     </div>
