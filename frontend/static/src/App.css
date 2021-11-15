@@ -620,8 +620,11 @@ span{
 
 @media screen and (max-width: 768px) {
 
-  .bg-pseudo{
-    
+  .well-info-grid{
+    width: 100%;
+  }
+
+  .bg-pseudo{    
     position: absolute;
   } 
 
@@ -657,6 +660,7 @@ span{
     justify-content: center;
     align-items: center;
     width: 100%;
+    min-width: 400px;
   }
 
   .perf-col, .casing-col, .cement-col, .hole-col, .plug-col{
@@ -664,7 +668,9 @@ span{
     border-right: none;
     height: auto;
     max-height: 5000vh;
+    min-width: 300px;
     width: 100%;
+    margin: 0px 16px;
   }
 
   .scroll-area{
@@ -683,7 +689,7 @@ span{
   }
 
   .new-feature-button{
-    margin-bottom: 16px;
+    margin-bottom: 24px;
     margin-left: 40px;
     margin-right: 40px;
   }
@@ -691,31 +697,31 @@ span{
   .label1{
     position: absolute;
     top: 5%;
-    left: 42.5%;
+    left: 43.5%;
   }
   
   .label2{
     position: absolute;
     top: 5%;
-    left: 38.5%;
+    left: 40%;
   }
   
   .label3{
     position: absolute;
     top: 5%;
-    left: 38.5%;
+    left: 40%;
   }
   
   .label4{
     position: absolute;
     top: 5%;
-    left: 27.5%;
+    left: 30.5%;
   }
   
   .label5{
     position: absolute;
     top: 5%;
-    left: 40%;
+    left: 42.50%;
   }
 
   .chart{
