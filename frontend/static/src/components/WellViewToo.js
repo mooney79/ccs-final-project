@@ -2,6 +2,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faImage } from '@fortawesome/free-solid-svg-icons'
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons'
+import { faCaretUp } from '@fortawesome/free-solid-svg-icons'
 import { useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
 import WellHoles from './WellHoles';
@@ -21,6 +22,7 @@ import Collapse from 'react-bootstrap/esm/Collapse';
 function WellViewToo(props) {
     
     const $faImage = <FontAwesomeIcon icon={faImage} />
+    const $faCaret = <FontAwesomeIcon icon={faCaretUp} size="3x" />
     const $faTrashAlt = <FontAwesomeIcon icon={faTrashAlt} inverse pull="right" className="highlight2" size="2x"/>
     const [wellFeatures, setWellFeatures] = useState([]);
     const [wellHoles, setWellHoles] = useState([]);
@@ -510,7 +512,7 @@ function WellViewToo(props) {
                     <div className="left-group"> 
                         <h2>{props.well.lease} {props.well.well_number} <span className="icon" onClick={displayPopup}>{$faImage}</span> </h2>
                     </div>
-                    <Button className="btn" variant="warning" onClick={handleBack}> well selection </Button>
+                    <Button className="btn back-button" variant="warning" id="back-button" onClick={handleBack}> well selection </Button>
                     <div className="right-group">
                         
                         <span className="bold-span">Last Updated: </span>{formatDate()}
@@ -660,10 +662,13 @@ function WellViewToo(props) {
 
     return (
         <>
-        <div className="well-container-grid">
+        <div className="well-container-grid" id="top">
             {wellInfoHTML}
             <Diagram wellFeatures={wellFeatures} wellCements={wellCements} wellCasings={wellCasings} wellPerfs={wellPerfs} wellPlugs={wellPlugs} well={props.well} refresh={refresh} />
            {/* {diagramHTML} */}
+           <a href="#top" className="float" id="float">
+                <span className="my-float">{$faCaret}</span>
+            </a>
         </div>
         <DeleteConfirmationModal deleteTarget={deleteTarget} setDeleteTarget={setDeleteTarget} showDelete={showDelete} setShowDelete={setShowDelete} history={props.history} setRefresh={setRefresh} setIsClicked={setIsClicked}/>
             <DeleteWellModal history={props.history} setRefresh={setRefresh} showWellDel={showWellDel} setShowWellDel={setShowWellDel}/>
