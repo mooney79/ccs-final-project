@@ -31,7 +31,7 @@ function DeleteConfirmationModal(props) {
             handleClose();
             props.setDeleteTarget({});
             props.setIsClicked(false);
-            props.setRefresh(Math.random());
+            props.setRefresh(Math.random()*237);
             
             // handleClose();
             // props.history.push(props.history.location.pathname);

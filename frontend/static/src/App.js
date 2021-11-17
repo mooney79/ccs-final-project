@@ -78,9 +78,9 @@ function App() {
             {/* <Test userName={userName} setShowSplash={setShowSplash} showSplash={showSplash}/> */}
             {/* {<PDFView  /> } well={props.well} wellCements={wellCements} wellCasings={wellCasings} wellPerfs={wellPerfs} wellPlugs={wellPlugs} wellHoles={wellHoles} */}
         {/* </Route>           */}
-        <Route path='/pdf/:id' >
+        {/* <Route path='/pdf/:id' >
           <PDFView history={history} well={well} setWell={setWell} userID={userID} setUserID={setUserID} setShowSplash={setShowSplash}/>            
-        </Route>
+        </Route> */}
 
         {/* <Route path='/chart'>
             <Chart />

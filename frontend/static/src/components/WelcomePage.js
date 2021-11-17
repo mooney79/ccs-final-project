@@ -1,6 +1,7 @@
 // import { NavLink } from 'react-router-dom';
 import Cookies from 'js-cookie'
 import WellList from './WellList';
+import CMlogo from '../StaticImages/CMlogo.png';
 // import Chart from './Chart';
 
 function WelcomePage(props){
@@ -36,11 +37,16 @@ function WelcomePage(props){
 
 
     return (
+        <>
+        <img className="wp-logo" src={CMlogo} alt="Case Manager logo" />
         <div className="welcome-container col-10 col-md-5">           
             <WellList setWell={props.setWell} well={props.well} setShowNew={props.setShowNew} showNew={props.showNew}/> 
             {logHTML}            
         </div>
+        </>
     )
 }
 
 export default WelcomePage
+
+//

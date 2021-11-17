@@ -269,6 +269,14 @@ h2{
   justify-content: space-between;
 }
 
+.list-group-left{
+  width:150px;
+}
+
+.li-center{
+  transform: translateX(-50px)
+}
+
 li:nth-child(even){
   background-color: rgba(184, 156, 45, 0.2);
 }
@@ -369,6 +377,14 @@ li:nth-child(even){
   /* body{
     background-image: none;
   } */
+
+  .list-group-left{
+    width:auto;
+  }
+  
+  .li-center{
+    transform: translateX(0px)
+  }
 
   .welcome-container{
     width: 90vw;
@@ -565,6 +581,15 @@ li:nth-child(even){
 /* .list-p{
   background: transparent;
 } */
+.wp-logo{
+  /* float: left; */
+  /* clear: both; */
+  width: 18%;
+  position: absolute;
+  top: 5vh;
+  left: 10vh;
+  opacity: 0.7;  
+}
 
 span{
   background-color: transparent;
@@ -637,9 +662,24 @@ span{
   .well-info-grid{
     width: 100%;
   }
+  
+  .wp-logo{
+    /* float: left; */
+    /* clear: both; */
+    width: 40%;
+    position: absolute;
+    top: 18vh;
+    left: 10vh;
+    opacity: 0.7;  
+  }
 
   .diagram-collapse{
     position: absolute;
+  }
+
+  .back-button{
+    transform: scale(0.75);
+    margin-bottom: 8px;
   }
 
   .bg-pseudo{    
@@ -661,7 +701,7 @@ span{
   
   #canvas0, #canvas1, #canvas2, #canvas3{
     position: absolute;
-    top: 8vh;
+    top: 9vh;
     left: 0%;
   }
 
@@ -787,6 +827,37 @@ span{
   justify-self: flex-end;
   align-self: flex-end;
   float: right;
-  transform: translateY(-100%);
+  transform: translateY(-100%);  
+}
+
+/* 
+.trash-icon:hover{
+  transform: scale(1.2);
+} */
+
+
+
+/*  MOBILE STYLE THE FOLLOWING!!! */
+
+
+
+
+.well-info-grid{
+background:rgba(241, 241, 241, 0.8);
+margin-top: -16px;
+margin-left: -16px;
+padding-top: 16px;
+padding-left: 16px;
+}
+
+#dropdown-basic-button{
+  margin-left: 8px;
+  background-color:rgba(184, 156, 45, 0.8);
+  border:rgba(184, 156, 45, 1.0);
+  transform: scale(0.9);
+}
+
+.left-group{
+  display: flex;
 }
 

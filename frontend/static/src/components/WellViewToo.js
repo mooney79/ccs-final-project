@@ -19,6 +19,8 @@ import Diagram from './Diagram';
 import Button from 'react-bootstrap/esm/Button';
 // import Collapse from 'react-bootstrap/esm/Collapse';
 import PDFView from './PDFView';
+import DropdownButton from 'react-bootstrap/esm/DropdownButton';
+import Dropdown from 'react-bootstrap/Dropdown'
 import { Route, Switch, useHistory } from 'react-router-dom'; //withRouter, 
 
 function WellViewToo(props) {
@@ -538,14 +540,19 @@ function WellViewToo(props) {
         <div className="well-info-grid" >
                 <div className="well-view-grid-top">
                     <div className="left-group"> 
-                        <h2>{props.well.lease} {props.well.well_number} <span className="icon" onClick={displayPopup}>{$faImage}</span> </h2>
+                        <h2>{props.well.lease} {props.well.well_number}  </h2>
+                        <DropdownButton id="dropdown-basic-button" title="Actions" autoclose="true">
+                            <Dropdown.Item id="dd-item-1" onClick={handleBack} >Back to Well Selection</Dropdown.Item>
+                            <Dropdown.Item id="dd-item-2" onClick={displayPopup} >Show/Upload Plat</Dropdown.Item>
+                            <Dropdown.Item id="dd-item-3" onClick={handleView}>Print/PDF View</Dropdown.Item>
+                            <Dropdown.Item id="dd-item-4" onClick={handleDeleteWell}>Delete Well</Dropdown.Item>
+                        </DropdownButton>
                     </div>
-                    <Button className="btn back-button" variant="warning" id="back-button" onClick={handleView}>Print View</Button>
-                    <Button className="btn back-button" variant="warning" id="back-button" onClick={handleBack}> well selection </Button>
+                    
                     <div className="right-group">
                         
                         <span className="bold-span">Last Updated: </span>{formatDate()}
-                        <span className="icon-trash-lrg" onClick={handleDeleteWell}>{$faTrashAlt}</span>
+                
                     </div>                    
                     
                 </div>
@@ -838,6 +845,12 @@ const newHole = async () => {
     }
 };
 
+<span className="icon" onClick={displayPopup}>{$faImage}</span>
+<Button className="btn back-button" variant="warning" id="back-button" onClick={handleView}>Print View</Button>
+<Button className="btn back-button" variant="warning" id="back-button" onClick={handleBack}> well selection </Button>
 
+
+<Button className="btn back-button" variant="warning" id="back-button" onClick={handleView}>Print View</Button>
+<Button className="btn back-button" variant="warning" id="back-button" onClick={handleBack}> well selection </Button>
 
 */
