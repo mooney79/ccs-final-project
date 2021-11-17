@@ -10,7 +10,8 @@ import WellView from './components/WellView';
 import NewWellModal from './components/NewWellModal';
 //FOR TESTING, BELOW
 // import Diagram from './components/Diagram';
-// import Test from './components/Test';
+import Test from './components/Test';
+import PDFView from './components/PDFView';
 import SplashModal from './components/SplashModal';
 import WellViewToo from './components/WellViewToo';
 
@@ -73,9 +74,13 @@ function App() {
         </Route> */}
         
 
-        {/* <Route path='/test'>
-            <Test userName={userName} setShowSplash={setShowSplash} showSplash={showSplash}/>
-        </Route>           */}
+        {/* <Route path='/pdf'> */}
+            {/* <Test userName={userName} setShowSplash={setShowSplash} showSplash={showSplash}/> */}
+            {/* {<PDFView  /> } well={props.well} wellCements={wellCements} wellCasings={wellCasings} wellPerfs={wellPerfs} wellPlugs={wellPlugs} wellHoles={wellHoles} */}
+        {/* </Route>           */}
+        <Route path='/pdf/:id' >
+          <PDFView history={history} well={well} setWell={setWell} userID={userID} setUserID={setUserID} setShowSplash={setShowSplash}/>            
+        </Route>
 
         {/* <Route path='/chart'>
             <Chart />
@@ -86,6 +91,7 @@ function App() {
         {/* <Route path='/wellslist'>
             <WellList isAuth={isAuth} history={history} well={well} setWell={setWell}/>
         </Route>        */}
+        
         <Route path=''>
           <WelcomePage isAuth={isAuth} setIsAuth={setIsAuth} userID={userID} history={history} userName={userName} well={well} setWell={setWell} setShowNew={setShowNew} showNew={showNew}/>
           <SplashModal userName={userName} setShowSplash={setShowSplash} showSplash={showSplash}/>

@@ -1,0 +1,125 @@
+@page{
+    size: letter portrait;
+}
+
+.PDF-body{
+    height: 11in;
+    width: 8.5in;
+    background: white;
+}
+
+.top-row{
+    padding-top: 0.5in;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: baseline;
+}
+
+.main-block{
+    width: 100%;
+    padding-left: 0.5in;
+    padding-right: 0.5in;
+    display: flex;
+    justify-content: space-between;
+    
+}
+
+.text-block{
+    width: 4.75in;   
+    position: relative; 
+}
+
+.xtext-block::after{
+    content: "";
+    position: absolute;
+    border-bottom: 1px solid black;
+    width: 4.75in;
+    height: 10px;
+    top: 25.5%;
+}
+
+.row-4{
+    display: flex;
+    justify-content: flex-start;
+}
+
+.row-2, .row-3, .row-5, .row-6{
+    display: flex;
+    justify-content: space-between;
+}
+
+.static-diagram{
+    width: 2.5in;
+    height: 6.5in;
+    border: 1px solid black;
+    margin-left: 0.125in;
+    /* height: auto; */
+}
+
+.features{
+    margin-top: 0.125in;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 2.25in;
+    max-height: 6.5in;
+}
+.features h4{
+    font-family: 'Oswald';
+    font-size: 16px;
+    text-decoration: underline;
+    text-align: center;
+    margin-bottom: 4px;
+    page-break-after: avoid;
+}
+
+.features p{
+    font-size: 12px;
+    /* line-height: 8px; */
+    margin: 0;
+    margin-left:  6px;
+}
+
+.pdf-well-hole, .pdf-well-casing, .pdf-well-cement, .pdf-well-perfs, .pdf-well-plug{
+    padding-bottom: 8px;
+}
+
+.pdf-diagram-container{
+    width: 2.5in;
+    height: auto;
+    border: 10px solid black;
+    margin-left: 0.125in;
+    position: relative;
+    /* height: auto; */
+}
+
+#pdfcanvas0, #pdfcanvas1, #pdfcanvas2, #pdfcanvas3{
+    position: absolute;
+    width: 2.5in;
+    height: 6.5in;
+    top: 1in;
+    left: 5.5in;
+}
+
+#pdfcanvas0{
+    z-index: 8;
+    background-image: url("../StaticImages/dirt-texture.jpeg");
+    background-size: contain;
+    background-repeat: repeat;  
+}
+  
+#pdfcanvas1{
+    z-index: 10;
+    background-color: transparent;
+  }
+  
+  #pdfcanvas2{
+    background-color: transparent;
+    z-index: 20;
+  }
+  
+  #pdfcanvas3{
+    background-color: transparent;
+    z-index: 30;
+  }

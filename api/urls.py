@@ -6,4 +6,5 @@ urlpatterns = [
     path('prices/latest/', views.get_price_latest, name="latest"),
     path('prices/past_week/', views.get_price_week),
     path('prices/past_month/', views.get_price_month),
+    # path('pdf/', views.get_pdf),
 ]

@@ -1,15 +1,15 @@
 import { useEffect, useRef, useState } from "react";
 import dirt from '../StaticImages/cement-texture.jpeg';
 
-function Diagram(props){
-    const canvas0Ref = useRef(null);
-    const canvas1Ref = useRef(null);
-    const canvas2Ref = useRef(null);
-    const canvas3Ref = useRef(null);
-    const ctx0Ref = useRef(null);
-    const ctx1Ref = useRef(null);
-    const ctx2Ref = useRef(null);
-    const ctx3Ref = useRef(null);
+function PDFDiagram(props){
+    const pdfcanvas0Ref = useRef(null);
+    const pdfcanvas1Ref = useRef(null);
+    const pdfcanvas2Ref = useRef(null);
+    const pdfcanvas3Ref = useRef(null);
+    const pdfctx0Ref = useRef(null);
+    const pdfctx1Ref = useRef(null);
+    const pdfctx2Ref = useRef(null);
+    const pdfctx3Ref = useRef(null);
     const xlgEndRef = useRef(null);
     const lrgEndRef = useRef(null);
     const medEndRef = useRef(null);
@@ -28,63 +28,63 @@ function Diagram(props){
     // const [cArray, setCArray] = useState([]);
 
     useEffect(() => {
-        const canvas0 = canvas0Ref.current;
-        const ctx0 = canvas0.getContext('2d');
-        ctx0Ref.current = ctx0;
+        const pdfcanvas0 = pdfcanvas0Ref.current;
+        const pdfctx0 = pdfcanvas0.getContext('2d');
+        pdfctx0Ref.current = pdfctx0;
 
-        ctx0.width = window.innerWidth;
-        ctx0.height = window.innerHeight;
+        pdfctx0.width = window.innerWidth;
+        pdfctx0.height = window.innerHeight;
 
-        canvas0.addEventListener('resize', function() {
-        ctx0.width = window.innerWidth;
-        ctx0.height = window.innerHeight;
+        pdfcanvas0.addEventListener('resize', function() {
+        pdfctx0.width = window.innerWidth;
+        pdfctx0.height = window.innerHeight;
         });
 
-        const canvas1 = canvas1Ref.current;
-        const ctx1 = canvas1.getContext('2d');
-        ctx1Ref.current = ctx1;
+        const pdfcanvas1 = pdfcanvas1Ref.current;
+        const pdfctx1 = pdfcanvas1.getContext('2d');
+        pdfctx1Ref.current = pdfctx1;
 
-        ctx1.width = window.innerWidth;
-        ctx1.height = window.innerHeight;
+        pdfctx1.width = window.innerWidth;
+        pdfctx1.height = window.innerHeight;
 
-        canvas1.addEventListener('resize', function() {
-        ctx1.width = window.innerWidth;
-        ctx1.height = window.innerHeight;
+        pdfcanvas1.addEventListener('resize', function() {
+        pdfctx1.width = window.innerWidth;
+        pdfctx1.height = window.innerHeight;
         });
 
         let img = new Image();
         let ptrn;
         img.src = dirt;        
 
-        const canvas2 = canvas2Ref.current;
-        const ctx2 = canvas2.getContext('2d');
-        ctx2Ref.current = ctx2;
+        const pdfcanvas2 = pdfcanvas2Ref.current;
+        const pdfctx2 = pdfcanvas2.getContext('2d');
+        pdfctx2Ref.current = pdfctx2;
 
-        canvas2.addEventListener('resize', function() {
-            ctx2.width = window.innerWidth;
-            ctx2.height = window.innerHeight;
+        pdfcanvas2.addEventListener('resize', function() {
+            pdfctx2.width = window.innerWidth;
+            pdfctx2.height = window.innerHeight;
         });
 
-        const canvas3 = canvas3Ref.current;
-        const ctx3 = canvas3.getContext('2d');
-        ctx3Ref.current = ctx3;
+        const pdfcanvas3 = pdfcanvas3Ref.current;
+        const pdfctx3 = pdfcanvas3.getContext('2d');
+        pdfctx3Ref.current = pdfctx3;
 
-        canvas3.addEventListener('resize', function() {
-            ctx3.width = window.innerWidth;
-            ctx3.height = window.innerHeight;
+        pdfcanvas3.addEventListener('resize', function() {
+            pdfctx3.width = window.innerWidth;
+            pdfctx3.height = window.innerHeight;
         });
 
-        ctx0.clearRect(0, 0, canvas0.width, canvas0.height);
-        ctx1.clearRect(0, 0, canvas1.width, canvas1.height);
-        ctx2.clearRect(0, 0, canvas2.width, canvas2.height);
-        ctx3.clearRect(0, 0, canvas3.width, canvas3.height);
+        pdfctx0.clearRect(0, 0, pdfcanvas0.width, pdfcanvas0.height);
+        pdfctx1.clearRect(0, 0, pdfcanvas1.width, pdfcanvas1.height);
+        pdfctx2.clearRect(0, 0, pdfcanvas2.width, pdfcanvas2.height);
+        pdfctx3.clearRect(0, 0, pdfcanvas3.width, pdfcanvas3.height);
         
         drawCasings(props.wellCasings);
 
         img.onload = () => {
-            ptrn = ctx1.createPattern(img, 'repeat');
-            ctx1.fillStyle = ptrn;
-            ctx2.fillStyle = ptrn;
+            ptrn = pdfctx1.createPattern(img, 'repeat');
+            pdfctx1.fillStyle = ptrn;
+            pdfctx2.fillStyle = ptrn;
             drawCements(props.wellCements);
             placePlugs(props.wellPlugs);
         }
@@ -95,47 +95,47 @@ function Diagram(props){
             drawDepthGuides(props.well.total_depth);
         }
 
-    }, [props.wellCasings, props.wellCements, props.wellPerfs, props.wellPlugs, props.refresh]);
-        // drawCasings, drawCements, placePerforations, placePlugs, props.well]);//[]
+    }, [props.well, props.wellCasings, props.wellCements, props.wellPerfs, props.wellPlugs]);
+        
 
 
 
 
     function drawCement(x, y, w, h, x2){
-        ctx1Ref.current.fillRect(x-x2, y, x2, h);
-        ctx1Ref.current.fillRect(x+w, y, x2, h);
+        pdfctx1Ref.current.fillRect(x-x2, y, x2, h);
+        pdfctx1Ref.current.fillRect(x+w, y, x2, h);
     }
 
     function drawDepthGuides(depth){
-        ctx0Ref.current.strokeStyle = "white";
-        ctx0Ref.current.lineWidth=2;
-        const x = canvas0Ref.current.width;
+        pdfctx0Ref.current.strokeStyle = "white";
+        pdfctx0Ref.current.lineWidth=2;
+        const x = pdfcanvas0Ref.current.width;
         const topLine = Math.round(depth*0.25);
-        ctx0Ref.current.fillStyle = "white";
-        ctx0Ref.current.font = '16px Oxygen';
-        ctx0Ref.current.fillText(topLine, 10, 891*0.25-10);
+        pdfctx0Ref.current.fillStyle = "white";
+        pdfctx0Ref.current.font = '16px Oxygen';
+        pdfctx0Ref.current.fillText(topLine, 10, 624*0.25-10);
         const midLine = Math.round(depth*0.5);
-        ctx0Ref.current.fillText(midLine, 10, 891*0.5-10);
+        pdfctx0Ref.current.fillText(midLine, 10, 624*0.5-10);
         const botLine = Math.round(depth*0.75);
-        ctx0Ref.current.fillText(botLine, 10, 891*0.75-10);
-        ctx0Ref.current.beginPath();
-        ctx0Ref.current.setLineDash([5, 15]);
-        ctx0Ref.current.moveTo(0, 891*0.25);
-        ctx0Ref.current.lineTo(x,891*0.25);
-        ctx0Ref.current.stroke();
-        ctx0Ref.current.moveTo(0, 891*0.5);
-        ctx0Ref.current.lineTo(x,  891*0.5);
-        ctx0Ref.current.stroke();
-        ctx0Ref.current.moveTo(0, 891*0.75);
-        ctx0Ref.current.lineTo(x, 891*0.75);
-        ctx0Ref.current.stroke();
+        pdfctx0Ref.current.fillText(botLine, 10, 624*0.75-10);
+        pdfctx0Ref.current.beginPath();
+        pdfctx0Ref.current.setLineDash([5, 15]);
+        pdfctx0Ref.current.moveTo(0, 624*0.25);
+        pdfctx0Ref.current.lineTo(x,624*0.25);
+        pdfctx0Ref.current.stroke();
+        pdfctx0Ref.current.moveTo(0, 624*0.5);
+        pdfctx0Ref.current.lineTo(x,  624*0.5);
+        pdfctx0Ref.current.stroke();
+        pdfctx0Ref.current.moveTo(0, 624*0.75);
+        pdfctx0Ref.current.lineTo(x, 624*0.75);
+        pdfctx0Ref.current.stroke();
     }
 
     function drawPipe(x, y, w, h, a, size){
-        ctx2Ref.current.beginPath();
+        pdfctx2Ref.current.beginPath();
         let next;
         switch (size){
-            case 'xlg': ctx2Ref.current.lineWidth= 6;
+            case 'xlg': pdfctx2Ref.current.lineWidth= 6;
                 if (table['lrg']['current'] !== null ){
                     next = 15;
                 } else if (table['med']['current']  !== null ){
@@ -148,7 +148,7 @@ function Diagram(props){
                     next = 75;
                 } else {next = 90}
                 break;
-            case 'lrg': ctx2Ref.current.lineWidth= 5;
+            case 'lrg': pdfctx2Ref.current.lineWidth= 5;
                 if (table['med']['current']  !== null ){
                     next = 15;
                 } else if (table['reg']['current']  !== null ){
@@ -159,7 +159,7 @@ function Diagram(props){
                     next = 60;
                 } else {next = 75}
                 break;
-            case 'med': ctx2Ref.current.lineWidth= 4;
+            case 'med': pdfctx2Ref.current.lineWidth= 4;
                 if (table['reg']['current']  !== null ){
                     next = 15;
                 } else if (table['sml']['current'] !== null ){
@@ -168,7 +168,7 @@ function Diagram(props){
                     next = 45;
                 } else {next = 60}
                 break;
-            case 'reg': ctx2Ref.current.lineWidth= 3;
+            case 'reg': pdfctx2Ref.current.lineWidth= 3;
                 if (table['sml']  !== null ){
                     next = 15;
                 } else if (table['xsm']['current']  !== null ){
@@ -177,39 +177,39 @@ function Diagram(props){
                     next = 45;
                 }
                 break;
-            case 'sml': ctx2Ref.current.lineWidth= 2;
+            case 'sml': pdfctx2Ref.current.lineWidth= 2;
                 if (table['xsm']['current']  !== null ){
                     next = 15;
                 } else {
                     next = 30;
                 }
                 break;
-            case 'xsm': ctx2Ref.current.lineWidth= 1;
+            case 'xsm': pdfctx2Ref.current.lineWidth= 1;
                 next = 15;
                 break;
             default: 
                 console.log('Error setting casing width');
                 break;
         }
-        ctx2Ref.current.strokestyle = "black";
-        ctx2Ref.current.fillStyle=`rgba(182, 112, 37, ${a})`;
-        ctx2Ref.current.fillRect(x, y, w, h, a);
-        ctx2Ref.current.moveTo(x,y);
-        ctx2Ref.current.lineTo(x,y+h);
-        ctx2Ref.current.lineTo(x+next, y+h); //Change to get next pipe?
-        ctx2Ref.current.stroke();
-        ctx2Ref.current.closePath();
+        pdfctx2Ref.current.strokestyle = "black";
+        pdfctx2Ref.current.fillStyle=`rgba(182, 112, 37, ${a})`;
+        pdfctx2Ref.current.fillRect(x, y, w, h, a);
+        pdfctx2Ref.current.moveTo(x,y);
+        pdfctx2Ref.current.lineTo(x,y+h);
+        pdfctx2Ref.current.lineTo(x+next, y+h); //Change to get next pipe?
+        pdfctx2Ref.current.stroke();
+        pdfctx2Ref.current.closePath();
 
-        ctx2Ref.current.beginPath();
-        ctx2Ref.current.moveTo(x+w, y);
-        ctx2Ref.current.lineTo(x+w,y+h);
-        ctx2Ref.current.lineTo(x+w-next, y+h)
-        ctx2Ref.current.stroke();
-        ctx2Ref.current.closePath();
+        pdfctx2Ref.current.beginPath();
+        pdfctx2Ref.current.moveTo(x+w, y);
+        pdfctx2Ref.current.lineTo(x+w,y+h);
+        pdfctx2Ref.current.lineTo(x+w-next, y+h)
+        pdfctx2Ref.current.stroke();
+        pdfctx2Ref.current.closePath();
     }
     
     function drawCasingSet(x, y, w, size){
-        ctx2Ref.current.fillStyle="black";
+        pdfctx2Ref.current.fillStyle="black";
         let lineWidth;
         switch (size){
             case 'xlg': lineWidth = 3;
@@ -229,27 +229,18 @@ function Diagram(props){
                 break;
         }
 
-        ctx2Ref.current.beginPath();
-        ctx2Ref.current.moveTo(x,y+lineWidth);
-        ctx2Ref.current.lineTo(x-30,y+lineWidth);
-        ctx2Ref.current.lineTo(x,y-30+lineWidth);
-        ctx2Ref.current.fill();
+        pdfctx2Ref.current.beginPath();
+        pdfctx2Ref.current.moveTo(x,y+lineWidth);
+        pdfctx2Ref.current.lineTo(x-30,y+lineWidth);
+        pdfctx2Ref.current.lineTo(x,y-30+lineWidth);
+        pdfctx2Ref.current.fill();
 
-        ctx2Ref.current.beginPath();
-        ctx2Ref.current.moveTo(x+w,y+lineWidth);
-        ctx2Ref.current.lineTo(x+w+30, y+lineWidth);
-        ctx2Ref.current.lineTo(x+w,y-30+lineWidth);
-        ctx2Ref.current.fill();
+        pdfctx2Ref.current.beginPath();
+        pdfctx2Ref.current.moveTo(x+w,y+lineWidth);
+        pdfctx2Ref.current.lineTo(x+w+30, y+lineWidth);
+        pdfctx2Ref.current.lineTo(x+w,y-30+lineWidth);
+        pdfctx2Ref.current.fill();
     }
-
-    // function drawPerforations(x, y, w){
-    //     drawEachPerf(x, y);
-    //     drawEachPerf(x, y+15);
-    //     drawEachPerf(x, y+30);
-    //     drawEachPerf(x+w, y);
-    //     drawEachPerf(x+w, y+15);
-    //     drawEachPerf(x+w, y+30);
-    // }
 
     function drawPerfPair(x, y, w){
         drawEachPerf(x, y);
@@ -257,56 +248,50 @@ function Diagram(props){
     }
 
     function drawEachPerf(x2,y2) {
-        ctx2Ref.current.fillStyle = "black";
-        ctx2Ref.current.beginPath();
-        ctx2Ref.current.strokeStyle = "white";
-        ctx2Ref.current.moveTo(x2, y2-5);
-        ctx2Ref.current.lineTo(x2-30, y2);
-        ctx2Ref.current.lineTo(x2, y2+5);
-        ctx2Ref.current.lineTo(x2+30, y2);
-        ctx2Ref.current.lineTo(x2, y2-5);
-        ctx2Ref.current.stroke();
-        ctx2Ref.current.closePath();
-        ctx2Ref.current.fill();
-        ctx2Ref.current.strokeStyle = "black";
+        pdfctx2Ref.current.fillStyle = "black";
+        pdfctx2Ref.current.beginPath();
+        pdfctx2Ref.current.strokeStyle = "white";
+        pdfctx2Ref.current.moveTo(x2, y2-5);
+        pdfctx2Ref.current.lineTo(x2-30, y2);
+        pdfctx2Ref.current.lineTo(x2, y2+5);
+        pdfctx2Ref.current.lineTo(x2+30, y2);
+        pdfctx2Ref.current.lineTo(x2, y2-5);
+        pdfctx2Ref.current.stroke();
+        pdfctx2Ref.current.closePath();
+        pdfctx2Ref.current.fill();
+        pdfctx2Ref.current.strokeStyle = "black";
     }
 
     function drawCementPlug(x,y,w,h){
-        ctx2Ref.current.fillRect(x, y, w, h);
+        pdfctx2Ref.current.fillRect(x, y, w, h);
     }
 
     function drawMechPlug(x,y,w,h){
-        ctx3Ref.current.fillStyle="black";
-        ctx3Ref.current.fillRect(x, y, w, h);
+        pdfctx3Ref.current.fillStyle="black";
+        pdfctx3Ref.current.fillRect(x, y, w, h);
     }
 
     function drawDVPlug(x, y, w){
-        ctx2Ref.current.beginPath();
-        ctx2Ref.current.lineWidth = 6;
-        ctx2Ref.current.moveTo(x, y);
-        ctx2Ref.current.lineTo(x-15, y+15);
-        ctx2Ref.current.moveTo(x+w, y);
-        ctx2Ref.current.lineTo(x+w+15, y+15);
-        ctx2Ref.current.stroke();
-        ctx2Ref.current.closePath();
+        pdfctx2Ref.current.beginPath();
+        pdfctx2Ref.current.lineWidth = 6;
+        pdfctx2Ref.current.moveTo(x, y);
+        pdfctx2Ref.current.lineTo(x-15, y+15);
+        pdfctx2Ref.current.moveTo(x+w, y);
+        pdfctx2Ref.current.lineTo(x+w+15, y+15);
+        pdfctx2Ref.current.stroke();
+        pdfctx2Ref.current.closePath();
     }
-
-    //CenterX 222px
-    //height 891px
-    // Ending_depth is to total_depth as X is to 891
-    //ED/TD = X/891
-    //X = ED/TD * 891
 
     function findA(casings, cements){
         let casingArray={};
         let cementArray=[];
         casings.forEach(casing => {
             if (casing.gauge === 'xlg'){  
-                const xlgEnd = Math.round(casing.ending_depth*891/props.well.total_depth);
+                const xlgEnd = Math.round(casing.ending_depth*624/props.well.total_depth);
                 xlgEndRef.current = xlgEnd;
                 casingArray['xlg'] = {
                     id: casing.id,
-                    x: 132,
+                    x: 30,
                     depth: xlgEndRef.current}; 
             } else if (casingArray['xlg'] === undefined){
                 casingArray['xlg'] = {
@@ -315,11 +300,11 @@ function Diagram(props){
                 };
             }
             if (casing.gauge === 'lrg'){
-                const lrgEnd = Math.round(casing.ending_depth*891/props.well.total_depth);
+                const lrgEnd = Math.round(casing.ending_depth*624/props.well.total_depth);
                 lrgEndRef.current = lrgEnd;
                 casingArray['lrg'] = {
                     id: casing.id,
-                    x: 147,
+                    x: 45,
                     depth: lrgEndRef.current};
             } else if (casingArray['lrg'] === undefined){
                 casingArray['lrg'] = {
@@ -328,11 +313,11 @@ function Diagram(props){
                 };
             }
             if (casing.gauge === 'med'){
-                const medEnd = Math.round(casing.ending_depth*891/props.well.total_depth);
+                const medEnd = Math.round(casing.ending_depth*624/props.well.total_depth);
                 medEndRef.current = medEnd;
                 casingArray['med'] = {
                     id: casing.id,
-                    x: 162,
+                    x: 60,
                     depth: medEndRef.current};
             } else if (casingArray['med'] === undefined){
                 casingArray['med'] = {
@@ -341,11 +326,11 @@ function Diagram(props){
                 };
             }
             if (casing.gauge === 'reg'){
-                const regEnd = Math.round(casing.ending_depth*891/props.well.total_depth);
+                const regEnd = Math.round(casing.ending_depth*624/props.well.total_depth);
                 regEndRef.current = regEnd;
                 casingArray['reg'] = {
                     id: casing.id,
-                    x: 177,
+                    x: 75,
                     depth: regEndRef.current};
             } else if (casingArray['reg'] === undefined){
                 casingArray['reg'] = {
@@ -354,11 +339,11 @@ function Diagram(props){
                 };
             }
             if (casing.gauge === 'sml'){
-                const smlEnd = Math.round(casing.ending_depth*891/props.well.total_depth);
+                const smlEnd = Math.round(casing.ending_depth*624/props.well.total_depth);
                 smlEndRef.current = smlEnd;
                 casingArray['sml'] = {
                     id: casing.id,
-                    x: 192,
+                    x: 90,
                     depth: smlEndRef.current};
             } else if (casingArray['sml'] === undefined) {
                 casingArray['sml'] = {
@@ -367,11 +352,11 @@ function Diagram(props){
                 };
             }
             if (casing.gauge === 'xsm'){
-                const xsmEnd = Math.round(casing.ending_depth*891/props.well.total_depth);
+                const xsmEnd = Math.round(casing.ending_depth*624/props.well.total_depth);
                 xsmEndRef.current = xsmEnd;
                 casingArray['xsm'] = {
                     id: casing.id,
-                    x: 207,
+                    x: 105,
                     depth: xsmEndRef.current};
             }
             else if (casingArray['xsm'] === undefined){
@@ -383,35 +368,35 @@ function Diagram(props){
         });
 
         cements.forEach(cement => {
-            const cementY=Math.round(cement.starting_depth*891/props.well.total_depth);
-            const cementBottom = Math.round(cement.ending_depth*891/props.well.total_depth);
+            const cementY=Math.round(cement.starting_depth*624/props.well.total_depth);
+            const cementBottom = Math.round(cement.ending_depth*624/props.well.total_depth);
             let cementXTop;
             let cementXBottom;
             if (cementY < casingArray['xlg']['depth']){
-                cementXTop = 132;
+                cementXTop = 30;
             } else if (cementY < casingArray['lrg']['depth']){
-                cementXTop = 147;
+                cementXTop = 45;
             } else if (cementY < casingArray['med']['depth']){
-                cementXTop = 162;
+                cementXTop = 60;
             } else if (cementY < casingArray['reg']['depth']){
-                cementXTop = 177;
+                cementXTop = 75;
             } else if (cementY < casingArray['sml']['depth']){
-                cementXTop = 192;
+                cementXTop = 90;
             } else if (cementY < casingArray['xsm']['depth']){
-                cementXTop = 207; 
+                cementXTop = 105; 
             }
             if (cementBottom <= casingArray['xlg']['depth'] +1){
-                cementXBottom = 132;
+                cementXBottom = 30;
             } else if (cementBottom <= casingArray['lrg']['depth'] +1){
-                cementXBottom = 147;
+                cementXBottom = 45;
             } else if (cementBottom <= casingArray['med']['depth'] +1){
-                cementXBottom = 162;
+                cementXBottom = 60;
             } else if (cementBottom <= casingArray['reg']['depth'] +1){
-                cementXBottom = 177;
+                cementXBottom = 75;
             } else if (cementBottom <= casingArray['sml']['depth'] +1){
-                cementXBottom = 192;
+                cementXBottom = 90;
             } else if (cementBottom <= casingArray['xsm']['depth'] +1){
-                cementXBottom = 207; 
+                cementXBottom = 105; 
             }
 
             let cementW = cementXTop = cementXBottom;
@@ -450,10 +435,10 @@ function Diagram(props){
         casings.forEach(casing => {
             let casingA;
             if (casing.gauge === 'xlg' && casing.ending_depth > casing.starting_depth){
-                const casingX=222-90;
-                const casingY=Math.round(casing.starting_depth*891/props.well.total_depth);
+                const casingX=120-90;
+                const casingY=Math.round(casing.starting_depth*624/props.well.total_depth);
                 const casingW=180;
-                const casingH=Math.round(casing.ending_depth*891/props.well.total_depth)-casingY;
+                const casingH=Math.round(casing.ending_depth*624/props.well.total_depth)-casingY;
                 casingArray.push(casingX);
                 
                 if (aIndex.includes(casing.id)){
@@ -478,10 +463,10 @@ function Diagram(props){
         casings.forEach(casing => {
             let casingA;
             if (casing.gauge === 'lrg' && casing.ending_depth > casing.starting_depth){
-                const casingX=222-75;
-                const casingY=Math.round(casing.starting_depth*891/props.well.total_depth);
+                const casingX=120-75;
+                const casingY=Math.round(casing.starting_depth*624/props.well.total_depth);
                 const casingW=150;
-                const casingH=Math.round(casing.ending_depth*891/props.well.total_depth)-casingY;
+                const casingH=Math.round(casing.ending_depth*624/props.well.total_depth)-casingY;
                 casingArray.push(casingX);
                 if (aIndex.includes(casing.id)){
                      casingA=0;
@@ -502,10 +487,10 @@ function Diagram(props){
         casings.forEach(casing => {
             let casingA;
             if (casing.gauge === 'med' && casing.ending_depth > casing.starting_depth){
-                const casingX=222-60;
-                const casingY=Math.round(casing.starting_depth*891/props.well.total_depth);
+                const casingX=120-60;
+                const casingY=Math.round(casing.starting_depth*624/props.well.total_depth);
                 const casingW=120;
-                const casingH=Math.round(casing.ending_depth*891/props.well.total_depth)-casingY;
+                const casingH=Math.round(casing.ending_depth*624/props.well.total_depth)-casingY;
                 casingArray.push(casingX);
                 if (aIndex.includes(casing.id)){
                      casingA=0;
@@ -527,10 +512,10 @@ function Diagram(props){
         casings.forEach(casing => {
             let casingA;
             if (casing.gauge === 'reg' && casing.ending_depth > casing.starting_depth){
-                const casingX=222-45;
-                const casingY=Math.round(casing.starting_depth*891/props.well.total_depth);
+                const casingX=120-45;
+                const casingY=Math.round(casing.starting_depth*624/props.well.total_depth);
                 const casingW=90;
-                const casingH=Math.round(casing.ending_depth*891/props.well.total_depth)-casingY;
+                const casingH=Math.round(casing.ending_depth*624/props.well.total_depth)-casingY;
                 casingArray.push(casingX);
                 if (aIndex.includes(casing.id)){
                      casingA=0;
@@ -552,10 +537,10 @@ function Diagram(props){
         casings.forEach(casing => {
             let casingA;
             if (casing.gauge === 'sml' && casing.ending_depth > casing.starting_depth){
-                const casingX=222-30;
-                const casingY=Math.round(casing.starting_depth*891/props.well.total_depth);
+                const casingX=120-30;
+                const casingY=Math.round(casing.starting_depth*624/props.well.total_depth);
                 const casingW=60;
-                const casingH=Math.round(casing.ending_depth*891/props.well.total_depth)-casingY;
+                const casingH=Math.round(casing.ending_depth*624/props.well.total_depth)-casingY;
                 casingArray.push(casingX);
                 if (aIndex.includes(casing.id)){
                      casingA=0;
@@ -577,10 +562,10 @@ function Diagram(props){
         casings.forEach(casing => {
             let casingA;
             if (casing.gauge === 'xsm' && casing.ending_depth > casing.starting_depth){
-                const casingX=222-15;
-                const casingY=Math.round(casing.starting_depth*891/props.well.total_depth);
+                const casingX=120-15;
+                const casingY=Math.round(casing.starting_depth*624/props.well.total_depth);
                 const casingW=30;
-                const casingH=Math.round(casing.ending_depth*891/props.well.total_depth)-casingY;
+                const casingH=Math.round(casing.ending_depth*624/props.well.total_depth)-casingY;
                 casingArray.push(casingX);
                 if (aIndex.includes(casing.id)){
                      casingA=0;
@@ -603,9 +588,9 @@ function Diagram(props){
 
     function drawCements(cements){
         cements.forEach(cement => {
-            const cementY=Math.round(cement.starting_depth*891/props.well.total_depth);
-            const cementH=Math.round(cement.ending_depth*891/props.well.total_depth)-cementY;
-            const cementBottom = Math.round(cement.ending_depth*891/props.well.total_depth);
+            const cementY=Math.round(cement.starting_depth*624/props.well.total_depth);
+            const cementH=Math.round(cement.ending_depth*624/props.well.total_depth)-cementY;
+            const cementBottom = Math.round(cement.ending_depth*624/props.well.total_depth);
     
             // console.log(cement.id)
             const cementX = findPipeXAtY(cementBottom, table);
@@ -631,22 +616,22 @@ function Diagram(props){
         // console.log(table);
         if (y < table['xlg']){
             // setActiveTable('xlg');
-            return 222-90
+            return 120-90
         } else if (y < table['lrg']){
             // setActiveTable('xlg');
-            return 222-75
+            return 120-75
         } else if (y < table['med']){
             // setActiveTable('lrg');
-            return 222-60
+            return 120-60
         } else if (y < table['reg']){
             // setActiveTable('med');
-            return 222-45
+            return 120-45
         } else if (y <= table['sml']){
             // setActiveTable('reg');
-            return 222-30
+            return 120-30
         } else if (y <= table['xsm']){
             // setActiveTable('sml');
-            return 222-15
+            return 120-15
         }
     };
 
@@ -699,10 +684,11 @@ function Diagram(props){
 
     function placePerforations(perfs){
        perfs.forEach(perf => {
-            const perfY=Math.round(perf.starting_depth*891/props.well.total_depth);
-            const perfH=Math.round(perf.ending_depth*891/props.well.total_depth)-perfY;
+            const perfY=Math.round(perf.starting_depth*624/props.well.total_depth);
+            const perfH=Math.round(perf.ending_depth*624/props.well.total_depth)-perfY;
             const perfX = findPipeXAtY(perfY+perfH, table);
             const perfW = findPipeWAtY(perfY+perfH, table);
+            console.log(perfX, perfY, perfW);
             if (perfH > 0){
                 drawPerfPair(perfX, perfY, perfW);
             }
@@ -712,16 +698,16 @@ function Diagram(props){
     function placePlugs(plugs){
         plugs.forEach(plug => {
             if (plug.plug_type === "DV"){
-                const plugY=plug.set_depth*891/props.well.total_depth;
+                const plugY=plug.set_depth*624/props.well.total_depth;
                 const plugX = findPipeXAtY(plugY, table);
                 const plugW = findPipeWAtY(plugY, table);
                 drawDVPlug(plugX, plugY, plugW);
             } else {
-                const plugY=plug.starting_depth*891/props.well.total_depth;
-                const plugH=(plug.ending_depth*891/props.well.total_depth)-plugY;
+                const plugY=plug.starting_depth*624/props.well.total_depth;
+                const plugH=(plug.ending_depth*624/props.well.total_depth)-plugY;
                 if (plugH > 0){
                     if (plugY+plugH <= xlgEndRef.current){
-                        const plugX=222-90;
+                        const plugX=120-90;
                         const plugW=180;
                         if (plug.plug_type === "CP"){
                             drawCementPlug(plugX, plugY, plugW, plugH);
@@ -729,7 +715,7 @@ function Diagram(props){
                             drawMechPlug(plugX, plugY, plugW, plugH);
                         }
                     } else if (plugY+plugH <= lrgEndRef.current){
-                        const plugX=222-75;
+                        const plugX=120-75;
                         const plugW=150;
                         if (plug.plug_type === "CP"){
                             drawCementPlug(plugX, plugY, plugW, plugH);
@@ -737,7 +723,7 @@ function Diagram(props){
                             drawMechPlug(plugX, plugY, plugW, plugH);
                         }                    
                     } else if (plugY+plugH <= medEndRef.current){
-                        const plugX=222-60;
+                        const plugX=120-60;
                         const plugW=120;
                         if (plug.plug_type === "CP"){
                             drawCementPlug(plugX, plugY, plugW, plugH);
@@ -745,7 +731,7 @@ function Diagram(props){
                             drawMechPlug(plugX, plugY, plugW, plugH);
                         }    
                     } else if (plugY+plugH <= regEndRef.current){
-                        const plugX=222-45;
+                        const plugX=120-45;
                         const plugW=90;
                         if (plug.plug_type === "CP"){
                             drawCementPlug(plugX, plugY, plugW, plugH);
@@ -753,7 +739,7 @@ function Diagram(props){
                             drawMechPlug(plugX, plugY, plugW, plugH);
                         }    
                     } else if (plugY+plugH <= smlEndRef.current){
-                        const plugX=222-30;
+                        const plugX=120-30;
                         const plugW=60;
                         if (plug.plug_type === "CP"){
                             drawCementPlug(plugX, plugY, plugW, plugH);
@@ -761,7 +747,7 @@ function Diagram(props){
                             drawMechPlug(plugX, plugY, plugW, plugH);
                         }    
                     } else {
-                        const plugX=222-15;
+                        const plugX=120-15;
                         const plugW=30;
                         if (plug.plug_type === "CP"){
                             drawCementPlug(plugX, plugY, plugW, plugH);
@@ -774,19 +760,14 @@ function Diagram(props){
         })
     }
 
-    // function handleCollapse(){
-    //     props.setShowCollapse(!props.showCollapse);
-    //     console.log(props.showCollapse);
-    // };
-//onClick={handleCollapse}
     return (
-        <div className="bg-pseudo" >
-            <canvas id="canvas0" width="444" height="900" ref={canvas0Ref}></canvas>
-            <canvas id="canvas1" width="444" height="900" ref={canvas1Ref}></canvas>
-            <canvas id="canvas2" width="444" height="900" ref={canvas2Ref}></canvas>
-            <canvas id="canvas3" width="444" height="900" ref={canvas3Ref} ></canvas>
+        <div className="pdf-canvas-container" >
+            <canvas id="pdfcanvas0" width="240" height="624" ref={pdfcanvas0Ref}></canvas>
+            <canvas id="pdfcanvas1" width="240" height="624" ref={pdfcanvas1Ref}></canvas>
+            <canvas id="pdfcanvas2" width="240" height="624" ref={pdfcanvas2Ref}></canvas>
+            <canvas id="pdfcanvas3" width="240" height="624" ref={pdfcanvas3Ref} ></canvas>
         </div>
     )
 }
 
-export default Diagram;
+export default PDFDiagram;

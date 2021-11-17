@@ -18,6 +18,8 @@ import PlatImageModal from './PlatImageModal';
 import Diagram from './Diagram';
 import Button from 'react-bootstrap/esm/Button';
 // import Collapse from 'react-bootstrap/esm/Collapse';
+import PDFView from './PDFView';
+import { Route, Switch, useHistory } from 'react-router-dom'; //withRouter, 
 
 function WellViewToo(props) {
     
@@ -36,6 +38,7 @@ function WellViewToo(props) {
     const [refresh, setRefresh] = useState(0);
     const [showWellDel, setShowWellDel] = useState(false);
     const [showImage, setShowImage] = useState(false);
+    const [showPDF, setShowPDF] = useState(false);
     // const [showCollapse, setShowCollapse] = useState(false);
     let wellHolesHTML;
     let wellCasingsHTML;
@@ -114,7 +117,7 @@ function WellViewToo(props) {
         fetchWell();
         fetchWellFeatures();
         setShowDelete(false);        
-    }, [refresh]);
+    }, [refresh, showPDF]);
 
     useEffect(() => {
         if (showDelete === false && isClicked === true) {
@@ -503,6 +506,31 @@ function WellViewToo(props) {
         props.history.push('');
     }
 
+    function handleView(){
+        setShowPDF(true);
+        // props.history.push(`/pdf/${props.match.params.id}`);
+     
+
+        // async function fetchPDF(){        
+        //   const response = await fetch(`/api/pdf/`, 
+        //     {headers: {
+        //             'Content-Type': 'application/json',
+        //             'X-CSRFToken': Cookies.get('csrftoken'),
+        //         }
+        //     });
+        //     if(!response){
+        //         console.log(response);
+        //     } else {
+        //         const data = await response.json();
+        //         console.log(data);
+        //     }
+           
+        // }
+        // fetchPDF();
+
+        // <Link to="/files/myfile.pdf" target="_blank" download>Download</Link>
+    }
+
     let wellInfoHTML;
     // style={marginStyle}
     if (props.well !== null) {
@@ -512,6 +540,7 @@ function WellViewToo(props) {
                     <div className="left-group"> 
                         <h2>{props.well.lease} {props.well.well_number} <span className="icon" onClick={displayPopup}>{$faImage}</span> </h2>
                     </div>
+                    <Button className="btn back-button" variant="warning" id="back-button" onClick={handleView}>Print View</Button>
                     <Button className="btn back-button" variant="warning" id="back-button" onClick={handleBack}> well selection </Button>
                     <div className="right-group">
                         
@@ -660,21 +689,26 @@ function WellViewToo(props) {
     //     }        
     // }, [showCollapse])
 
-    return (
-        <>
-        <div className="well-container-grid" id="top">
-            {wellInfoHTML}
-            <Diagram wellFeatures={wellFeatures} wellCements={wellCements} wellCasings={wellCasings} wellPerfs={wellPerfs} wellPlugs={wellPlugs} well={props.well} refresh={refresh} />
-           {/* {diagramHTML} */}
-           <a href="#top" className="float" id="float">
-                <i className="my-float">{$faCaret}</i>
-            </a>
-        </div>
-        <DeleteConfirmationModal deleteTarget={deleteTarget} setDeleteTarget={setDeleteTarget} showDelete={showDelete} setShowDelete={setShowDelete} history={props.history} setRefresh={setRefresh} setIsClicked={setIsClicked}/>
-            <DeleteWellModal history={props.history} setRefresh={setRefresh} showWellDel={showWellDel} setShowWellDel={setShowWellDel}/>
-            <PlatImageModal well={props.well} setWell={props.setWell} showImage={showImage} setShowImage={setShowImage} history={props.history} refresh={refresh} setRefresh={setRefresh}/>
-        </>
-    );
+    // <PDFView well={props.well} wellCements={wellCements} wellCasings={wellCasings} wellPerfs={wellPerfs} wellPlugs={wellPlugs} wellHoles={wellHoles} />
+    if (showPDF){
+        return <PDFView well={props.well} setWell={props.setWell} setShowPDF={setShowPDF}/>
+    } else {
+        return (
+            <>
+            <div className="well-container-grid" id="top">
+                {wellInfoHTML}
+                <Diagram wellFeatures={wellFeatures} wellCements={wellCements} wellCasings={wellCasings} wellPerfs={wellPerfs} wellPlugs={wellPlugs} well={props.well} refresh={refresh} />
+            {/* {diagramHTML} */}
+            <a href="#top" className="float" id="float">
+                    <i className="my-float">{$faCaret}</i>
+                </a>
+            </div>
+                <DeleteConfirmationModal deleteTarget={deleteTarget} setDeleteTarget={setDeleteTarget} showDelete={showDelete} setShowDelete={setShowDelete} history={props.history} setRefresh={setRefresh} setIsClicked={setIsClicked}/>
+                <DeleteWellModal history={props.history} setRefresh={setRefresh} showWellDel={showWellDel} setShowWellDel={setShowWellDel}/>
+                <PlatImageModal well={props.well} setWell={props.setWell} showImage={showImage} setShowImage={setShowImage} history={props.history} refresh={refresh} setRefresh={setRefresh}/>                            
+            </>
+        );
+    }
 };
 
 export default withRouter(WellViewToo)
@@ -682,6 +716,11 @@ export default withRouter(WellViewToo)
 
 
 /*
+<Switch>
+                    <Route path='/pdf' >
+                        <PDFView well={props.well} wellCements={wellCements} wellCasings={wellCasings} wellPerfs={wellPerfs} wellPlugs={wellPlugs} wellHoles={wellHoles} />            
+                    </Route>
+                </Switch>
 
 <Collapse in={showCollapse}>
         <Diagram wellFeatures={wellFeatures} wellCements={wellCements} wellCasings={wellCasings} wellPerfs={wellPerfs} wellPlugs={wellPlugs} well={props.well} refresh={refresh} />
