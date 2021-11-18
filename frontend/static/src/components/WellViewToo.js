@@ -541,20 +541,16 @@ function WellViewToo(props) {
                 <div className="well-view-grid-top">
                     <div className="left-group"> 
                         <h2>{props.well.lease} {props.well.well_number}  </h2>
-                        <DropdownButton id="dropdown-basic-button" title="Actions" autoclose="true">
+                        <DropdownButton id="dropdown-basic-button" title="Actions" autoClose="true" onClick={(e) => e.stopPropagation()}>
                             <Dropdown.Item id="dd-item-1" onClick={handleBack} >Back to Well Selection</Dropdown.Item>
                             <Dropdown.Item id="dd-item-2" onClick={displayPopup} >Show/Upload Plat</Dropdown.Item>
                             <Dropdown.Item id="dd-item-3" onClick={handleView}>Print/PDF View</Dropdown.Item>
                             <Dropdown.Item id="dd-item-4" onClick={handleDeleteWell}>Delete Well</Dropdown.Item>
                         </DropdownButton>
-                    </div>
-                    
-                    <div className="right-group">
-                        
-                        <span className="bold-span">Last Updated: </span>{formatDate()}
-                
                     </div>                    
-                    
+                    <div className="right-group">                        
+                        <span className="bold-span">Last Updated: </span>{formatDate()}                
+                    </div>                                        
                 </div>
                 <div className="well-table-id row">
                     <div className="col-lg-3">
@@ -698,13 +694,13 @@ function WellViewToo(props) {
 
     // <PDFView well={props.well} wellCements={wellCements} wellCasings={wellCasings} wellPerfs={wellPerfs} wellPlugs={wellPlugs} wellHoles={wellHoles} />
     if (showPDF){
-        return <PDFView well={props.well} setWell={props.setWell} setShowPDF={setShowPDF}/>
+        return <PDFView well={props.well} setWell={props.setWell} setShowPDF={setShowPDF} setRefresh={setRefresh}/>
     } else {
         return (
             <>
             <div className="well-container-grid" id="top">
                 {wellInfoHTML}
-                <Diagram wellFeatures={wellFeatures} wellCements={wellCements} wellCasings={wellCasings} wellPerfs={wellPerfs} wellPlugs={wellPlugs} well={props.well} refresh={refresh} />
+                <Diagram wellFeatures={wellFeatures} wellCements={wellCements} wellCasings={wellCasings} wellPerfs={wellPerfs} wellPlugs={wellPlugs} well={props.well} refresh={refresh}/>
             {/* {diagramHTML} */}
             <a href="#top" className="float" id="float">
                     <i className="my-float">{$faCaret}</i>
@@ -852,5 +848,15 @@ const newHole = async () => {
 
 <Button className="btn back-button" variant="warning" id="back-button" onClick={handleView}>Print View</Button>
 <Button className="btn back-button" variant="warning" id="back-button" onClick={handleBack}> well selection </Button>
+
+
+Add ShowDelete to props...
+for Diagram
+UseEffect
+
+
+Why is ... DROPDOWN -> PDF -> CLICK OUTSIDE ACTION ...
+locking up the DROPDOWN?
+Hidden state.
 
 */

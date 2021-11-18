@@ -153,6 +153,7 @@ function PDFView(props){
 
     window.onafterprint = (event) => {
         props.setShowPDF(false);
+        props.setRefresh(Math.random()*733)
       };
 
 
